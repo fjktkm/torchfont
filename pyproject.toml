@@ -1,0 +1,20 @@
+[project]
+name = "torchfont"
+version = "0.1.0"
+description = "Datasets, Transforms and Models specific to Vector Fonts"
+readme = "README.md"
+authors = [
+    { name = "fjktkm", email = "fjktkm@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = []
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.uv]
+link-mode = "copy"
+
+[tool.uv.workspace]
+members = ["torchfont"]
