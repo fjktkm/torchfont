@@ -1,0 +1,34 @@
+{
+	"name": "fjktkm/torchfont/cuda",
+	"image": "ghcr.io/astral-sh/uv:debian",
+	"hostRequirements": {
+		"gpu": "optional"
+	},
+	"runArgs": [
+		"--gpus=all"
+	],
+	"mounts": [
+		{
+			"target": "${containerWorkspaceFolder}/.venv",
+			"type": "volume",
+			"source": "torchfont-venv"
+		},
+		{
+			"target": "${containerWorkspaceFolder}/fonts",
+			"type": "volume",
+			"source": "torchfont-fonts"
+		}
+	],
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"charliermarsh.ruff",
+				"ms-azuretools.vscode-docker",
+				"ms-python.python",
+				"ms-toolsai.jupyter",
+				"tamasfe.even-better-toml"
+			]
+		}
+	},
+	"postCreateCommand": "uv venv --allow-existing && uv sync --frozen"
+}
