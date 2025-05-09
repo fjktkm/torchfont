@@ -5,7 +5,7 @@ from fontTools.ttLib.tables._n_a_m_e import table__n_a_m_e
 from fontTools.varLib.instancer import instantiateVariableFont
 from pympler import asizeof
 
-LICENSE_DIRS = ("apache", "ofl", "ufl", "cc-by-sa")
+LICENSE_DIRS = ("apache", "ofl", "ufl")
 FONT_ROOT = Path("./fonts")
 
 font_paths = [fp for lic in LICENSE_DIRS for fp in (FONT_ROOT / lic).rglob("*.ttf")]
