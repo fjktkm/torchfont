@@ -1,24 +1,31 @@
 {
-	"name": "fjktkm/torchfont/cuda",
+	"name": "uv",
 	"image": "ghcr.io/astral-sh/uv:debian",
+	"features": {
+		"ghcr.io/devcontainers/features/common-utils:2": {
+			"username": "none"
+		}
+	},
 	"hostRequirements": {
 		"gpu": "optional"
 	},
-	"runArgs": [
-		"--gpus=all"
-	],
 	"mounts": [
 		{
-			"target": "${containerWorkspaceFolder}/.venv",
-			"type": "volume",
-			"source": "torchfont-venv"
+			"source": "uv-cache",
+			"target": "/root/.cache/uv",
+			"type": "volume"
 		},
 		{
-			"target": "${containerWorkspaceFolder}/fonts",
-			"type": "volume",
-			"source": "torchfont-fonts"
+			"target": "${containerWorkspaceFolder}/.venv",
+			"type": "volume"
+		},
+		{
+			"source": "torchfont-datasets",
+			"target": "${containerWorkspaceFolder}/data",
+			"type": "volume"
 		}
 	],
+	"postCreateCommand": "uv sync",
 	"customizations": {
 		"vscode": {
 			"extensions": [
@@ -29,6 +36,5 @@
 				"tamasfe.even-better-toml"
 			]
 		}
-	},
-	"postCreateCommand": "uv venv --allow-existing && uv sync --frozen"
+	}
 }
