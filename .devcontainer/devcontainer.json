@@ -25,7 +25,7 @@
 			"type": "volume"
 		}
 	],
-	"postCreateCommand": "uv sync",
+	"postCreateCommand": "uv sync --all-extras",
 	"customizations": {
 		"vscode": {
 			"extensions": [
