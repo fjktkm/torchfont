@@ -5,7 +5,7 @@ from torchfont.datasets.repo import FontRepo
 
 
 class GoogleFonts(FontRepo):
-    REPO_URL = "https://github.com/google/fonts.git"
+    REPO_URL = "https://github.com/google/fonts"
     DEFAULT_PATTERNS = [
         "apache/*/*.ttf",
         "ofl/*/*.ttf",
