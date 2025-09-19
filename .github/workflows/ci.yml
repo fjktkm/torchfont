@@ -1,4 +1,4 @@
-name: tests
+name: Test
 
 on:
   push:
@@ -21,14 +21,29 @@ on:
       - "README.md"
 
 jobs:
-  tests-matrix:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: astral-sh/setup-uv@v6
+
+      - name: Ruff lint
+        run: uv run ruff check .
+
+      - name: Ruff format
+        run: uv run ruff format --diff .
+
+  test:
+    name: Run tests
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
         python-version: ["3.10", "3.11", "3.12", "3.13"]
         torch-version: ["2.6.0", "2.7.0", "2.8.0"]
-
     runs-on: ${{ matrix.os }}
 
     steps:
