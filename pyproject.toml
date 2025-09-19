@@ -19,3 +19,6 @@ dev = ["pytest>=8.4.2", "ruff>=0.12.4"]
 
 [tool.uv]
 link-mode = "copy"
+
+[tool.setuptools.package-data]
+"torchfont" = ["py.typed"]
