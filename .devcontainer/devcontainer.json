@@ -2,9 +2,7 @@
 	"name": "uv",
 	"image": "ghcr.io/astral-sh/uv:debian",
 	"features": {
-		"ghcr.io/devcontainers/features/common-utils:2": {
-			"username": "none"
-		}
+		"ghcr.io/devcontainers/features/common-utils:2": {}
 	},
 	"hostRequirements": {
 		"gpu": "optional"
