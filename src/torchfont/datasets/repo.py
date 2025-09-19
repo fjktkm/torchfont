@@ -59,7 +59,7 @@ class FontRepo(FontFolder):
             check=True,
         )
         subprocess.run(
-            ["git", "-C", repo, "sparse-checkout", "set", *self.patterns],
+            ["git", "-C", repo, "sparse-checkout", "set", "--", *self.patterns],
             check=True,
         )
         subprocess.run(
