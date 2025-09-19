@@ -24,12 +24,14 @@ on:
 
 jobs:
   tests-matrix:
-    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
         python-version: ["3.10", "3.11", "3.12", "3.13"]
         torch-version: ["2.6.0", "2.7.0", "2.8.0"]
+
+    runs-on: ${{ matrix.os }}
 
     steps:
       - uses: actions/checkout@v5
