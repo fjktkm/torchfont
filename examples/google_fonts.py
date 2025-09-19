@@ -1,3 +1,5 @@
+from tqdm import tqdm
+
 from torchfont.datasets import GoogleFonts
 
 dataset = GoogleFonts(
@@ -6,9 +8,8 @@ dataset = GoogleFonts(
     download=True,
 )
 
-print(f"{len(dataset)=}")
-print(f"{dataset.num_content_classes=}")
-print(f"{dataset.num_style_classes=}")
-
-for i in range(5):
-    print(dataset[i])
+for i in tqdm(
+    range(len(dataset)),
+    desc="Iterating over dataset",
+):
+    sample = dataset[i]
