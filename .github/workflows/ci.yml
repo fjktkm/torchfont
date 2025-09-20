@@ -10,7 +10,7 @@ on:
       - "pyproject.toml"
       - "uv.lock"
   pull_request:
-    paths-ignore:
+    paths:
       - ".github/workflows/ci.yml"
       - "src/**"
       - "tests/**"
