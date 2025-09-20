@@ -2,23 +2,21 @@ name: Test
 
 on:
   push:
-    paths-ignore:
-      - ".devcontainer/**"
-      - ".vscode/**"
-      - "examples/**"
-      - ".gitattributes"
-      - ".gitignore"
-      - "LICENSE"
-      - "README.md"
+    paths:
+      - ".github/workflows/ci.yml"
+      - "src/**"
+      - "tests/**"
+      - ".python-version"
+      - "pyproject.toml"
+      - "uv.lock"
   pull_request:
     paths-ignore:
-      - ".devcontainer/**"
-      - ".vscode/**"
-      - "examples/**"
-      - ".gitattributes"
-      - ".gitignore"
-      - "LICENSE"
-      - "README.md"
+      - ".github/workflows/ci.yml"
+      - "src/**"
+      - "tests/**"
+      - ".python-version"
+      - "pyproject.toml"
+      - "uv.lock"
 
 jobs:
   lint:
@@ -49,8 +47,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - name: Install uv
-        uses: astral-sh/setup-uv@v6
+      - uses: astral-sh/setup-uv@v6
         with:
           python-version: ${{ matrix.python-version }}
           enable-cache: true
