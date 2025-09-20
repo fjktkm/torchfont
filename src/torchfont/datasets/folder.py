@@ -89,20 +89,23 @@ class FontFolder(Dataset):
         local_idx = int(idx - self._sample_offsets[font_idx])
 
         n_cps = int(self._cps_counts[font_idx])
-        inst_idx, cp_idx_local = divmod(local_idx, n_cps)
+        inst_idx, cp_local_idx = divmod(local_idx, n_cps)
 
-        cp_start = int(self._cps_offsets[font_idx])
-        cp = int(self._flat_cps[int(cp_start + cp_idx_local)])
+        cp_global_idx = int(self._cps_offsets[font_idx] + cp_local_idx)
+        cp = int(self._flat_cps[cp_global_idx])
 
         style_idx = int(self._inst_offsets[font_idx] + inst_idx)
         content_idx = int(np.searchsorted(self._unique_cps, cp))
 
-        sample = (
-            self.paths[font_idx],
-            bool(self._is_var[font_idx]),
-            inst_idx,
-            cp,
-            style_idx,
-            content_idx,
-        )
-        return self.transform(*sample) if self.transform else sample
+        sample = {
+            "path": self.paths[font_idx],
+            "is_variable": bool(self._is_var[font_idx]),
+            "instance_index": inst_idx,
+            "codepoint": cp,
+            "labels": {
+                "style": style_idx,
+                "content": content_idx,
+            },
+        }
+
+        return self.transform(sample) if self.transform else sample
