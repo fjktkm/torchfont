@@ -1,0 +1,12 @@
+site_name: TorchFont
+site_description: A PyTorch-based library for Vector Fonts
+site_author: Takumu Fujioka
+site_url: https://fjktkm.github.io/torchfont
+repo_url: https://github.com/fjktkm/torchfont
+repo_name: fjktkm/torchfont
+theme:
+  name: material
+nav:
+  - Home: index.md
+plugins:
+  - search
