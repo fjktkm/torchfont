@@ -5,10 +5,12 @@ description = "Datasets, Transforms and Models specific to Vector Fonts"
 readme = "README.md"
 authors = [{ name = "Takumu Fujioka", email = "fjktkm@gmail.com" }]
 requires-python = ">=3.10"
-dependencies = ["fonttools>=4.58", "numpy>=1.21.3", "tqdm>=4.63.0"]
-
-[project.optional-dependencies]
-torch = ["torch>=2.6.0"]
+dependencies = [
+    "fonttools>=4.58",
+    "numpy>=1.21.3",
+    "tqdm>=4.63.0",
+    "torch>=2.6.0",
+]
 
 [build-system]
 requires = ["uv_build>=0.8.13,<0.9.0"]

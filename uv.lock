@@ -1032,12 +1032,8 @@ dependencies = [
     { name = "fonttools" },
     { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
     { name = "numpy", version = "2.3.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
-    { name = "tqdm" },
-]
-
-[package.optional-dependencies]
-torch = [
     { name = "torch" },
+    { name = "tqdm" },
 ]
 
 [package.dev-dependencies]
@@ -1052,10 +1048,9 @@ dev = [
 requires-dist = [
     { name = "fonttools", specifier = ">=4.58" },
     { name = "numpy", specifier = ">=1.21.3" },
-    { name = "torch", marker = "extra == 'torch'", specifier = ">=2.6.0" },
+    { name = "torch", specifier = ">=2.6.0" },
     { name = "tqdm", specifier = ">=4.63.0" },
 ]
-provides-extras = ["torch"]
 
 [package.metadata.requires-dev]
 dev = [
