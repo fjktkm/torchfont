@@ -2,7 +2,7 @@ from collections.abc import Callable
 from concurrent.futures import ProcessPoolExecutor
 from functools import partial
 from pathlib import Path
-from typing import Any, cast
+from typing import cast
 
 import numpy as np
 from fontTools.ttLib import TTFont
@@ -84,7 +84,7 @@ class FontFolder(Dataset):
     def __len__(self) -> int:
         return int(self._sample_offsets[-1])
 
-    def __getitem__(self, idx: int) -> Any:  # noqa: ANN401
+    def __getitem__(self, idx: int) -> dict[str, object]:
         font_idx = int(np.searchsorted(self._sample_offsets, idx, side="right") - 1)
         local_idx = int(idx - self._sample_offsets[font_idx])
 
