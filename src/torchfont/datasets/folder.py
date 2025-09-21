@@ -19,7 +19,7 @@ def _load_meta(
 ) -> tuple[bool, int, np.ndarray]:
     path = Path(path).expanduser().resolve()
 
-    with TTFont(path, lazy=True) as font:
+    with TTFont(path) as font:
         for tag in list(font.keys()):
             if tag not in _KEEP_TABLES:
                 del font[tag]
