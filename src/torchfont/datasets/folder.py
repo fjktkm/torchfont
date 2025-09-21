@@ -102,10 +102,8 @@ class FontFolder(Dataset):
             "is_variable": bool(self._is_var[font_idx]),
             "instance_index": inst_idx,
             "codepoint": cp,
-            "labels": {
-                "style": style_idx,
-                "content": content_idx,
-            },
+            "style_label": style_idx,
+            "content_label": content_idx,
         }
 
         return self.transform(sample) if self.transform else sample
