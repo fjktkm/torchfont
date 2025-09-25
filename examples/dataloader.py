@@ -108,7 +108,6 @@ loaders = [
 ]
 dataloader = CombinedLoader(loaders)
 _ = iter(dataloader)
-total = len(dataloader)
 
-for batch, _, _ in tqdm(dataloader, total=total, desc="Iterating over datasets"):
+for batch, _, _ in tqdm(dataloader, desc="Iterating over datasets"):
     types, coords, style_labels, content_labels = combine_fn(batch)
