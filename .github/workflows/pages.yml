@@ -7,8 +7,6 @@ on:
       - ".github/workflows/pages.yml"
       - "docs/**"
       - "mkdocs.yml"
-      - "pyproject.toml"
-      - "uv.lock"
   workflow_dispatch:
 permissions:
   contents: read
