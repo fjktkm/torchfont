@@ -55,7 +55,7 @@ jobs:
           enable-cache: true
 
       - name: Install the project
-        run: uv sync --locked --dev
+        run: uv sync --locked --no-install-package torch --only-dev
 
       - name: Run tests
         run: uv run --with "torch==${{ matrix.torch-version }}" pytest tests

@@ -1,5 +1,5 @@
 version = 1
-revision = 2
+revision = 3
 requires-python = ">=3.10"
 resolution-markers = [
     "python_full_version >= '3.12'",
@@ -1507,11 +1507,15 @@ dependencies = [
 
 [package.dev-dependencies]
 dev = [
-    { name = "lightning" },
-    { name = "mkdocs" },
-    { name = "mkdocs-material" },
     { name = "pytest" },
     { name = "ruff" },
+]
+docs = [
+    { name = "mkdocs" },
+    { name = "mkdocs-material" },
+]
+examples = [
+    { name = "lightning" },
 ]
 
 [package.metadata]
@@ -1524,12 +1528,14 @@ requires-dist = [
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "lightning", specifier = ">=2.5.5" },
-    { name = "mkdocs", specifier = ">=1.6.1" },
-    { name = "mkdocs-material", specifier = ">=9.6.20" },
     { name = "pytest", specifier = ">=8.4.2" },
     { name = "ruff", specifier = ">=0.12.4" },
 ]
+docs = [
+    { name = "mkdocs", specifier = ">=1.6.1" },
+    { name = "mkdocs-material", specifier = ">=9.6.20" },
+]
+examples = [{ name = "lightning", specifier = ">=2.5.5" }]
 
 [[package]]
 name = "torchmetrics"
