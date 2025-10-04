@@ -1,14 +1,16 @@
-from collections.abc import Callable
+from collections.abc import Callable, Sequence
 from functools import lru_cache, partial
 from pathlib import Path
-from typing import cast
+from typing import TYPE_CHECKING, cast
 
 import torch
 from fontTools.ttLib import TTFont
-from fontTools.ttLib.tables._f_v_a_r import NamedInstance, table__f_v_a_r
 from torch import Tensor
 
 from torchfont.transforms.pens import TensorPen
+
+if TYPE_CHECKING:
+    from fontTools.ttLib.tables._f_v_a_r import NamedInstance, table__f_v_a_r
 
 _DEFAULT_KEEP_TABLES = (
     {"cmap", "maxp", "head", "hmtx", "hhea"}
@@ -33,7 +35,8 @@ def _open_font(
 
 class Compose:
     def __init__(
-        self, transforms: list[Callable[[dict[str, object]], dict[str, object]]]
+        self,
+        transforms: Sequence[Callable[[dict[str, object]], dict[str, object]]],
     ) -> None:
         self.transforms = transforms
 
@@ -46,6 +49,7 @@ class Compose:
 class OpenFont:
     def __init__(
         self,
+        *,
         keep_tables: set[str] | None = None,
         enable_cache: bool = True,
         max_cache_size: int | None = None,
@@ -59,7 +63,7 @@ class OpenFont:
         )
 
     def __call__(self, sample: dict[str, object]) -> dict[str, object]:
-        path = cast(Path, sample["path"])
+        path = cast("Path", sample["path"])
 
         font = self._open(path)
 
@@ -70,13 +74,13 @@ class OpenFont:
 
 class ToTensor:
     def __call__(self, sample: dict[str, object]) -> dict[str, object]:
-        font = cast(TTFont, sample["font"])
-        is_variable = cast(bool, sample["is_variable"])
-        inst_idx = cast(int, sample["instance_index"])
-        codepoint = cast(int, sample["codepoint"])
+        font = cast("TTFont", sample["font"])
+        is_variable = cast("bool", sample["is_variable"])
+        inst_idx = cast("int", sample["instance_index"])
+        codepoint = cast("int", sample["codepoint"])
 
         if is_variable:
-            fvar = cast(table__f_v_a_r, font["fvar"])
+            fvar = cast("table__f_v_a_r", font["fvar"])
             inst: NamedInstance = fvar.instances[inst_idx]
             glyph_set = font.getGlyphSet(location=inst.coordinates)
         else:
@@ -100,8 +104,8 @@ class LimitSequenceLength:
         self.max_len = max_len
 
     def __call__(self, sample: dict[str, object]) -> dict[str, object]:
-        types = cast(Tensor, sample["command_types"])
-        coords = cast(Tensor, sample["command_coordinates"])
+        types = cast("Tensor", sample["command_types"])
+        coords = cast("Tensor", sample["command_coordinates"])
 
         sample["command_types"] = types[: self.max_len]
         sample["command_coordinates"] = coords[: self.max_len]
@@ -111,10 +115,10 @@ class LimitSequenceLength:
 
 class Normalize:
     def __call__(self, sample: dict[str, object]) -> dict[str, object]:
-        coords = cast(Tensor, sample["command_coordinates"])
-        font = cast(TTFont, sample["font"])
+        coords = cast("Tensor", sample["command_coordinates"])
+        font = cast("TTFont", sample["font"])
 
-        upem: int = getattr(font["head"], "unitsPerEm")
+        upem: int = getattr(font["head"], "unitsPerEm", 1000)
         coords.mul_(1.0 / float(upem))
 
         sample["coords"] = coords
@@ -127,8 +131,8 @@ class Patchify:
         self.patch_size = patch_size
 
     def __call__(self, sample: dict[str, object]) -> dict[str, object]:
-        types = cast(Tensor, sample["command_types"])
-        coords = cast(Tensor, sample["command_coordinates"])
+        types = cast("Tensor", sample["command_types"])
+        coords = cast("Tensor", sample["command_coordinates"])
 
         seq_len = types.size(0)
         pad = (-seq_len) % self.patch_size

@@ -16,21 +16,21 @@ from torchfont.transforms import (
 logging.getLogger("fontTools").setLevel(logging.ERROR)
 
 transforms = Compose(
-    [
+    (
         OpenFont(),
         ToTensor(),
         LimitSequenceLength(),
         Normalize(),
         Patchify(),
         CloseFont(),
-    ]
+    ),
 )
 
 dataset = GoogleFonts(
     root="data/google_fonts",
     ref="main",
-    download=True,
     transform=transforms,
+    download=True,
 )
 
 for i in tqdm(

@@ -14,6 +14,6 @@ __all__ = [
     "LimitSequenceLength",
     "Normalize",
     "OpenFont",
-    "ToTensor",
     "Patchify",
+    "ToTensor",
 ]

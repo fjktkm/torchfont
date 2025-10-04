@@ -1,4 +1,5 @@
 import logging
+from collections.abc import Sequence
 from typing import cast
 
 import numpy as np
@@ -23,21 +24,21 @@ from torchfont.transforms import (
 logging.getLogger("fontTools").setLevel(logging.ERROR)
 
 transforms = Compose(
-    [
+    (
         OpenFont(),
         ToTensor(),
         LimitSequenceLength(),
         Normalize(),
         Patchify(patch_size=32),
         CloseFont(),
-    ]
+    ),
 )
 
 dataset = GoogleFonts(
     root="data/google_fonts",
     ref="main",
-    download=True,
     transform=transforms,
+    download=True,
 )
 
 num_splits = 8
@@ -48,12 +49,12 @@ subsets = [Subset(dataset, idxs.tolist()) for idxs in splits]
 
 
 def collate_fn(
-    batch: list[dict[str, object]],
+    batch: Sequence[dict[str, object]],
 ) -> tuple[Tensor, Tensor, Tensor, Tensor]:
-    types_list = [cast(Tensor, item["command_types"]) for item in batch]
-    coords_list = [cast(Tensor, item["command_coordinates"]) for item in batch]
-    style_label_list = [cast(int, item["style_label"]) for item in batch]
-    content_label_list = [cast(int, item["content_label"]) for item in batch]
+    types_list = [cast("Tensor", item["command_types"]) for item in batch]
+    coords_list = [cast("Tensor", item["command_coordinates"]) for item in batch]
+    style_label_list = [cast("int", item["style_label"]) for item in batch]
+    content_label_list = [cast("int", item["content_label"]) for item in batch]
 
     types_tensor = pad_sequence(types_list, batch_first=True, padding_value=0)
     coords_tensor = pad_sequence(coords_list, batch_first=True, padding_value=0.0)
@@ -65,10 +66,11 @@ def collate_fn(
 
 
 def combine_fn(
-    batch: list[tuple[Tensor, Tensor, Tensor, Tensor]],
+    batch: Sequence[tuple[Tensor, Tensor, Tensor, Tensor]],
 ) -> tuple[Tensor, Tensor, Tensor, Tensor]:
     types_list, coords_list, style_label_list, content_label_list = zip(
-        *batch, strict=True
+        *batch,
+        strict=True,
     )
 
     sizes = [t.size(0) for t in types_list]
@@ -80,7 +82,10 @@ def combine_fn(
 
     combined_types = types_ref.new_zeros(total_samples, max_seq_len, types_ref.size(2))
     combined_coords = coords_ref.new_zeros(
-        total_samples, max_seq_len, coords_ref.size(2), coords_ref.size(3)
+        total_samples,
+        max_seq_len,
+        coords_ref.size(2),
+        coords_ref.size(3),
     )
 
     for i, (types, coords) in enumerate(zip(types_list, coords_list, strict=True)):

@@ -28,5 +28,18 @@ default-groups = "all"
 [tool.pytest.ini_options]
 filterwarnings = ["ignore:.*fork.*:DeprecationWarning"]
 
+[tool.ruff]
+unsafe-fixes = true
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = ["D"]
+
+[tool.ruff.per-file-ignores]
+"examples/**/*.py" = ["T201"]
+"src/torchfont/datasets/repo.py" = ["S603"]
+"src/torchfont/datasets/*.py" = ["PLR0913"]
+"tests/**/*.py" = ["S101"]
+
 [tool.setuptools.package-data]
 "torchfont" = ["py.typed"]

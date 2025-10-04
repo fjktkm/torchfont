@@ -1,21 +1,23 @@
-from collections.abc import Callable
+from collections.abc import Callable, Sequence
 from concurrent.futures import ProcessPoolExecutor
 from functools import partial
 from pathlib import Path
-from typing import cast
+from typing import TYPE_CHECKING, cast
 
 import numpy as np
 from fontTools.ttLib import TTFont
-from fontTools.ttLib.tables._f_v_a_r import NamedInstance, table__f_v_a_r
 from torch.utils.data import Dataset
 from tqdm.auto import tqdm
+
+if TYPE_CHECKING:
+    from fontTools.ttLib.tables._f_v_a_r import NamedInstance, table__f_v_a_r
 
 _KEEP_TABLES = {"cmap", "maxp", "fvar"}
 
 
 def _load_meta(
     path: Path | str,
-    cps_filter: list[int] | None,
+    cps_filter: Sequence[int] | None,
 ) -> tuple[bool, int, np.ndarray]:
     path = Path(path).expanduser().resolve()
 
@@ -25,7 +27,7 @@ def _load_meta(
                 del font[tag]
 
         if "fvar" in font:
-            fvar = cast(table__f_v_a_r, font["fvar"])
+            fvar = cast("table__f_v_a_r", font["fvar"])
             insts: list[NamedInstance] = fvar.instances
             is_var, n_inst = (True, len(insts)) if insts else (False, 1)
         else:
@@ -48,7 +50,8 @@ class FontFolder(Dataset):
     def __init__(
         self,
         root: Path | str,
-        codepoint_filter: list[int] | None = None,
+        *,
+        codepoint_filter: Sequence[int] | None = None,
         transform: Callable | None = None,
     ) -> None:
         self.root = Path(root).expanduser().resolve()

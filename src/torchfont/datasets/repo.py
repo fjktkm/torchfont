@@ -1,6 +1,6 @@
 import shutil
 import subprocess
-from collections.abc import Callable
+from collections.abc import Callable, Sequence
 from pathlib import Path
 
 from torchfont.datasets.folder import FontFolder
@@ -12,8 +12,9 @@ class FontRepo(FontFolder):
         root: Path | str,
         url: str,
         ref: str,
-        patterns: list[str],
-        codepoint_filter: list[int] | None = None,
+        *,
+        patterns: Sequence[str],
+        codepoint_filter: Sequence[int] | None = None,
         transform: Callable | None = None,
         download: bool = False,
     ) -> None:
