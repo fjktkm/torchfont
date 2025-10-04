@@ -1,6 +1,6 @@
 [project]
 name = "torchfont"
-version = "0.2.0"
+version = "0.3.0"
 description = "Datasets, Transforms and Models specific to Vector Fonts"
 readme = "README.md"
 authors = [{ name = "Takumu Fujioka", email = "fjktkm@gmail.com" }]
