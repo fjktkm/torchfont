@@ -22,7 +22,6 @@ docs = ["mkdocs>=1.6.1", "mkdocs-material>=9.6.20"]
 examples = ["lightning>=2.5.5"]
 
 [tool.uv]
-link-mode = "copy"
 default-groups = "all"
 
 [tool.pytest.ini_options]
