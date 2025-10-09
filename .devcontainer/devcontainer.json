@@ -24,9 +24,7 @@
 		}
 	],
 	"containerEnv": {
-		"UV_LINK_MODE": "copy",
-		"SUDO_UID": "1000",
-		"SUDO_GID": "1000"
+		"UV_LINK_MODE": "copy"
 	},
 	"postCreateCommand": "uv sync",
 	"customizations": {
