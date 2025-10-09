@@ -18,13 +18,15 @@
 			"type": "volume"
 		},
 		{
-			"source": "torchfont-datasets",
+			"source": "torchfont",
 			"target": "${containerWorkspaceFolder}/data",
 			"type": "volume"
 		}
 	],
 	"containerEnv": {
-		"UV_LINK_MODE": "copy"
+		"UV_LINK_MODE": "copy",
+		"SUDO_UID": "1000",
+		"SUDO_GID": "1000"
 	},
 	"postCreateCommand": "uv sync",
 	"customizations": {
