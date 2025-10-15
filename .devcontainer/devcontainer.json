@@ -1,6 +1,6 @@
 {
 	"name": "uv",
-	"image": "ghcr.io/astral-sh/uv:debian",
+	"image": "ghcr.io/astral-sh/uv:python3.13-trixie",
 	"features": {
 		"ghcr.io/devcontainers/features/common-utils:2": {}
 	},
