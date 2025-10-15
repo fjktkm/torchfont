@@ -32,9 +32,9 @@ unsafe-fixes = true
 
 [tool.ruff.lint]
 select = ["ALL"]
-ignore = ["D"]
+ignore = ["D", "EXE002"]
 
-[tool.ruff.per-file-ignores]
+[tool.ruff.lint.per-file-ignores]
 "examples/**/*.py" = ["T201"]
 "src/torchfont/datasets/repo.py" = ["S603"]
 "src/torchfont/datasets/*.py" = ["PLR0913"]
