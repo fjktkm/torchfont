@@ -10,7 +10,7 @@ from torch import Tensor
 from torchfont.transforms.pens import TensorPen
 
 if TYPE_CHECKING:
-    from fontTools.ttLib.tables._f_v_a_r import NamedInstance, table__f_v_a_r
+    from fontTools.ttLib.tables._f_v_a_r import NamedInstance
 
 _DEFAULT_KEEP_TABLES = (
     {"cmap", "maxp", "head", "hmtx", "hhea"}
@@ -80,8 +80,7 @@ class ToTensor:
         codepoint = cast("int", sample["codepoint"])
 
         if is_variable:
-            fvar = cast("table__f_v_a_r", font["fvar"])
-            inst: NamedInstance = fvar.instances[inst_idx]
+            inst: NamedInstance = font["fvar"].instances[inst_idx]
             glyph_set = font.getGlyphSet(location=inst.coordinates)
         else:
             glyph_set = font.getGlyphSet()
@@ -118,7 +117,7 @@ class Normalize:
         coords = cast("Tensor", sample["command_coordinates"])
         font = cast("TTFont", sample["font"])
 
-        upem: int = getattr(font["head"], "unitsPerEm", 1000)
+        upem: int = font["head"].unitsPerEm
         coords.mul_(1.0 / float(upem))
 
         sample["coords"] = coords

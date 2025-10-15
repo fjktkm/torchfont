@@ -1,5 +1,5 @@
 import logging
-from collections.abc import Sequence
+from collections.abc import Iterable, Sequence
 from typing import cast
 
 import numpy as np
@@ -45,7 +45,7 @@ num_splits = 8
 n = len(dataset)
 indices = torch.arange(n)
 splits = torch.tensor_split(indices, num_splits)
-subsets = [Subset(dataset, idxs.tolist()) for idxs in splits]
+subsets = [Subset(dataset, idxs.numpy().tolist()) for idxs in splits]
 
 
 def collate_fn(
@@ -111,7 +111,10 @@ loaders = [
     )
     for subset in subsets
 ]
-dataloader = CombinedLoader(loaders)
+dataloader = cast(
+    "Iterable[tuple[Sequence[tuple[Tensor, Tensor, Tensor, Tensor]], int, int]]",
+    CombinedLoader(loaders),
+)
 _ = iter(dataloader)
 
 for batch, _, _ in tqdm(dataloader, desc="Iterating over datasets"):

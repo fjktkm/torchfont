@@ -1,6 +1,8 @@
+from collections.abc import Mapping
+
 import torch
 from fontTools.pens.basePen import BasePen
-from fontTools.ttLib.ttGlyphSet import _TTGlyphSet
+from fontTools.ttLib.ttGlyphSet import _TTGlyph, _TTGlyphSet
 from torch import Tensor
 
 TYPE_TO_IDX: dict[str, int] = {
@@ -20,7 +22,7 @@ CMD_DIM: int = TYPE_DIM + COORD_DIM
 class TensorPen(BasePen):
     def __init__(
         self,
-        glyph_set: _TTGlyphSet,
+        glyph_set: _TTGlyphSet | Mapping[str, _TTGlyph] | None,
     ) -> None:
         super().__init__(glyph_set)
         self.types: list[int] = []

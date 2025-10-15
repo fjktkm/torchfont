@@ -20,7 +20,7 @@ class GoogleFonts(FontRepo):
         *,
         patterns: Sequence[str] | None = None,
         codepoint_filter: Sequence[int] | None = None,
-        transform: Callable | None = None,
+        transform: Callable[[dict[str, object]], dict[str, object]] | None = None,
         download: bool = False,
     ) -> None:
         if patterns is None:

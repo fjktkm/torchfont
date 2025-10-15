@@ -2,7 +2,7 @@ from collections.abc import Callable, Sequence
 from concurrent.futures import ProcessPoolExecutor
 from functools import partial
 from pathlib import Path
-from typing import TYPE_CHECKING, cast
+from typing import TYPE_CHECKING
 
 import numpy as np
 from fontTools.ttLib import TTFont
@@ -10,7 +10,7 @@ from torch.utils.data import Dataset
 from tqdm.auto import tqdm
 
 if TYPE_CHECKING:
-    from fontTools.ttLib.tables._f_v_a_r import NamedInstance, table__f_v_a_r
+    from fontTools.ttLib.tables._f_v_a_r import NamedInstance
 
 _KEEP_TABLES = {"cmap", "maxp", "fvar"}
 
@@ -27,8 +27,7 @@ def _load_meta(
                 del font[tag]
 
         if "fvar" in font:
-            fvar = cast("table__f_v_a_r", font["fvar"])
-            insts: list[NamedInstance] = fvar.instances
+            insts: list[NamedInstance] = font["fvar"].instances
             is_var, n_inst = (True, len(insts)) if insts else (False, 1)
         else:
             is_var, n_inst = False, 1
@@ -46,13 +45,13 @@ def _load_meta(
     return is_var, n_inst, cps
 
 
-class FontFolder(Dataset):
+class FontFolder(Dataset[dict[str, object]]):
     def __init__(
         self,
         root: Path | str,
         *,
         codepoint_filter: Sequence[int] | None = None,
-        transform: Callable | None = None,
+        transform: Callable[[dict[str, object]], dict[str, object]] | None = None,
     ) -> None:
         self.root = Path(root).expanduser().resolve()
         self.paths = sorted(fp for fp in self.root.rglob("*.[oOtT][tT][fF]"))
@@ -100,7 +99,7 @@ class FontFolder(Dataset):
         style_idx = int(self._inst_offsets[font_idx] + inst_idx)
         content_idx = int(np.searchsorted(self._unique_cps, cp))
 
-        sample = {
+        sample: dict[str, object] = {
             "path": self.paths[font_idx],
             "is_variable": bool(self._is_var[font_idx]),
             "instance_index": inst_idx,
