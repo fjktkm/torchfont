@@ -39,6 +39,7 @@ ignore = ["D", "EXE002"]
 "src/torchfont/datasets/repo.py" = ["S603"]
 "src/torchfont/datasets/*.py" = ["PLR0913"]
 "tests/**/*.py" = ["S101"]
+"typings/**/*.pyi" = ["N801", "N802", "N803", "N815", "N999"]
 
 [tool.setuptools.package-data]
 "torchfont" = ["py.typed"]
