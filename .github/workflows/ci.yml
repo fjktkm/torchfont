@@ -48,11 +48,8 @@ jobs:
 
       - uses: astral-sh/setup-uv@v6
 
-      - name: Install the project
-        run: uv sync --only-dev
-
       - name: Run mypy
-        run: uv run --no-sync mypy src tests examples
+        run: uv run mypy src tests examples
 
   test:
     name: Run tests
