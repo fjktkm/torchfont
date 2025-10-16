@@ -17,7 +17,12 @@ requires = ["uv_build>=0.8.13,<0.9.0"]
 build-backend = "uv_build"
 
 [dependency-groups]
-dev = ["pytest>=8.4.2", "ruff>=0.12.4"]
+dev = [
+    "mypy>=1.18.2",
+    "pytest>=8.4.2",
+    "ruff>=0.12.4",
+    "types-tqdm>=4.67.0.20250809",
+]
 docs = ["mkdocs>=1.6.1", "mkdocs-material>=9.6.20"]
 examples = ["lightning>=2.5.5"]
 
@@ -26,6 +31,9 @@ default-groups = "all"
 
 [tool.pytest.ini_options]
 filterwarnings = ["ignore:.*fork.*:DeprecationWarning"]
+
+[tool.mypy]
+mypy_path = "typings"
 
 [tool.ruff]
 unsafe-fixes = true

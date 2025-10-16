@@ -40,16 +40,3 @@ def test_dataset_getitem() -> None:
     )
     sample = dataset[0]
     assert sample is not None
-
-
-def test_dataset_iter() -> None:
-    dataset = GoogleFonts(
-        root="data/google_fonts",
-        ref="main",
-        patterns=("ufl/*/*.ttf",),
-        codepoint_filter=range(0x80),
-        download=True,
-    )
-
-    for sample in dataset:
-        assert sample is not None

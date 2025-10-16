@@ -1,5 +1,5 @@
 import logging
-from collections.abc import Iterable, Sequence
+from collections.abc import Sequence
 from typing import cast
 
 import numpy as np
@@ -111,10 +111,7 @@ loaders = [
     )
     for subset in subsets
 ]
-dataloader = cast(
-    "Iterable[tuple[Sequence[tuple[Tensor, Tensor, Tensor, Tensor]], int, int]]",
-    CombinedLoader(loaders),
-)
+dataloader = CombinedLoader(loaders)
 _ = iter(dataloader)
 
 for batch, _, _ in tqdm(dataloader, desc="Iterating over datasets"):
