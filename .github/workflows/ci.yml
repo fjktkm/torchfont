@@ -30,11 +30,29 @@ jobs:
 
       - uses: astral-sh/setup-uv@v6
 
+      - name: Install the project
+        run: uv sync --only-dev
+
       - name: Ruff lint
-        run: uv run ruff check .
+        run: uv run --no-sync ruff check .
 
       - name: Ruff format
-        run: uv run ruff format --diff .
+        run: uv run --no-sync ruff format --diff .
+
+  typecheck:
+    name: Type check
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: astral-sh/setup-uv@v6
+
+      - name: Install the project
+        run: uv sync --only-dev
+
+      - name: Run mypy
+        run: uv run --no-sync mypy src tests examples
 
   test:
     name: Run tests
@@ -54,8 +72,5 @@ jobs:
           python-version: ${{ matrix.python-version }}
           enable-cache: true
 
-      - name: Install the project
-        run: uv sync --only-dev --upgrade-package "torch==${{ matrix.torch-version }}"
-
       - name: Run tests
-        run: uv run pytest tests
+        run: uv run --with "torch==${{ matrix.torch-version }}" pytest tests
