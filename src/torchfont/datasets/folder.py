@@ -35,12 +35,8 @@ def _load_meta(
         cmap: dict[int, str] = font.getBestCmap()
         cps = np.fromiter(cmap.keys(), dtype=np.uint32)
 
-        if cps_filter:
-            cps = np.intersect1d(
-                cps,
-                np.asarray(cps_filter, dtype=np.uint32),
-                assume_unique=False,
-            )
+        if cps_filter is not None:
+            cps = np.intersect1d(cps, np.asarray(cps_filter), assume_unique=False)
 
     return is_var, n_inst, cps
 
@@ -59,7 +55,7 @@ class FontFolder(Dataset[dict[str, object]]):
 
         loader = partial(_load_meta, cps_filter=codepoint_filter)
         with ProcessPoolExecutor() as ex:
-            results = list(
+            metadata = list(
                 tqdm(
                     ex.map(loader, self.paths),
                     total=len(self.paths),
@@ -67,45 +63,48 @@ class FontFolder(Dataset[dict[str, object]]):
                 ),
             )
 
-        is_var, n_inst, cps_list = zip(*results, strict=True)
-        self._is_var = np.asarray(is_var, dtype=bool)
-        self._n_inst = np.asarray(n_inst, dtype=np.uint32)
+        is_var = [is_var for is_var, _, _ in metadata]
+        n_inst = [n_inst for _, n_inst, _ in metadata]
+        cps = [cps for _, _, cps in metadata]
 
-        self._cps_counts = np.array([a.size for a in cps_list], dtype=np.uint32)
-        self._cps_offsets = np.concatenate([[0], np.cumsum(self._cps_counts)])
-        self._flat_cps = np.concatenate(cps_list)
+        self._is_var = np.array(is_var, dtype=bool)
+        self._n_inst = np.array(n_inst, dtype=np.uint16)
+        n_cp = np.array([cps.size for cps in cps])
 
-        lens_per_font = self._n_inst * self._cps_counts
-        self._sample_offsets = np.concatenate([[0], np.cumsum(lens_per_font)])
-        self._inst_offsets = np.concatenate([[0], np.cumsum(self._n_inst)])
+        n_sample = n_cp * self._n_inst
 
-        self._unique_cps = np.unique(self._flat_cps)
-        self.num_content_classes = len(self._unique_cps)
+        self._sample_offsets = np.r_[0, np.cumsum(n_sample, dtype=np.int64)]
+        self._cp_offsets = np.r_[0, np.cumsum(n_cp, dtype=np.int64)]
+        self._inst_offsets = np.r_[0, np.cumsum(self._n_inst, dtype=np.int64)]
+
+        self._flat_cps = np.concatenate(cps) if cps else np.array([], dtype=np.uint32)
+        unique_cps = np.unique(self._flat_cps)
+        self._content_map = {cp: i for i, cp in enumerate(unique_cps)}
+
+        self.num_content_classes = len(self._content_map)
         self.num_style_classes = int(self._inst_offsets[-1])
 
     def __len__(self) -> int:
         return int(self._sample_offsets[-1])
 
     def __getitem__(self, idx: int) -> dict[str, object]:
-        font_idx = int(np.searchsorted(self._sample_offsets, idx, side="right") - 1)
-        local_idx = int(idx - self._sample_offsets[font_idx])
+        font_idx = np.searchsorted(self._sample_offsets, idx, side="right") - 1
+        sample_idx = idx - self._sample_offsets[font_idx]
 
-        n_cps = int(self._cps_counts[font_idx])
-        inst_idx, cp_local_idx = divmod(local_idx, n_cps)
+        n_cps = self._cp_offsets[font_idx + 1] - self._cp_offsets[font_idx]
+        inst_idx, cp_idx = divmod(sample_idx, n_cps)
+        cp = self._flat_cps[self._cp_offsets[font_idx] + cp_idx]
 
-        cp_global_idx = int(self._cps_offsets[font_idx] + cp_local_idx)
-        cp = int(self._flat_cps[cp_global_idx])
-
-        style_idx = int(self._inst_offsets[font_idx] + inst_idx)
-        content_idx = int(np.searchsorted(self._unique_cps, cp))
+        style_idx = self._inst_offsets[font_idx] + inst_idx
+        content_idx = self._content_map[cp]
 
         sample: dict[str, object] = {
-            "path": self.paths[font_idx],
+            "path": self.paths[int(font_idx)],
             "is_variable": bool(self._is_var[font_idx]),
-            "instance_index": inst_idx,
-            "codepoint": cp,
-            "style_label": style_idx,
-            "content_label": content_idx,
+            "instance_index": int(inst_idx),
+            "codepoint": int(cp),
+            "style_label": int(style_idx),
+            "content_label": int(content_idx),
         }
 
         return self.transform(sample) if self.transform else sample
