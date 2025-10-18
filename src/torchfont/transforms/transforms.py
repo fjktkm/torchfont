@@ -1,6 +1,5 @@
 from collections.abc import Callable, Sequence
 from functools import lru_cache, partial
-from pathlib import Path
 from typing import TYPE_CHECKING, cast
 
 import torch
@@ -20,7 +19,7 @@ _DEFAULT_KEEP_TABLES = (
 
 
 def _open_font(
-    path: Path | str,
+    path: str,
     keep_tables: set[str] | None = None,
 ) -> TTFont:
     keep_tables = keep_tables or _DEFAULT_KEEP_TABLES
@@ -63,7 +62,7 @@ class OpenFont:
         )
 
     def __call__(self, sample: dict[str, object]) -> dict[str, object]:
-        path = cast("Path", sample["path"])
+        path = cast("str", sample["path"])
 
         font = self._open(path)
 

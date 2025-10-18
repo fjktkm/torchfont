@@ -50,7 +50,7 @@ class FontFolder(Dataset[dict[str, object]]):
         transform: Callable[[dict[str, object]], dict[str, object]] | None = None,
     ) -> None:
         self.root = Path(root).expanduser().resolve()
-        self.paths = sorted(fp for fp in self.root.rglob("*.[oOtT][tT][fF]"))
+        self.paths = sorted(str(fp) for fp in self.root.rglob("*.[oOtT][tT][fF]"))
         self.transform = transform
 
         loader = partial(_load_meta, cps_filter=codepoint_filter)
