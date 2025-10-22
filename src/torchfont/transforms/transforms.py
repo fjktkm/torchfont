@@ -1,5 +1,5 @@
 from collections.abc import Callable, Sequence
-from functools import lru_cache, partial
+from functools import lru_cache
 from typing import TYPE_CHECKING, cast
 
 import torch
@@ -10,26 +10,6 @@ from torchfont.transforms.pens import TensorPen
 
 if TYPE_CHECKING:
     from fontTools.ttLib.tables._f_v_a_r import NamedInstance
-
-_DEFAULT_KEEP_TABLES = (
-    {"cmap", "maxp", "head", "hmtx", "hhea"}
-    | {"glyf", "loca", "CFF ", "CFF2"}
-    | {"gvar", "fvar", "avar"}
-)
-
-
-def _open_font(
-    path: str,
-    keep_tables: set[str] | None = None,
-) -> TTFont:
-    keep_tables = keep_tables or _DEFAULT_KEEP_TABLES
-    font = TTFont(path)
-    present = set(font.keys())
-
-    for tag in present - keep_tables:
-        del font[tag]
-
-    return font
 
 
 class Compose:
@@ -49,16 +29,11 @@ class OpenFont:
     def __init__(
         self,
         *,
-        keep_tables: set[str] | None = None,
         enable_cache: bool = True,
-        max_cache_size: int | None = None,
+        cache_maxsize: int | None = None,
     ) -> None:
-        self.tables = keep_tables
-        partial_open = partial(_open_font, keep_tables=self.tables)
         self._open = (
-            lru_cache(maxsize=max_cache_size)(partial_open)
-            if enable_cache
-            else partial_open
+            lru_cache(maxsize=cache_maxsize)(TTFont) if enable_cache else TTFont
         )
 
     def __call__(self, sample: dict[str, object]) -> dict[str, object]:

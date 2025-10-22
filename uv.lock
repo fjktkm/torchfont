@@ -1796,7 +1796,7 @@ examples = [
 
 [package.metadata]
 requires-dist = [
-    { name = "fonttools", specifier = ">=4.58" },
+    { name = "fonttools", specifier = ">=4.60" },
     { name = "numpy", specifier = ">=1.21.3" },
     { name = "torch", specifier = ">=2.6.0" },
     { name = "tqdm", specifier = ">=4.63.0" },

@@ -12,8 +12,6 @@ from tqdm.auto import tqdm
 if TYPE_CHECKING:
     from fontTools.ttLib.tables._f_v_a_r import NamedInstance
 
-_KEEP_TABLES = {"cmap", "maxp", "fvar"}
-
 
 def _load_meta(
     path: Path | str,
@@ -22,10 +20,6 @@ def _load_meta(
     path = Path(path).expanduser().resolve()
 
     with TTFont(path) as font:
-        for tag in list(font.keys()):
-            if tag not in _KEEP_TABLES:
-                del font[tag]
-
         if "fvar" in font:
             insts: list[NamedInstance] = font["fvar"].instances
             is_var, n_inst = (True, len(insts)) if insts else (False, 1)
