@@ -1,6 +1,11 @@
+import logging
+
 from tqdm import tqdm
 
 from torchfont.datasets import GoogleFonts
+
+logging.getLogger("fontTools").setLevel(logging.ERROR)
+
 
 dataset = GoogleFonts(
     root="data/google_fonts",

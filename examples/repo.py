@@ -1,4 +1,9 @@
+import logging
+
 from torchfont.datasets import FontRepo
+
+logging.getLogger("fontTools").setLevel(logging.ERROR)
+
 
 dataset = FontRepo(
     root="data/source_han_sans",
