@@ -9,7 +9,11 @@ The package requires Python 3.10+ and PyTorch 2.6+.
 You can install TorchFont as follows:
 
 ```bash
-pip install torch torchfont
+# With uv.
+uv add torchfont
+
+# With pip.
+pip install torchfont
 ```
 
 ## Citing TorchFont
