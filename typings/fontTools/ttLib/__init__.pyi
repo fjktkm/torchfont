@@ -1,6 +1,3 @@
 from .ttFont import TTFont
 
-__all__ = ["TTFont", "TTLibError", "TTLibFileIsCollectionError"]
-
-class TTLibError(Exception): ...
-class TTLibFileIsCollectionError(TTLibError): ...
+__all__ = ["TTFont"]
