@@ -30,7 +30,7 @@ jobs:
         run: uv sync --only-group docs
 
       - name: Build the documentation
-        run: uv run mkdocs build
+        run: uv run --no-sync mkdocs build
 
       - uses: actions/upload-pages-artifact@v3
         with:
