@@ -1,21 +1,23 @@
-name: Test
+name: Static Analysis
 
 on:
   push:
     paths:
-      - ".github/workflows/ci.yml"
+      - ".github/workflows/static-analysis.yml"
       - "examples/**"
       - "src/**"
       - "tests/**"
+      - "typings/**"
       - ".python-version"
       - "pyproject.toml"
       - "uv.lock"
   pull_request:
     paths:
-      - ".github/workflows/ci.yml"
+      - ".github/workflows/static-analysis.yml"
       - "examples/**"
       - "src/**"
       - "tests/**"
+      - "typings/**"
       - ".python-version"
       - "pyproject.toml"
       - "uv.lock"
@@ -52,24 +54,3 @@ jobs:
 
       - name: Run mypy
         run: uv run mypy src tests examples
-
-  test:
-    name: Run tests
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-        python-version: ["3.10", "3.11", "3.12", "3.13"]
-        torch-version: ["2.6", "2.7", "2.8"]
-    runs-on: ${{ matrix.os }}
-
-    steps:
-      - uses: actions/checkout@v5
-
-      - uses: astral-sh/setup-uv@v6
-        with:
-          python-version: ${{ matrix.python-version }}
-          enable-cache: true
-
-      - name: Run tests
-        run: uv run --with "torch==${{ matrix.torch-version }}" pytest tests
