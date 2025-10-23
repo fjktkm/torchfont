@@ -31,6 +31,7 @@ default-groups = "all"
 
 [tool.pytest.ini_options]
 filterwarnings = ["ignore:.*fork.*:DeprecationWarning"]
+testpaths = ["tests"]
 
 [tool.mypy]
 mypy_path = "typings"
