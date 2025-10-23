@@ -10,6 +10,7 @@ dataset = FontRepo(
     url="https://github.com/adobe-fonts/source-han-sans",
     ref="release",
     patterns=("Variable/TTF/*.ttf",),
+    loader=lambda x, y, z: (x, y, z),
     download=True,
 )
 

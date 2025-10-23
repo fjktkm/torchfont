@@ -1,6 +1,5 @@
 import logging
 from collections.abc import Sequence
-from typing import cast
 
 import numpy as np
 import torch
@@ -12,25 +11,17 @@ from tqdm import tqdm
 
 from torchfont.datasets import GoogleFonts
 from torchfont.transforms import (
-    CloseFont,
     Compose,
     LimitSequenceLength,
-    Normalize,
-    OpenFont,
     Patchify,
-    ToTensor,
 )
 
 logging.getLogger("fontTools").setLevel(logging.ERROR)
 
 transform = Compose(
     (
-        OpenFont(),
-        ToTensor(),
-        LimitSequenceLength(),
-        Normalize(),
+        LimitSequenceLength(max_len=512),
         Patchify(patch_size=32),
-        CloseFont(),
     ),
 )
 
@@ -49,12 +40,12 @@ subsets = [Subset(dataset, idxs.numpy().tolist()) for idxs in splits]
 
 
 def collate_fn(
-    batch: Sequence[dict[str, object]],
+    batch: Sequence[tuple[tuple[Tensor, Tensor], tuple[int, int]]],
 ) -> tuple[Tensor, Tensor, Tensor, Tensor]:
-    types_list = [cast("Tensor", item["command_types"]) for item in batch]
-    coords_list = [cast("Tensor", item["command_coordinates"]) for item in batch]
-    style_label_list = [cast("int", item["style_label"]) for item in batch]
-    content_label_list = [cast("int", item["content_label"]) for item in batch]
+    types_list = [types for (types, _), _ in batch]
+    coords_list = [coords for (_, coords), _ in batch]
+    style_label_list = [style for _, (style, _) in batch]
+    content_label_list = [content for _, (_, content) in batch]
 
     types_tensor = pad_sequence(types_list, batch_first=True, padding_value=0)
     coords_tensor = pad_sequence(coords_list, batch_first=True, padding_value=0.0)

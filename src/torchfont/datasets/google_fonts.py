@@ -1,6 +1,8 @@
 from collections.abc import Callable, Sequence
 from pathlib import Path
+from typing import SupportsIndex
 
+from torchfont.datasets.folder import default_loader
 from torchfont.datasets.repo import FontRepo
 
 REPO_URL = "https://github.com/google/fonts"
@@ -20,7 +22,11 @@ class GoogleFonts(FontRepo):
         *,
         patterns: Sequence[str] | None = None,
         codepoint_filter: Sequence[int] | None = None,
-        transform: Callable[[dict[str, object]], dict[str, object]] | None = None,
+        loader: Callable[
+            [str, SupportsIndex | None, SupportsIndex],
+            object,
+        ] = default_loader,
+        transform: Callable[[object], object] | None = None,
         download: bool = False,
     ) -> None:
         if patterns is None:
@@ -32,6 +38,7 @@ class GoogleFonts(FontRepo):
             ref=ref,
             patterns=patterns,
             codepoint_filter=codepoint_filter,
+            loader=loader,
             transform=transform,
             download=download,
         )

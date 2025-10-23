@@ -4,25 +4,17 @@ from tqdm import tqdm
 
 from torchfont.datasets import GoogleFonts
 from torchfont.transforms import (
-    CloseFont,
     Compose,
     LimitSequenceLength,
-    Normalize,
-    OpenFont,
     Patchify,
-    ToTensor,
 )
 
 logging.getLogger("fontTools").setLevel(logging.ERROR)
 
 transforms = Compose(
     (
-        OpenFont(),
-        ToTensor(),
-        LimitSequenceLength(),
-        Normalize(),
-        Patchify(),
-        CloseFont(),
+        LimitSequenceLength(max_len=512),
+        Patchify(patch_size=32),
     ),
 )
 

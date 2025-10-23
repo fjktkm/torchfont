@@ -28,15 +28,15 @@ class TensorPen(BasePen):
         self.types: list[int] = []
         self.coords: list[tuple[float, float, float, float, float, float]] = []
 
-    def _moveTo(self, pt: tuple[float, float]) -> None:  # noqa: N802
+    def _moveTo(self, pt: tuple[float, float]) -> None:
         self.types.append(TYPE_TO_IDX["moveTo"])
         self.coords.append((*ZERO, *ZERO, *pt))
 
-    def _lineTo(self, pt: tuple[float, float]) -> None:  # noqa: N802
+    def _lineTo(self, pt: tuple[float, float]) -> None:
         self.types.append(TYPE_TO_IDX["lineTo"])
         self.coords.append((*ZERO, *ZERO, *pt))
 
-    def _curveToOne(  # noqa: N802
+    def _curveToOne(
         self,
         pt1: tuple[float, float],
         pt2: tuple[float, float],
@@ -45,7 +45,7 @@ class TensorPen(BasePen):
         self.types.append(TYPE_TO_IDX["curveTo"])
         self.coords.append((*pt1, *pt2, *pt3))
 
-    def _closePath(self) -> None:  # noqa: N802
+    def _closePath(self) -> None:
         self.types.append(TYPE_TO_IDX["closePath"])
         self.coords.append((*ZERO, *ZERO, *ZERO))
 

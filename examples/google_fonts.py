@@ -10,6 +10,7 @@ logging.getLogger("fontTools").setLevel(logging.ERROR)
 dataset = GoogleFonts(
     root="data/google_fonts",
     ref="main",
+    loader=lambda x, y, z: (x, y, z),
     download=True,
 )
 

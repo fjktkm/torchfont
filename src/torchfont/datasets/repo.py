@@ -2,8 +2,9 @@ import shutil
 import subprocess
 from collections.abc import Callable, Sequence
 from pathlib import Path
+from typing import SupportsIndex
 
-from torchfont.datasets.folder import FontFolder
+from torchfont.datasets.folder import FontFolder, default_loader
 
 
 class FontRepo(FontFolder):
@@ -14,8 +15,12 @@ class FontRepo(FontFolder):
         ref: str,
         *,
         patterns: Sequence[str],
-        codepoint_filter: Sequence[int] | None = None,
-        transform: Callable[[dict[str, object]], dict[str, object]] | None = None,
+        codepoint_filter: Sequence[SupportsIndex] | None = None,
+        loader: Callable[
+            [str, SupportsIndex | None, SupportsIndex],
+            object,
+        ] = default_loader,
+        transform: Callable[[object], object] | None = None,
         download: bool = False,
     ) -> None:
         self.root = Path(root).expanduser().resolve()
@@ -87,5 +92,6 @@ class FontRepo(FontFolder):
         super().__init__(
             root=self.root,
             codepoint_filter=codepoint_filter,
+            loader=loader,
             transform=transform,
         )

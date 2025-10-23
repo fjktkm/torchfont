@@ -2,7 +2,7 @@ import logging
 from collections.abc import Mapping
 from os import PathLike
 from types import TracebackType
-from typing import IO, Literal, Self, overload
+from typing import IO, Literal, Self, SupportsIndex, overload
 
 from fontTools.ttLib.tables._f_v_a_r import table__f_v_a_r
 from fontTools.ttLib.tables._h_e_a_d import table__h_e_a_d
@@ -39,4 +39,4 @@ class TTFont:
         location: Mapping[str, float] | None = ...,
         normalized: bool = ...,
     ) -> _TTGlyphSet: ...
-    def getBestCmap(self) -> dict[int, str]: ...
+    def getBestCmap(self) -> dict[SupportsIndex, str]: ...

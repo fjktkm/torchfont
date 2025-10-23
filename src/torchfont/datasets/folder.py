@@ -1,32 +1,30 @@
 from collections.abc import Callable, Sequence
 from concurrent.futures import ProcessPoolExecutor
-from functools import partial
+from functools import cache, partial
 from pathlib import Path
-from typing import TYPE_CHECKING
+from typing import SupportsIndex
 
 import numpy as np
 from fontTools.ttLib import TTFont
+from torch import Tensor
 from torch.utils.data import Dataset
 from tqdm.auto import tqdm
 
-if TYPE_CHECKING:
-    from fontTools.ttLib.tables._f_v_a_r import NamedInstance
+from torchfont.io.pens import TensorPen
 
 
 def _load_meta(
-    path: Path | str,
-    cps_filter: Sequence[int] | None,
-) -> tuple[bool, int, np.ndarray]:
-    path = Path(path).expanduser().resolve()
-
-    with TTFont(path) as font:
+    file: str,
+    cps_filter: Sequence[SupportsIndex] | None,
+) -> tuple[bool, SupportsIndex, np.ndarray]:
+    with TTFont(file) as font:
         if "fvar" in font:
-            insts: list[NamedInstance] = font["fvar"].instances
+            insts = font["fvar"].instances
             is_var, n_inst = (True, len(insts)) if insts else (False, 1)
         else:
             is_var, n_inst = False, 1
 
-        cmap: dict[int, str] = font.getBestCmap()
+        cmap = font.getBestCmap()
         cps = np.fromiter(cmap.keys(), dtype=np.uint32)
 
         if cps_filter is not None:
@@ -35,24 +33,60 @@ def _load_meta(
     return is_var, n_inst, cps
 
 
-class FontFolder(Dataset[dict[str, object]]):
+@cache
+def load_font(file: str) -> TTFont:
+    return TTFont(file)
+
+
+def default_loader(
+    file: str,
+    instance_index: SupportsIndex | None,
+    codepoint: SupportsIndex,
+) -> tuple[Tensor, Tensor]:
+    font = load_font(file)
+
+    if instance_index is not None:
+        inst = font["fvar"].instances[instance_index]
+        glyph_set = font.getGlyphSet(location=inst.coordinates)
+    else:
+        glyph_set = font.getGlyphSet()
+
+    cmap = font.getBestCmap()
+    name = cmap[codepoint]
+    glyph = glyph_set[name]
+    pen = TensorPen(glyph_set)
+    glyph.draw(pen)
+    types, coords = pen.get_tensor()
+
+    upem = font["head"].unitsPerEm
+    coords.mul_(1.0 / float(upem))
+
+    return types, coords
+
+
+class FontFolder(Dataset[object]):
     def __init__(
         self,
         root: Path | str,
         *,
-        codepoint_filter: Sequence[int] | None = None,
-        transform: Callable[[dict[str, object]], dict[str, object]] | None = None,
+        codepoint_filter: Sequence[SupportsIndex] | None = None,
+        loader: Callable[
+            [str, SupportsIndex | None, SupportsIndex],
+            object,
+        ] = default_loader,
+        transform: Callable[[object], object] | None = None,
     ) -> None:
         self.root = Path(root).expanduser().resolve()
-        self.paths = sorted(str(fp) for fp in self.root.rglob("*.[oOtT][tT][fF]"))
+        self.files = sorted(str(fp) for fp in self.root.rglob("*.[oOtT][tT][fF]"))
+        self.loader = loader
         self.transform = transform
 
-        loader = partial(_load_meta, cps_filter=codepoint_filter)
+        meta_loader = partial(_load_meta, cps_filter=codepoint_filter)
         with ProcessPoolExecutor() as ex:
             metadata = list(
                 tqdm(
-                    ex.map(loader, self.paths),
-                    total=len(self.paths),
+                    ex.map(meta_loader, self.files),
+                    total=len(self.files),
                     desc="Loading fonts",
                 ),
             )
@@ -81,7 +115,7 @@ class FontFolder(Dataset[dict[str, object]]):
     def __len__(self) -> int:
         return int(self._sample_offsets[-1])
 
-    def __getitem__(self, idx: int) -> dict[str, object]:
+    def __getitem__(self, idx: int) -> object:
         font_idx = np.searchsorted(self._sample_offsets, idx, side="right") - 1
         sample_idx = idx - self._sample_offsets[font_idx]
 
@@ -92,13 +126,13 @@ class FontFolder(Dataset[dict[str, object]]):
         style_idx = self._inst_offsets[font_idx] + inst_idx
         content_idx = self._content_map[cp]
 
-        sample: dict[str, object] = {
-            "path": self.paths[int(font_idx)],
-            "is_variable": bool(self._is_var[font_idx]),
-            "instance_index": int(inst_idx),
-            "codepoint": int(cp),
-            "style_label": int(style_idx),
-            "content_label": int(content_idx),
-        }
+        file = self.files[font_idx]
+        inst_idx = inst_idx if self._is_var[font_idx] else None
 
-        return self.transform(sample) if self.transform else sample
+        sample = self.loader(file, inst_idx, cp)
+        if self.transform is not None:
+            sample = self.transform(sample)
+
+        target = (style_idx, content_idx)
+
+        return sample, target
