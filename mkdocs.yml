@@ -7,6 +7,7 @@ repo_name: fjktkm/torchfont
 theme:
   name: material
   features:
+    - navigation.footer
     - navigation.sections
     - navigation.tabs
   palette:
@@ -49,8 +50,9 @@ plugins:
           paths: [src]
           inventories:
             - https://docs.python.org/3/objects.inv
-            - https://pytorch.org/docs/stable/objects.inv
+            - https://fonttools.readthedocs.io/en/stable/objects.inv
             - https://numpy.org/doc/stable/objects.inv
+            - https://pytorch.org/docs/stable/objects.inv
           options:
             docstring_options:
               ignore_init_summary: true
