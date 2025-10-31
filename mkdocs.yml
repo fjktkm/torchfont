@@ -27,5 +27,15 @@ theme:
         name: Switch to system preference
 nav:
   - Home: index.md
+  - API Reference:
+      - Datasets:
+        - datasets.folder: reference/datasets/folder.md
+        - datasets.google_fonts: reference/datasets/google_fonts.md
+        - datasets.repo: reference/datasets/repo.md
+      - IO:
+        - io.pens: reference/io/pens.md
+      - Transforms:
+        - transforms.transforms: reference/transforms/transforms.md
+
 plugins:
   - search
