@@ -40,9 +40,9 @@ def _load_meta(
             code points present in this filter and the font's cmap are kept.
 
     Returns:
-        Tuple containing a flag that indicates whether the font exposes variable
-        instances, the number of available instances (1 for static fonts), and
-        the code points available after filtering.
+        tuple[bool, SupportsIndex, np.ndarray]: Flag indicating whether the font
+            exposes variable instances, the number of available instances (``1``
+            for static fonts), and the code points available after filtering.
 
     See Also:
         FontFolder: Consumes this metadata to construct dataset indices.
@@ -72,6 +72,9 @@ def load_font(file: str) -> TTFont:
         Editing a font file on disk is not reflected unless
         ``load_font.cache_clear()`` is invoked before the next access.
 
+    Returns:
+        TTFont: Cached font instance for the supplied ``file``.
+
     """
     return TTFont(file)
 
@@ -90,8 +93,8 @@ def default_loader(
         codepoint: Unicode code point mapped to the glyph to be converted.
 
     Returns:
-        Tuple whose first element contains pen instruction types and whose
-        second element contains normalized outline coordinates in EM units.
+        tuple[Tensor, Tensor]: First element contains pen instruction types and
+            the second contains normalized outline coordinates in EM units.
 
     Examples:
         Create tensors for the lowercase letter ``a``::
@@ -206,7 +209,12 @@ class FontFolder(Dataset[object]):
         self.num_style_classes = int(self._inst_offsets[-1])
 
     def __len__(self) -> int:
-        """Return the total number of glyph samples discoverable in the dataset."""
+        """Return the total number of glyph samples discoverable in the dataset.
+
+        Returns:
+            int: Total number of glyph samples available in the dataset.
+
+        """
         return int(self._sample_offsets[-1])
 
     def __getitem__(self, idx: int) -> tuple[object, tuple[int, int]]:
@@ -217,7 +225,7 @@ class FontFolder(Dataset[object]):
                 and instances.
 
         Returns:
-            item:
+            tuple[object, tuple[int, int]]:
                 ``(sample, target)`` pair where ``sample`` is produced by the
                 configured loader and ``target`` is ``(style_idx, content_idx)``,
                 describing the variation instance and Unicode code point class.

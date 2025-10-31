@@ -91,8 +91,9 @@ class TensorPen(BasePen):
         """Return the recorded drawing commands as padded tensors.
 
         Returns:
-            tuple[Tensor, Tensor]: Pair of tensors where the first stores command
-            indices and the second stores flattened control-point coordinates.
+            tuple[Tensor, Tensor]:
+                Pair of tensors where the first stores command
+                indices and the second stores flattened control-point coordinates.
 
         Examples:
             Extract tensors after completing a drawing pass::
