@@ -1,3 +1,22 @@
+"""Dataset wrapper that materializes fonts from remote Git repositories.
+
+Examples:
+    Synchronize a Git-based font corpus locally::
+
+        repo_ds = FontRepo(
+            root="data/fonts",
+            url="https://example.com/fonts.git",
+            ref="main",
+            patterns=("**/*.ttf",),
+            download=True,
+        )
+
+Requirements:
+    The system must have ``git`` available in ``PATH`` and network access when
+    ``download`` is set to ``True``.
+
+"""
+
 import shutil
 import subprocess
 from collections.abc import Callable, Sequence
@@ -8,6 +27,13 @@ from torchfont.datasets.folder import FontFolder, default_loader
 
 
 class FontRepo(FontFolder):
+    """Font dataset that synchronizes glyphs from a sparse Git checkout.
+
+    See Also:
+        FontFolder: Provides the glyph indexing logic reused here.
+
+    """
+
     def __init__(
         self,
         root: Path | str,
@@ -23,6 +49,40 @@ class FontRepo(FontFolder):
         transform: Callable[[object], object] | None = None,
         download: bool = False,
     ) -> None:
+        """Clone and index a Git repository of fonts.
+
+        Args:
+            root: Local directory that contains the Git working tree.
+            url: Remote origin URL for the repository.
+            ref: Git reference (branch, tag, or commit hash) to synchronize.
+            patterns: Sparse-checkout patterns that describe which files to
+                materialize. See the `git sparse-checkout` docs for syntax:
+                <https://git-scm.com/docs/git-sparse-checkout>.
+            codepoint_filter: Optional iterable that limits Unicode code points
+                when indexing glyphs.
+            loader: Callable that constructs a sample from a font/code point pair.
+            transform: Optional callable applied to each sample from the loader.
+            download: Whether to clone and check out the repository contents if
+                the working tree is empty.
+
+        Raises:
+            RuntimeError: If Git is not available or the existing repository does
+                not match the requested configuration.
+            FileNotFoundError: If the repository does not exist locally and
+                ``download`` is ``False``.
+
+        Examples:
+            Skip cloning when the working tree already matches the desired state::
+
+                ds = FontRepo(
+                    root="data/fonts",
+                    url="https://github.com/google/fonts",
+                    ref="main",
+                    patterns=("ofl/*/*.ttf",),
+                    download=False,
+                )
+
+        """
         self.root = Path(root).expanduser().resolve()
         self.root.mkdir(parents=True, exist_ok=True)
         self.url = url

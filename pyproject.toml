@@ -45,15 +45,15 @@ unsafe-fixes = true
 
 [tool.ruff.lint]
 select = ["ALL"]
-ignore = ["D", "EXE002"]
+ignore = ["EXE002"]
 
 [tool.ruff.lint.per-file-ignores]
-"examples/**/*.py" = ["T201"]
+"examples/**/*.py" = ["D", "T201"]
 "src/torchfont/datasets/repo.py" = ["S603"]
 "src/torchfont/datasets/*.py" = ["PLR0913"]
 "src/torchfont/io/pens.py" = ["N802"]
-"tests/**/*.py" = ["S101"]
-"typings/**/*.pyi" = ["N"]
+"tests/**/*.py" = ["D", "S101"]
+"typings/**/*.pyi" = ["D", "N"]
 
 [tool.setuptools.package-data]
 "torchfont" = ["py.typed"]

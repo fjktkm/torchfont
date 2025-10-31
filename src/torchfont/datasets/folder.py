@@ -1,3 +1,18 @@
+"""Font folder dataset utilities for glyph loading and indexing.
+
+Examples:
+    Iterate glyph samples from a directory of fonts::
+
+        from torchfont.datasets import FontFolder
+        dataset = FontFolder(root="~/fonts")
+        sample, target = dataset[0]
+
+Guidance:
+    Fonts are cached by absolute path to limit redundant disk access during
+    dataset iteration.
+
+"""
+
 from collections.abc import Callable, Sequence
 from concurrent.futures import ProcessPoolExecutor
 from functools import cache, partial
@@ -17,6 +32,22 @@ def _load_meta(
     file: str,
     cps_filter: Sequence[SupportsIndex] | None,
 ) -> tuple[bool, SupportsIndex, np.ndarray]:
+    """Load metadata required to enumerate glyph samples from a font file.
+
+    Args:
+        file: Path to the font file that will be inspected.
+        cps_filter: Optional iterable of code points to retain. If provided, only
+            code points present in this filter and the font's cmap are kept.
+
+    Returns:
+        tuple[bool, SupportsIndex, np.ndarray]: Flag indicating whether the font
+            exposes variable instances, the number of available instances (``1``
+            for static fonts), and the code points available after filtering.
+
+    See Also:
+        FontFolder: Consumes this metadata to construct dataset indices.
+
+    """
     with TTFont(file) as font:
         if "fvar" in font:
             insts = font["fvar"].instances
@@ -35,6 +66,19 @@ def _load_meta(
 
 @cache
 def load_font(file: str) -> TTFont:
+    """Load a font file and cache the resulting ``TTFont`` instance.
+
+    Warning:
+        Editing a font file on disk is not reflected unless
+        ``load_font.cache_clear()`` is invoked before the next access.
+
+    Args:
+        file: Path to the font file to load.
+
+    Returns:
+        TTFont: Cached font instance for the supplied ``file``.
+
+    """
     return TTFont(file)
 
 
@@ -43,6 +87,24 @@ def default_loader(
     instance_index: SupportsIndex | None,
     codepoint: SupportsIndex,
 ) -> tuple[Tensor, Tensor]:
+    """Convert a glyph outline to tensor representations.
+
+    Args:
+        file: Path to the font containing the glyph.
+        instance_index: Optional index for the font variation instance. ``None``
+            selects the default font master.
+        codepoint: Unicode code point mapped to the glyph to be converted.
+
+    Returns:
+        tuple[Tensor, Tensor]: First element contains pen instruction types and
+            the second contains normalized outline coordinates in EM units.
+
+    Examples:
+        Create tensors for the lowercase letter ``a``::
+
+            types, coords = default_loader("font.otf", None, ord("a"))
+
+    """
     font = load_font(file)
 
     if instance_index is not None:
@@ -65,6 +127,23 @@ def default_loader(
 
 
 class FontFolder(Dataset[object]):
+    """Dataset that yields glyph samples from a directory of font files.
+
+    The dataset flattens every available code point and variation instance into
+    a single indexable sequence. Each item returns the loader output along with
+    style and content targets.
+
+    Attributes:
+        files: Sorted list of discovered font file paths.
+        num_content_classes: Total number of unique Unicode code points present.
+        num_style_classes: Total number of variation instances across fonts.
+
+    See Also:
+        FontRepo: Adds sparse Git checkout support on top of the same indexing
+        machinery.
+
+    """
+
     def __init__(
         self,
         root: Path | str,
@@ -76,6 +155,26 @@ class FontFolder(Dataset[object]):
         ] = default_loader,
         transform: Callable[[object], object] | None = None,
     ) -> None:
+        """Initialize the dataset by scanning font files and indexing samples.
+
+        Args:
+            root: Directory containing font files. Both OTF and TTF files are
+                discovered recursively.
+            codepoint_filter: Optional iterable of Unicode code points to
+                restrict the dataset content.
+            loader: Callable that loads a glyph sample from a font file.
+            transform: Optional transformation applied to each loader output
+                before the item is returned.
+
+        Examples:
+            Restrict the dataset to uppercase ASCII glyphs::
+
+                dataset = FontFolder(
+                    root="~/fonts",
+                    codepoint_filter=[ord(c) for c in "ABCDEFGHIJKLMNOPQRSTUVWXYZ"],
+                )
+
+        """
         self.root = Path(root).expanduser().resolve()
         self.files = sorted(str(fp) for fp in self.root.rglob("*.[oOtT][tT][fF]"))
         self.loader = loader
@@ -113,9 +212,36 @@ class FontFolder(Dataset[object]):
         self.num_style_classes = int(self._inst_offsets[-1])
 
     def __len__(self) -> int:
+        """Return the total number of glyph samples discoverable in the dataset.
+
+        Returns:
+            int: Total number of glyph samples available in the dataset.
+
+        """
         return int(self._sample_offsets[-1])
 
-    def __getitem__(self, idx: int) -> object:
+    def __getitem__(self, idx: int) -> tuple[object, tuple[int, int]]:
+        """Load a glyph sample and its associated targets.
+
+        Args:
+            idx: Zero-based index locating a sample across all fonts, code points,
+                and instances.
+
+        Returns:
+            tuple[object, tuple[int, int]]:
+                ``(sample, target)`` pair where ``sample`` is produced by the
+                configured loader and ``target`` is ``(style_idx, content_idx)``,
+                describing the variation instance and Unicode code point class.
+
+        Raises:
+            IndexError: If ``idx`` falls outside the range ``[0, len(self))``.
+
+        Examples:
+            Retrieve the first glyph sample and its target pair::
+
+                sample, target = dataset[0]
+
+        """
         font_idx = np.searchsorted(self._sample_offsets, idx, side="right") - 1
         sample_idx = idx - self._sample_offsets[font_idx]
 
