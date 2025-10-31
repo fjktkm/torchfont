@@ -6,6 +6,9 @@ repo_url: https://github.com/fjktkm/torchfont
 repo_name: fjktkm/torchfont
 theme:
   name: material
+  features:
+    - navigation.sections
+    - navigation.tabs
   palette:
     - media: "(prefers-color-scheme)"
       toggle:
@@ -27,5 +30,51 @@ theme:
         name: Switch to system preference
 nav:
   - Home: index.md
+  - API Reference:
+      - Datasets:
+        - datasets.folder: reference/datasets/folder.md
+        - datasets.google_fonts: reference/datasets/google_fonts.md
+        - datasets.repo: reference/datasets/repo.md
+      - IO:
+        - io.pens: reference/io/pens.md
+      - Transforms:
+        - transforms.transforms: reference/transforms/transforms.md
+
 plugins:
   - search
+  - autorefs
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [src]
+          inventories:
+            - https://docs.python.org/3/objects.inv
+            - https://pytorch.org/docs/stable/objects.inv
+            - https://numpy.org/doc/stable/objects.inv
+          options:
+            docstring_options:
+              ignore_init_summary: true
+
+            docstring_section_style: list
+
+            signature_crossrefs: true
+            unwrap_annotated: true
+
+            inherited_members: true
+            summary: true
+
+            heading_level: 1
+            parameter_headings: true
+            type_parameter_headings: true
+            show_root_heading: true
+            show_root_full_path: false
+            show_symbol_type_heading: true
+            show_symbol_type_toc: true
+
+            line_length: 88
+            merge_init_into_class: true
+            separate_signature: true
+            show_signature_annotations: true
+            show_signature_type_parameters: true
+
+            show_bases: false
