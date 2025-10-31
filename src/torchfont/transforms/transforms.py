@@ -116,7 +116,7 @@ class Patchify:
 
     See Also:
         LimitSequenceLength: Use together to enforce a strict maximum before
-        patchification.
+        patching.
 
     """
 
