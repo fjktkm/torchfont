@@ -83,7 +83,7 @@ class LimitSequenceLength:
         self.max_len = max_len
 
     def __call__(self, sample: tuple[Tensor, Tensor]) -> tuple[Tensor, Tensor]:
-        """Clip the sequence and coordinate tensors to the configured length.
+        """Clip the sequence and coordinate tensors to the specified length.
 
         Args:
             sample: Tuple of ``(types, coords)`` tensors representing pen commands
