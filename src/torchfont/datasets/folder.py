@@ -72,6 +72,9 @@ def load_font(file: str) -> TTFont:
         Editing a font file on disk is not reflected unless
         ``load_font.cache_clear()`` is invoked before the next access.
 
+    Args:
+        file: Path to the font file to load.
+
     Returns:
         TTFont: Cached font instance for the supplied ``file``.
 
