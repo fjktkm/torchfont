@@ -23,7 +23,11 @@ dev = [
     "ruff>=0.12.4",
     "types-tqdm>=4.67.0.20250809",
 ]
-docs = ["mkdocs>=1.6.1", "mkdocs-material>=9.6.20"]
+docs = [
+    "mkdocs>=1.6.1",
+    "mkdocs-material>=9.6.20",
+    "mkdocstrings[python]>=0.30.1",
+]
 examples = ["lightning>=2.5.5"]
 
 [tool.uv]
