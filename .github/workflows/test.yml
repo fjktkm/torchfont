@@ -36,14 +36,11 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Remove PyTorch
-        run: uv remove torch --no-sync
+      - name: Configure PyTorch to use CPU source index
+        run: uvx --with tomli --with tomli-w python .github/scripts/set_pytorch_cpu.py
 
-      - name: Install the project
-        run: uv sync --dev
-
-      - name: Add CPU PyTorch
-        run: uv pip install "torch==${{ matrix.torch-version }}" --torch-backend=cpu
+      - name: Install specified PyTorch version
+        run: uv add "torch==${{ matrix.torch-version }}"
 
       - name: Run tests
-        run: uv run --no-sync pytest tests
+        run: uv run pytest tests

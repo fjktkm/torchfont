@@ -22,6 +22,8 @@ dev = [
     "pytest>=8.4.2",
     "ruff>=0.12.4",
     "types-tqdm>=4.67.0.20250809",
+    "tomli>=2.3.0",
+    "tomli-w>=1.2.0",
 ]
 docs = [
     "mkdocs>=1.6.1",
@@ -58,6 +60,7 @@ select = ["ALL"]
 ignore = ["EXE002"]
 
 [tool.ruff.lint.per-file-ignores]
+".github/scripts/**/*.py" = ["D", "INP001"]
 "examples/**/*.py" = ["D", "T201"]
 "src/torchfont/datasets/repo.py" = ["S603"]
 "src/torchfont/datasets/*.py" = ["PLR0913"]
