@@ -36,8 +36,14 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Lock dependencies with CPU PyTorch
-        run: uv lock --upgrade-package "torch==${{ matrix.torch-version }}" --index https://download.pytorch.org/whl/cpu
+      - name: Remove PyTorch
+        run: uv remove torch --no-sync
+
+      - name: Install the project
+        run: uv sync --dev
+
+      - name: Add CPU PyTorch
+        run: uv pip install "torch==${{ matrix.torch-version }}" --torch-backend=cpu
 
       - name: Run tests
-        run: uv run pytest tests
+        run: uv run --no-sync pytest tests
