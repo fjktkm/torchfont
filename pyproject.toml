@@ -30,6 +30,19 @@ docs = [
 ]
 examples = ["lightning>=2.5.5"]
 
+[tool.uv.sources]
+torch = [{ index = "pytorch-cu128" }]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
 [tool.pytest.ini_options]
 filterwarnings = ["ignore:.*fork.*:DeprecationWarning"]
 testpaths = ["tests"]
