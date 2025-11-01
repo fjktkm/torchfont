@@ -35,7 +35,15 @@ jobs:
       - uses: astral-sh/setup-uv@v6
         with:
           python-version: ${{ matrix.python-version }}
-          enable-cache: true
+
+      - name: Remove PyTorch
+        run: uv remove torch --no-sync
+
+      - name: Install the project
+        run: uv sync --dev
+
+      - name: Add CPU PyTorch
+        run: uv pip install "torch==${{ matrix.torch-version }}" --torch-backend=cpu
 
       - name: Run tests
-        run: uv run --with "torch==${{ matrix.torch-version }}" pytest tests
+        run: uv run --no-sync pytest tests

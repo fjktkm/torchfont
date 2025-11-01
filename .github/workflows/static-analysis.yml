@@ -51,8 +51,18 @@ jobs:
       - uses: actions/checkout@v5
 
       - uses: astral-sh/setup-uv@v6
-        with:
-          enable-cache: true
+
+      - name: Remove Lightning
+        run: uv remove lightning --group examples --no-sync
+
+      - name: Remove PyTorch
+        run: uv remove torch --no-sync
+
+      - name: Install the project
+        run: uv sync --dev
+
+      - name: Add CPU PyTorch
+        run: uv pip install torch lightning --torch-backend=cpu
 
       - name: Run mypy
         run: uv run mypy src tests examples
