@@ -35,7 +35,9 @@ jobs:
       - uses: astral-sh/setup-uv@v6
         with:
           python-version: ${{ matrix.python-version }}
-          enable-cache: true
+
+      - name: Lock dependencies with CPU PyTorch
+        run: uv lock --upgrade-package "torch==${{ matrix.torch-version }}" --index https://download.pytorch.org/whl/cpu
 
       - name: Run tests
-        run: uv run --with "torch==${{ matrix.torch-version }}" pytest tests
+        run: uv run pytest tests
