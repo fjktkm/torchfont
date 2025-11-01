@@ -30,9 +30,6 @@ docs = [
 ]
 examples = ["lightning>=2.5.5"]
 
-[tool.uv]
-default-groups = "all"
-
 [tool.pytest.ini_options]
 filterwarnings = ["ignore:.*fork.*:DeprecationWarning"]
 testpaths = ["tests"]
