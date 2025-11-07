@@ -1,7 +1,8 @@
 API Reference
 =============
 
-.. toctree::
-   :maxdepth: 2
+.. autosummary::
+   :toctree: generated
+   :recursive:
 
    torchfont
