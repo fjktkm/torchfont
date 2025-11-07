@@ -28,7 +28,7 @@ jobs:
       - uses: astral-sh/setup-uv@v6
 
       - name: Install the project
-        run: uv sync --only-group docs
+        run: uv sync --group docs
 
       - name: Build documentation
         run: uv run --no-sync sphinx-build -b html docs/source docs/build

@@ -22,8 +22,6 @@ dev = [
     "pytest>=8.4.2",
     "ruff>=0.12.4",
     "types-tqdm>=4.67.0.20250809",
-    "tomli>=2.3.0",
-    "tomli-w>=1.2.0",
 ]
 docs = [
     "furo>=2025.9.25",
@@ -34,16 +32,11 @@ docs = [
 examples = ["lightning>=2.5.5"]
 
 [tool.uv.sources]
-torch = [{ index = "pytorch-cu128" }]
+torch = [{ index = "pytorch-cpu" }]
 
 [[tool.uv.index]]
 name = "pytorch-cpu"
 url = "https://download.pytorch.org/whl/cpu"
-explicit = true
-
-[[tool.uv.index]]
-name = "pytorch-cu128"
-url = "https://download.pytorch.org/whl/cu128"
 explicit = true
 
 [tool.pytest.ini_options]

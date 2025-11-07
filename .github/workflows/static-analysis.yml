@@ -52,9 +52,6 @@ jobs:
 
       - uses: astral-sh/setup-uv@v6
 
-      - name: Configure PyTorch to use CPU source index
-        run: uvx --with tomli --with tomli-w python .github/scripts/set_pytorch_cpu.py
-
       - name: Install the project
         run: uv sync --group examples
 
