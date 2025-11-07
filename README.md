@@ -6,17 +6,20 @@ It is not affiliated with or endorsed by the PyTorch project.
 ## Installation
 
 The package requires Python 3.10+ and PyTorch 2.6+.
-You can install TorchFont as follows:
+
+Install TorchFont with **uv**:
 
 ```bash
-# With uv.
 uv add torchfont
+```
 
-# With pip.
+Or with **pip**:
+
+```bash
 pip install torchfont
 ```
 
-## Citing TorchFont
+## Citation
 
 If you find TorchFont useful in your work, please consider citing the following BibTeX entry:
 
