@@ -1,4 +1,6 @@
+# Custom ignore rules
 data/
+docs/source/api/generated/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
