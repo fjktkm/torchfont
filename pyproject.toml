@@ -62,6 +62,7 @@ ignore = ["EXE002"]
 
 [tool.ruff.lint.per-file-ignores]
 ".github/scripts/**/*.py" = ["D", "INP001"]
+"docs/**/*.py" = ["A001", "D", "INP001"]
 "examples/**/*.py" = ["D", "T201"]
 "src/torchfont/datasets/repo.py" = ["S603"]
 "src/torchfont/datasets/*.py" = ["PLR0913"]
