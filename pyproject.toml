@@ -29,6 +29,7 @@ docs = [
     "sphinx-autobuild>=2024.10.3",
     "sphinx-autodoc-typehints>=3.0.1",
     "sphinx-design>=0.6.1",
+    "sphinx-intl>=2.3.2",
 ]
 examples = ["lightning>=2.5.5"]
 

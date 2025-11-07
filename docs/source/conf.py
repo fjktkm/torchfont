@@ -32,3 +32,9 @@ exclude_patterns = []
 
 html_theme = "furo"
 html_static_path = ["_static"]
+
+language = "en"
+locale_dirs = ["locale/"]
+gettext_compact = False
+gettext_uuid = True
+gettext_encoding = "utf-8"

@@ -1,6 +1,8 @@
 # Custom ignore rules
 data/
 docs/source/api/generated/
+docs/source/locale/_sphinx_design_static/
+docs/source/locale/.doctrees/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
