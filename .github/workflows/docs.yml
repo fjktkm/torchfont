@@ -30,12 +30,12 @@ jobs:
       - name: Install the project
         run: uv sync --only-group docs
 
-      - name: Build the documentation
-        run: uv run --no-sync mkdocs build
+      - name: Build documentation
+        run: uv run --no-sync sphinx-build -b html docs/source docs/build
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: ./site
+          path: docs/build
 
   deploy:
     name: Deploy
