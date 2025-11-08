@@ -1,0 +1,94 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Takumu Fujioka
+# This file is distributed under the same license as the TorchFont package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: TorchFont \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-11-07 18:54+0000\n"
+"PO-Revision-Date: 2025-11-08 05:55+0000\n"
+"Last-Translator: Codex AI <codex@example.com>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../api/generated/torchfont.transforms.transforms.rst:2
+#: 5f8cc4cb19d643668f51362bfcbca039
+msgid "torchfont.transforms.transforms"
+msgstr "torchfont.transforms.transforms"
+
+#: d14319aebd8d4b32a88fb6d2052aa3f0 of torchfont.transforms.transforms:1
+msgid "Composable transforms for preprocessing tensor glyph sequences."
+msgstr "Tensor 化されたグリフ系列の前処理に組み合わせて使える Transform 群。"
+
+#: 9a207d561bad458b9119822568713bdc of torchfont.transforms.transforms:4
+msgid "Examples"
+msgstr "使用例"
+
+#: 9c468459fb7843799023d627c6c733d7 of torchfont.transforms.transforms:5
+msgid "``Compose`` multiple operations to normalize glyph tensors::"
+msgstr "複数の処理を ``Compose`` で束ねてグリフ Tensor を正規化::"
+
+#: b6812d96bc764ffd8244dc860504f7d6 of torchfont.transforms.transforms:9
+msgid "Background:"
+msgstr "背景:"
+
+#: b86af65270ef46e3a3d8aa0011426228 of torchfont.transforms.transforms:10
+msgid ""
+"The transforms aim to cover the common preprocessing steps for vectorized"
+" glyph data while still integrating cleanly with PyTorch ``Dataset`` "
+"instances."
+msgstr "これらの Transform はベクトル化されたグリフデータの一般的な前処理を網羅しつつ、PyTorch の ``Dataset`` とスムーズに統合できるように設計されています。"
+
+#: ../../api/generated/torchfont.transforms.transforms.rst:8
+#: a434f9fc1ddb4401b2cc79277e58227c
+msgid "Classes"
+msgstr "クラス"
+
+#: ../../api/generated/torchfont.transforms.transforms.rst:13:<autosummary>:1
+#: d39029712191482b979471a99f90bb61
+msgid ""
+":py:obj:`Compose <torchfont.transforms.transforms.Compose>`\\ "
+"\\(transforms\\)"
+msgstr ""
+":py:obj:`Compose <torchfont.transforms.transforms.Compose>`\\ "
+"\\(transforms\\)"
+
+#: ../../api/generated/torchfont.transforms.transforms.rst:13:<autosummary>:1
+#: 2c98f680d9924d4bae362ad678fdcb59
+msgid "Apply a sequence of transform callables to each sample."
+msgstr "各サンプルに Transform callable の列を順番に適用。"
+
+#: ../../api/generated/torchfont.transforms.transforms.rst:13:<autosummary>:1
+#: b31024adb7d147a7bb5dd782fc6d790c
+msgid ""
+":py:obj:`LimitSequenceLength "
+"<torchfont.transforms.transforms.LimitSequenceLength>`\\ \\(max\\_len\\)"
+msgstr ""
+":py:obj:`LimitSequenceLength "
+"<torchfont.transforms.transforms.LimitSequenceLength>`\\ \\(max\\_len\\)"
+
+#: ../../api/generated/torchfont.transforms.transforms.rst:13:<autosummary>:1
+#: 6c22109ad91d427e830db6d447a6fd72
+msgid "Trim glyph sequences to a fixed maximum length."
+msgstr "グリフ系列を指定した最大長までトリムします。"
+
+#: ../../api/generated/torchfont.transforms.transforms.rst:13:<autosummary>:1
+#: 6c0aa1ba6fd542fca68b0c3e5247451c
+msgid ""
+":py:obj:`Patchify <torchfont.transforms.transforms.Patchify>`\\ "
+"\\(patch\\_size\\)"
+msgstr ""
+":py:obj:`Patchify <torchfont.transforms.transforms.Patchify>`\\ "
+"\\(patch\\_size\\)"
+
+#: ../../api/generated/torchfont.transforms.transforms.rst:13:<autosummary>:1
+#: f2865441f9254dcaa34fbda670a6b978
+msgid "Pad glyph sequences and reshape them into equal-sized patches."
+msgstr "グリフ系列にパディングを入れ、均一サイズのパッチへ再構成します。"

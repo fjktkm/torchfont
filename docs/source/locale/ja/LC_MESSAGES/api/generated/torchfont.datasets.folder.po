@@ -1,0 +1,94 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Takumu Fujioka
+# This file is distributed under the same license as the TorchFont package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: TorchFont \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-11-07 18:54+0000\n"
+"PO-Revision-Date: 2025-11-08 05:55+0000\n"
+"Last-Translator: Codex AI <codex@example.com>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../api/generated/torchfont.datasets.folder.rst:2
+#: c77802cb5dbf401aa13b891cb1396a31
+msgid "torchfont.datasets.folder"
+msgstr "torchfont.datasets.folder"
+
+#: f3678ec790804a08bb1165d8ac78806a of torchfont.datasets.folder:1
+msgid "Font folder dataset utilities for glyph loading and indexing."
+msgstr "グリフの読み込みと索引付けを行うフォントフォルダ用データセットユーティリティ。"
+
+#: 5e087b29618c4147b2b6b6b9910b4567 of torchfont.datasets.folder:4
+msgid "Examples"
+msgstr "使用例"
+
+#: bea57ccd8b594f2cbdd584b189cd94b0 of torchfont.datasets.folder:5
+msgid "Iterate glyph samples from a directory of fonts::"
+msgstr "フォントを収めたディレクトリからグリフサンプルを順に取得::"
+
+#: a37df0674f124df0955551fe70a6b88d of torchfont.datasets.folder:11
+msgid "Guidance:"
+msgstr "ガイダンス:"
+
+#: 0d46f37faf194aec81de76d158f9b9ad of torchfont.datasets.folder:12
+msgid ""
+"Fonts are cached by absolute path to limit redundant disk access during "
+"dataset iteration."
+msgstr "データセットを反復処理する際の不要なディスクアクセスを抑えるため、フォントは絶対パスごとにキャッシュされます。"
+
+#: ../../api/generated/torchfont.datasets.folder.rst:8
+#: c033ff4155574c55ae3d894d3ccb9ec7
+msgid "Functions"
+msgstr "関数"
+
+#: ../../api/generated/torchfont.datasets.folder.rst:13:<autosummary>:1
+#: cb16cbee118943ed896499156250b6f8
+msgid ""
+":py:obj:`default_loader <torchfont.datasets.folder.default_loader>`\\ "
+"\\(file\\, instance\\_index\\, codepoint\\)"
+msgstr ""
+":py:obj:`default_loader <torchfont.datasets.folder.default_loader>`\\ "
+"\\(file\\, instance\\_index\\, codepoint\\)"
+
+#: ../../api/generated/torchfont.datasets.folder.rst:13:<autosummary>:1
+#: 3453d95a72914b45a3e26716cdcd9c94
+msgid "Convert a glyph outline to tensor representations."
+msgstr "グリフのアウトラインを Tensor 表現へ変換します。"
+
+#: ../../api/generated/torchfont.datasets.folder.rst:13:<autosummary>:1
+#: c76d101ec0624a2cb7a0770d1aae6edb
+msgid ":py:obj:`load_font <torchfont.datasets.folder.load_font>`\\ \\(file\\)"
+msgstr ":py:obj:`load_font <torchfont.datasets.folder.load_font>`\\ \\(file\\)"
+
+#: ../../api/generated/torchfont.datasets.folder.rst:13:<autosummary>:1
+#: 8dd7aec2cee64a28a1c510f6d758a49e
+msgid "Load a font file and cache the resulting ``TTFont`` instance."
+msgstr "フォントファイルを読み込み、生成された ``TTFont`` インスタンスをキャッシュします。"
+
+#: ../../api/generated/torchfont.datasets.folder.rst:15
+#: a1c93a0109a24a01a2726d95bbe93ecc
+msgid "Classes"
+msgstr "クラス"
+
+#: ../../api/generated/torchfont.datasets.folder.rst:18:<autosummary>:1
+#: 8e2ce0e3b69d4f41962e774d1273ee89
+msgid ""
+":py:obj:`FontFolder <torchfont.datasets.folder.FontFolder>`\\ \\(root\\, "
+"\\*\\[\\, codepoint\\_filter\\, ...\\]\\)"
+msgstr ""
+":py:obj:`FontFolder <torchfont.datasets.folder.FontFolder>`\\ \\(root\\, "
+"\\*\\[\\, codepoint\\_filter\\, ...\\]\\)"
+
+#: ../../api/generated/torchfont.datasets.folder.rst:18:<autosummary>:1
+#: bb864f27c8fd40a392469887fd0e975e
+msgid "Dataset that yields glyph samples from a directory of font files."
+msgstr "フォントファイルのディレクトリからグリフサンプルを生成するデータセット。"

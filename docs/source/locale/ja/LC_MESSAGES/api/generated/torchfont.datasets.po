@@ -1,0 +1,71 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Takumu Fujioka
+# This file is distributed under the same license as the TorchFont package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: TorchFont \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-11-07 18:54+0000\n"
+"PO-Revision-Date: 2025-11-08 05:55+0000\n"
+"Last-Translator: Codex AI <codex@example.com>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../api/generated/torchfont.datasets.rst:2
+#: c3fb99daec65486192d947d3b7de3606
+msgid "torchfont.datasets"
+msgstr "torchfont.datasets"
+
+#: 1be2bce93c014ff4a3362eaf8102e06c of torchfont.datasets:1
+msgid "Dataset utilities for loading glyph samples from font files."
+msgstr "フォントファイルからグリフサンプルを読み込むためのデータセットユーティリティ。"
+
+#: 324d99acc2cf4b509a1c6470d5a586df of torchfont.datasets:4
+msgid "Examples"
+msgstr "使用例"
+
+#: 24ab4b6e289440aea628ac13801ade8d of torchfont.datasets:5
+msgid "Build a dataset sourced from the Google Fonts index::"
+msgstr "Google Fonts の索引を基にしたデータセットを構築::"
+
+#: ../../api/generated/torchfont.datasets.rst:8
+#: 05b5436fd58e4d16b74e0bed30079918
+msgid "Modules"
+msgstr "モジュール"
+
+#: ../../api/generated/torchfont.datasets.rst:15:<autosummary>:1
+#: 496f5668aadf4b5cae678ac13cec3326
+msgid ":py:obj:`folder <torchfont.datasets.folder>`\\"
+msgstr ":py:obj:`folder <torchfont.datasets.folder>`\\"
+
+#: ../../api/generated/torchfont.datasets.rst:15:<autosummary>:1
+#: e5ba45eb0c794c9ea52ed4adbd808968
+msgid "Font folder dataset utilities for glyph loading and indexing."
+msgstr "グリフの読み込みと索引付けを行うフォントフォルダ用データセットユーティリティ。"
+
+#: ../../api/generated/torchfont.datasets.rst:15:<autosummary>:1
+#: 0c1b1dc956ed49b68d66a2bfcbfbe695
+msgid ":py:obj:`google_fonts <torchfont.datasets.google_fonts>`\\"
+msgstr ":py:obj:`google_fonts <torchfont.datasets.google_fonts>`\\"
+
+#: ../../api/generated/torchfont.datasets.rst:15:<autosummary>:1
+#: 18bf2877344e411b890017f272abb861
+msgid "Dataset utilities for working with the Google Fonts repository."
+msgstr "Google Fonts リポジトリを扱うためのデータセットユーティリティ。"
+
+#: ../../api/generated/torchfont.datasets.rst:15:<autosummary>:1
+#: dfe96d8f11204ec5937ffde2b15b3945
+msgid ":py:obj:`repo <torchfont.datasets.repo>`\\"
+msgstr ":py:obj:`repo <torchfont.datasets.repo>`\\"
+
+#: ../../api/generated/torchfont.datasets.rst:15:<autosummary>:1
+#: 0454ec6ef6fd4840aad832cfe689eda3
+msgid "Dataset wrapper that materializes fonts from remote Git repositories."
+msgstr "リモート Git リポジトリからフォントを取得するデータセットラッパー。"

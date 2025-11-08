@@ -1,0 +1,107 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Takumu Fujioka
+# This file is distributed under the same license as the TorchFont package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: TorchFont \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-11-07 18:54+0000\n"
+"PO-Revision-Date: 2025-11-08 05:55+0000\n"
+"Last-Translator: Codex AI <codex@example.com>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../api/generated/torchfont.rst:2 b807612f4b64400ca027a2e8ab1b1511
+msgid "torchfont"
+msgstr "torchfont"
+
+#: 27d6a783b16e4dd6bfa3e85ddd8b6e6a of torchfont:1
+msgid ""
+"TorchFont: A PyTorch-based library for learning and processing vector "
+"fonts."
+msgstr "TorchFont: ベクトルフォントの学習と処理のための PyTorch ベースのライブラリです。"
+
+#: 46e4eee617de48a69eae2f9c5314bdf7 of torchfont:3
+msgid "Overview:"
+msgstr "概要:"
+
+#: 71fbd55030e34e0c941e2a2a7dd0de3b of torchfont:4
+msgid ""
+"TorchFont bundles dataset utilities, tensor pens, and preprocessing "
+"transforms that streamline glyph-focused machine learning workflows."
+msgstr "TorchFont には、グリフに特化した機械学習ワークフローを効率化するデータセットユーティリティ、Tensor ペン、前処理用 Transform が含まれています。"
+
+#: 05bdbda96c004bd388716429a9426e71 of torchfont:7
+msgid "Features:"
+msgstr "機能:"
+
+#: de268dd814a14662ba292b02a9f2c48e of torchfont:8
+msgid "Google Fonts integration via sparse Git checkouts."
+msgstr "スパースな Git チェックアウトによる Google Fonts との統合。"
+
+#: de7e146b22c74052b1001b0137690df3 of torchfont:9
+msgid "Tensor-based glyph rendering with `fontTools` pens."
+msgstr "`fontTools` ペンを用いた Tensor ベースのグリフレンダリング。"
+
+#: 5aa28167cfcb48a79582c0bb1bf61ed1 of torchfont:10
+msgid "Transform primitives that handle batching and truncation."
+msgstr "バッチ処理や系列トリミングを扱う Transform プリミティブ。"
+
+#: 144f6e3cbe5545d9a3e1856f918ec245 of torchfont:13
+msgid "Examples"
+msgstr "使用例"
+
+#: a034ff2cfd1e403a8f6f97ab226d0886 of torchfont:14
+msgid "Build a dataset sourced from Google Fonts::"
+msgstr "Google Fonts 由来のデータセットを構築::"
+
+#: 8437a182a5574e08b26d10a2d5fad8c2 of torchfont:19
+msgid "Further Reading:"
+msgstr "参考資料:"
+
+#: b26f41a40a5c4797801bac2f0cd4aa4c of torchfont:20
+msgid ""
+"Consult the project README for installation guidance and advanced usage "
+"patterns."
+msgstr "インストール手順や高度な利用方法についてはプロジェクトの README を参照してください。"
+
+#: ../../api/generated/torchfont.rst:8 a11e8c9f2d8946868ecb68f45030ece6
+msgid "Modules"
+msgstr "モジュール"
+
+#: ../../api/generated/torchfont.rst:15:<autosummary>:1
+#: ef71a0cdbb3f43f3a4dcfc16ec71d6d3
+msgid ":py:obj:`datasets <torchfont.datasets>`\\"
+msgstr ":py:obj:`datasets <torchfont.datasets>`\\"
+
+#: ../../api/generated/torchfont.rst:15:<autosummary>:1
+#: edb1f598fdd44c08be38ce7335c40cf7
+msgid "Dataset utilities for loading glyph samples from font files."
+msgstr "フォントファイルからグリフサンプルを読み込むためのデータセットユーティリティ。"
+
+#: ../../api/generated/torchfont.rst:15:<autosummary>:1
+#: bce96c8e955949a4bd318cd283a8ba82
+msgid ":py:obj:`io <torchfont.io>`\\"
+msgstr ":py:obj:`io <torchfont.io>`\\"
+
+#: ../../api/generated/torchfont.rst:15:<autosummary>:1
+#: 8e0264602bcc40b8b06f8e0da4111e8b
+msgid "Input/output helpers for converting font outlines to tensor formats."
+msgstr "フォントアウトラインを Tensor 形式へ変換する入出力ヘルパー。"
+
+#: ../../api/generated/torchfont.rst:15:<autosummary>:1
+#: e2920efa320849ddb6ad99b9f362c6c2
+msgid ":py:obj:`transforms <torchfont.transforms>`\\"
+msgstr ":py:obj:`transforms <torchfont.transforms>`\\"
+
+#: ../../api/generated/torchfont.rst:15:<autosummary>:1
+#: ad3bf3a642be4ceaa32245f079d75dbf
+msgid "Transform primitives for manipulating tensorized glyph sequences."
+msgstr "Tensor 化されたグリフ系列を操作する Transform プリミティブ。"

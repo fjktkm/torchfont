@@ -1,0 +1,65 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Takumu Fujioka
+# This file is distributed under the same license as the TorchFont package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: TorchFont \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-11-07 18:54+0000\n"
+"PO-Revision-Date: 2025-11-08 05:55+0000\n"
+"Last-Translator: Codex AI <codex@example.com>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../api/generated/torchfont.datasets.repo.rst:2
+#: 742a2eed83334124917f180fdf23e0a2
+msgid "torchfont.datasets.repo"
+msgstr "torchfont.datasets.repo"
+
+#: ca272d0373c94145af38f85842423a29 of torchfont.datasets.repo:1
+msgid "Dataset wrapper that materializes fonts from remote Git repositories."
+msgstr "リモート Git リポジトリからフォントを取得するデータセットラッパー。"
+
+#: 69effadee6e448d9a55149b709d6cd18 of torchfont.datasets.repo:4
+msgid "Examples"
+msgstr "使用例"
+
+#: 75e5e1b469b64eb88f2893e01e58a253 of torchfont.datasets.repo:5
+msgid "Synchronize a Git-based font corpus locally::"
+msgstr "Git ベースのフォントコーパスをローカルに同期::"
+
+#: 37b33ac3fa994101ad523619a0753894 of torchfont.datasets.repo:15
+msgid "Requirements:"
+msgstr "要件:"
+
+#: 57a40423a96d488f80dc59b42f48cd10 of torchfont.datasets.repo:16
+msgid ""
+"The system must have ``git`` available in ``PATH`` and network access "
+"when ``download`` is set to ``True``."
+msgstr "``download`` が ``True`` に設定されている場合、システムの ``PATH`` 上に ``git`` が存在し、ネットワークにアクセスできる必要があります。"
+
+#: ../../api/generated/torchfont.datasets.repo.rst:8
+#: 87bd865efce84938ae018a2d20992f9b
+msgid "Classes"
+msgstr "クラス"
+
+#: ../../api/generated/torchfont.datasets.repo.rst:11:<autosummary>:1
+#: f4b11c85745a453e88eb71fb5f6c3bf5
+msgid ""
+":py:obj:`FontRepo <torchfont.datasets.repo.FontRepo>`\\ \\(root\\, url\\,"
+" ref\\, \\*\\, patterns\\[\\, ...\\]\\)"
+msgstr ""
+":py:obj:`FontRepo <torchfont.datasets.repo.FontRepo>`\\ \\(root\\, url\\,"
+" ref\\, \\*\\, patterns\\[\\, ...\\]\\)"
+
+#: ../../api/generated/torchfont.datasets.repo.rst:11:<autosummary>:1
+#: af411d45b28a4a9983daab6c6958bac2
+msgid "Font dataset that synchronizes glyphs from a sparse Git checkout."
+msgstr "スパースな Git チェックアウトからグリフを同期するフォントデータセット。"

@@ -1,0 +1,183 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Takumu Fujioka
+# This file is distributed under the same license as the TorchFont package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: TorchFont \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-11-08 06:54+0000\n"
+"PO-Revision-Date: 2025-11-08 06:40+0000\n"
+"Last-Translator: Codex AI <codex@example.com>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../contributor_guide/index.rst:2 086bd5ae33f841c981fea60c3bd34d94
+msgid "Contributor Guide"
+msgstr "コントリビューターガイド"
+
+#: ../../contributor_guide/index.rst:4 6a20ea7f6e954eb881048378e76f26b2
+msgid ""
+"This document provides guidelines for contributors, including setup "
+"instructions, development workflow, and contribution rules."
+msgstr "このドキュメントでは、セットアップ手順、開発フロー、貢献に関するルールなど、コントリビューター向けのガイドラインを示します。"
+
+#: ../../../../CONTRIBUTING.rst:1 7940cf9d989a49e39201e71bc60f8762
+msgid ""
+"Thank you for taking the time to improve TorchFont! The guidelines below "
+"keep the project healthy and make it easier for maintainers to review "
+"changes."
+msgstr ""
+"TorchFont "
+"の改善に時間を割いてくださりありがとうございます。以下のガイドラインは、プロジェクトを健全に保ちレビューを円滑に進めるためのものです。"
+
+#: ../../../../CONTRIBUTING.rst:5 93cfa6c0198049a7aa4c718ea3cc08d9
+msgid "Project Setup"
+msgstr "プロジェクトのセットアップ"
+
+#: ../../../../CONTRIBUTING.rst:7 b83dd9c726db4c3ab79fb6fa5f85de98
+msgid ""
+"TorchFont uses `uv <https://docs.astral.sh/uv/>`_ to manage virtual "
+"environments and dependency locks."
+msgstr ""
+"TorchFont では仮想環境と依存関係のロックを `uv <https://docs.astral.sh/uv/>`_ で管理しており、まず "
+"``uv sync --all-groups`` を実行して環境を整えます。"
+
+#: ../../../../CONTRIBUTING.rst:14 5a73c29988724ad0a6ea94fdddd53178
+msgid ""
+"This installs the runtime package, development tooling (linters, tests), "
+"and the documentation toolchain in a single isolated environment. "
+"Activate the shell with ``uv run`` or prefix commands as shown later in "
+"this document."
+msgstr ""
+"このコマンドでランタイム、開発ツール（リンター・テスト）、ドキュメント生成ツールをひとつの分離された環境にまとめて導入できます。以降は ``uv "
+"run`` を付けるか、ここに示したコマンド例をそのまま利用してください。"
+
+#: ../../../../CONTRIBUTING.rst:19 6205a0c48d694667b0ab310de30f4d52
+msgid "Coding Standards"
+msgstr "コーディング規約"
+
+#: ../../../../CONTRIBUTING.rst:21 f26792a602374fd0870307a01bb7875d
+msgid ""
+"The minimum supported Python version is 3.10. Avoid syntax that would "
+"break on that interpreter."
+msgstr "サポートする最小の Python は 3.10 です。このバージョンで動かない構文は避けてください。"
+
+#: ../../../../CONTRIBUTING.rst:23 49c29a9dd8b54c9b83d9c92d3864a765
+msgid ""
+"Keep modules typed. ``pyproject.toml`` ships ``py.typed`` metadata, so "
+"mypy warnings matter."
+msgstr ""
+"各モジュールには型注釈を付けましょう。``pyproject.toml`` には ``py.typed`` が含まれているため mypy "
+"の警告はそのままユーザーに伝わります。"
+
+#: ../../../../CONTRIBUTING.rst:26 5d1ae423fc30420aac1c61aa2ea95503
+msgid ""
+"Public APIs live under ``torchfont.datasets``, ``torchfont.transforms`` "
+"and ``torchfont.io``. When adding modules, update ``docs/source/api`` so "
+"that Sphinx picks them up."
+msgstr ""
+"公開 API は ``torchfont.datasets``、``torchfont.transforms``、``torchfont.io``"
+" にまとまっています。モジュールを追加したら ``docs/source/api`` も更新し、Sphinx "
+"の自動ドキュメントに反映させてください。"
+
+#: ../../../../CONTRIBUTING.rst:31 7edb982883e748beb273d76b834edb7c
+msgid "Testing & Linting"
+msgstr "テストとリント"
+
+#: ../../../../CONTRIBUTING.rst:33 49c79f73bfc347ccb3736816f82fbf39
+msgid ""
+"GitHub Actions runs linting, type-checking, and tests automatically after "
+"you open a pull request. Keep an eye on the workflow status and address "
+"any failures that appear. To reproduce issues locally, run:"
+msgstr ""
+"プルリクエストを作成すると GitHub Actions が lint／型チェック／テストを自動で実行します。ワークフローの状態を確認し、"
+"失敗があれば対応してください。ローカルで再現したい場合は次のコマンドを実行します。"
+
+#: ../../../../CONTRIBUTING.rst:43 022ce51f7b294faaaa829aa706a43432
+msgid ""
+"The repository contains small integration samples inside ``examples/``. "
+"Please exercise or extend them if your change alters their behavior."
+msgstr "``examples/`` 配下には小さな統合サンプルがあります。挙動に影響する変更を行った場合は、必要に応じて実行・更新してください。"
+
+#: ../../../../CONTRIBUTING.rst:47 5da9d671c24d4544bfe8169f95440205
+msgid "Documentation"
+msgstr "ドキュメント"
+
+#: ../../../../CONTRIBUTING.rst:49 e6798900870442d59bc936a61eba5c44
+msgid "Every significant feature should include user-facing documentation:"
+msgstr "大きな機能追加には必ずユーザー向けドキュメントを添えてください。"
+
+#: ../../../../CONTRIBUTING.rst:51 d1680d933c04469ea109995a3068baf9
+msgid "Update ``docs/source`` with narrative text or API references."
+msgstr "まず ``docs/source`` に説明文や API リファレンスを追加します。"
+
+#: ../../../../CONTRIBUTING.rst:52 39dc6a37eaa347d39c88f86f33d4ef87
+msgid "Build the docs locally to ensure nothing regresses:"
+msgstr ""
+"そのうえで ``uv run sphinx-build -b html docs/source docs/build`` を実行し、"
+"ローカルでビルドして退行がないか確認します。"
+
+#: ../../../../CONTRIBUTING.rst:58 3eb792e6c7a54be4ae1b45f995f79efa
+msgid ""
+"If you touched any ``.rst`` files, regenerate message catalogs and "
+"refresh translations:"
+msgstr "``.rst`` ファイルを編集した場合はメッセージカタログを再生成し、日本語訳を更新してください。"
+
+#: ../../../../CONTRIBUTING.rst:66 6dcd918194dd4f9696d5ede86ca2a1c1
+msgid ""
+"Translate the new strings inside ``docs/source/locale/ja/LC_MESSAGES``. "
+"The Japanese docs should stay reasonably idiomatic—feel free to adapt "
+"phrasing instead of providing literal translations."
+msgstr ""
+"追加された文字列は ``docs/source/locale/ja/LC_MESSAGES`` "
+"内で翻訳します。逐語訳にこだわらず、自然な日本語になるよう意訳して構いません。"
+
+#: ../../../../CONTRIBUTING.rst:71 140ee4bb9d5f4433936299658cd2dfab
+msgid "Git Workflow"
+msgstr "Git ワークフロー"
+
+#: ../../../../CONTRIBUTING.rst:73 9c71d2a37c13477b8b057e79be96b0f7
+msgid "Create topic branches off ``main``."
+msgstr "作業ブランチは ``main`` から切ってください。"
+
+#: ../../../../CONTRIBUTING.rst:74 d699d7b64eb74cf0b0608bb1dddea22c
+msgid ""
+"Write descriptive commit messages. Mention the relevant issue when "
+"applicable."
+msgstr "コミットメッセージは内容が伝わるものにし、必要に応じて関連 issue を明記します。"
+
+#: ../../../../CONTRIBUTING.rst:75 c17b84695fc1435f9678d83f9aed916a
+msgid ""
+"Keep pull requests focused. Separate unrelated refactors or formatting "
+"changes into their own PRs."
+msgstr "プルリクエストは焦点を絞り、無関係なリファクタリングや整形は別 PR としてください。"
+
+#: ../../../../CONTRIBUTING.rst:77 752d27c2552547a28ab95f94d41e840c
+msgid "Ensure CI (lint, type-check, tests, docs) passes before requesting review."
+msgstr "レビュー依頼の前に CI（lint・型チェック・テスト・ドキュメント）がすべて通っていることを確認します。"
+
+#: ../../../../CONTRIBUTING.rst:80 8f1bac29149541ee954a51add64626be
+msgid "Need Help?"
+msgstr "困ったときは"
+
+#: ../../../../CONTRIBUTING.rst:82 e973f0d7c46042c39dfa4e6da6fb440c
+msgid ""
+"Open a GitHub Discussion or issue if anything here is unclear. The more "
+"context you provide (logs, screenshots, sample fonts), the faster "
+"reviewers can help."
+msgstr ""
+"不明点があれば GitHub Discussion か issue "
+"で相談してください。ログやスクリーンショット、問題のあるフォントなどの情報が多いほど早くサポートできます。"
+
+#~ msgid "Contributing to TorchFont"
+#~ msgstr "TorchFont への貢献について"
+
+#~ msgid "Run the automated checks before opening a pull request:"
+#~ msgstr "プルリクエストを開く前に以下の自動チェックを通してください。"

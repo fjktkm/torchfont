@@ -1,0 +1,73 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Takumu Fujioka
+# This file is distributed under the same license as the TorchFont package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: TorchFont \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-11-07 18:54+0000\n"
+"PO-Revision-Date: 2025-11-08 05:55+0000\n"
+"Last-Translator: Codex AI <codex@example.com>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../index.rst:2 d3f47cf2cc7542368d90a7c86b39c94f
+msgid "TorchFont Documentation"
+msgstr "TorchFont ドキュメント"
+
+#: ../../index.rst:4 bf9af450a98146d3b9b587d37a7074a2
+msgid ""
+"Welcome to the TorchFont documentation. The sections below provide "
+"guidance for users, developers, and contributors."
+msgstr "TorchFont のドキュメントへようこそ。以下のセクションでは、ユーザー、開発者、コントリビューター向けのガイドを提供します。"
+
+#: ../../index.rst:10 64add23619b64762aad5773bb466af04
+msgid "Getting Started"
+msgstr "はじめに"
+
+#: ../../index.rst:15 4f3c93f8dfc842498642c910010f474a
+msgid "Quick installation and first steps to use TorchFont."
+msgstr "TorchFont を素早くインストールし使い始めるための手順です。"
+
+#: ../../index.rst:17 efdf56b215bb4413bd0850bfbb278e9a
+msgid "User Guide"
+msgstr "ユーザーガイド"
+
+#: ../../index.rst:22 c14cb7e63f7741168bd21e4c4c98d8bc
+msgid "Learn how to use TorchFont effectively with practical examples."
+msgstr "TorchFont を実践的な例とともに効果的に使う方法を学びます。"
+
+#: ../../index.rst:24 928fd9f0314c4a5ba793cb9f94986192
+msgid "API Reference"
+msgstr "API リファレンス"
+
+#: ../../index.rst:29 091e8f435a8c484e91004e4ce6888344
+msgid "Detailed documentation for TorchFont’s public API."
+msgstr "TorchFont の公開 API についての詳細なリファレンスです。"
+
+#: ../../index.rst:31 e2cef6e9229f43b2a09b63d7d0d3cbed
+msgid "Contributor Guide"
+msgstr "コントリビューターガイド"
+
+#: ../../index.rst:36 13ea269bd42e40e9836dd2c17c1b0fd9
+msgid ""
+"Instructions for contributing to TorchFont and setting up a development "
+"environment."
+msgstr "TorchFont への貢献方法や開発環境の構築手順を説明します。"
+
+#: ../../index.rst:39 74f1291d592b4f7fb8a1357e0bcd41c4
+msgid "Citation"
+msgstr "引用"
+
+#: ../../index.rst:41 c193cb4047bf4841bd037cfc7913da09
+msgid ""
+"If you find TorchFont useful in your work, please consider citing the "
+"following BibTeX entry:"
+msgstr "TorchFont が研究や業務で役立った場合は、以下の BibTeX を引用することをご検討ください。"

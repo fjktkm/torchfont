@@ -1,0 +1,59 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Takumu Fujioka
+# This file is distributed under the same license as the TorchFont package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: TorchFont \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-11-07 18:54+0000\n"
+"PO-Revision-Date: 2025-11-08 05:55+0000\n"
+"Last-Translator: Codex AI <codex@example.com>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../api/generated/torchfont.io.pens.rst:2 428067d6d3fd4c41a4fda919d3298c55
+msgid "torchfont.io.pens"
+msgstr "torchfont.io.pens"
+
+#: 94ea232b0a4240e4ba75dcbe28f92652 of torchfont.io.pens:1
+msgid "Conversion utilities that draw vector glyphs into tensor representations."
+msgstr "ベクターグリフを Tensor 表現として描画する Transform ユーティリティ。"
+
+#: 1be4f4edeb31418595e5744126205db8 of torchfont.io.pens:4
+msgid "Examples"
+msgstr "使用例"
+
+#: 475acf4b17684bdf80e3c39e0cb4f662 of torchfont.io.pens:5
+msgid "Capture a glyph as tensors::"
+msgstr "グリフを Tensor として取得::"
+
+#: f50478512a934062bfbc02c008d26121 of torchfont.io.pens:11
+msgid "Design Notes:"
+msgstr "設計メモ:"
+
+#: c8fb94794af14741a5a02bc78bb41184 of torchfont.io.pens:12
+msgid ""
+"Command indices are appended with an explicit end-of-sequence token to "
+"simplify batching downstream."
+msgstr "後段のバッチ処理を単純化するため、コマンドインデックスには明示的な終端トークンが付加されます。"
+
+#: ../../api/generated/torchfont.io.pens.rst:8 c8b49f44f4fe4002ad63d199dc5bb96d
+msgid "Classes"
+msgstr "クラス"
+
+#: ../../api/generated/torchfont.io.pens.rst:11:<autosummary>:1
+#: 8542ac6dc2b746e39b8e1654a9321f84
+msgid ":py:obj:`TensorPen <torchfont.io.pens.TensorPen>`\\ \\(glyph\\_set\\)"
+msgstr ":py:obj:`TensorPen <torchfont.io.pens.TensorPen>`\\ \\(glyph\\_set\\)"
+
+#: ../../api/generated/torchfont.io.pens.rst:11:<autosummary>:1
+#: e1e02c32847e428c8b965abb4754d71a
+msgid "FontTools pen that records glyph outlines as PyTorch tensors."
+msgstr "グリフのアウトラインを PyTorch Tensor として記録する FontTools ペン。"
