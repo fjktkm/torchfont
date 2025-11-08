@@ -67,7 +67,7 @@ jobs:
           fi
 
           git commit -m "Update translations via Codex"
-          git push origin codex-translation-update
+          git push -f origin codex-translation-update
 
           pr_number=$(gh pr list --head codex-translation-update --base main --json number --jq '.[0].number')
           if [ -n "$pr_number" ]; then
