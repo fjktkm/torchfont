@@ -34,6 +34,7 @@ exclude_patterns = []
 
 html_theme = "furo"
 html_static_path = ["_static"]
+html_extra_path = ["llms.txt"]
 
 language = os.environ.get("READTHEDOCS_LANGUAGE", "en")
 locale_dirs = ["../locale/"]
