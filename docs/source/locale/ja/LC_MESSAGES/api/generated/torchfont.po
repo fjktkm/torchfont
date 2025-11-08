@@ -26,7 +26,7 @@ msgstr "torchfont"
 msgid ""
 "TorchFont: A PyTorch-native toolkit for modeling and processing vector "
 "fonts."
-msgstr "TorchFont: ベクターフォントのモデリングと処理に特化した PyTorch ネイティブのツールキット。"
+msgstr "TorchFont：ベクターフォントのモデリングと処理に特化した PyTorch ネイティブのツールキット。"
 
 #: 8ebcb23995de4a6ca35b6bb936bd1f9f of torchfont:4
 msgid "Notes"
@@ -41,7 +41,7 @@ msgstr "TorchFont にはデータセットラッパー、Tensor ペン、前処�
 
 #: bb0f2b700f2e4be18f1373cba98a79d7 of torchfont:9
 msgid "Features:"
-msgstr "機能:"
+msgstr "機能："
 
 #: 0420832e361d47d0a6f51efe40cba4dc of torchfont:10
 msgid "Seamless Google Fonts integration through sparse Git checkouts."
@@ -112,13 +112,13 @@ msgid "Transform primitives tailored to tensorized glyph sequences."
 msgstr "Tensor 化されたグリフ系列に合わせて設計された Transform プリミティブ。"
 
 #~ msgid "Overview:"
-#~ msgstr "概要:"
+#~ msgstr "概要："
 
 #~ msgid "Build a dataset sourced from Google Fonts::"
 #~ msgstr "Google Fonts 由来のデータセットを構築::"
 
 #~ msgid "Further Reading:"
-#~ msgstr "参考資料:"
+#~ msgstr "参考資料："
 
 #~ msgid "Tensor-based glyph rendering powered by ``fontTools`` pens."
 #~ msgstr "`fontTools` ペンを用いた Tensor ベースのグリフレンダリング。"

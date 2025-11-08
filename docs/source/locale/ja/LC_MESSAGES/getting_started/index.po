@@ -107,7 +107,7 @@ msgstr ""
 ":class:`torchfont.datasets.FontFolder` は ``.otf`` や ``.ttf`` "
 "が入ったディレクトリをそのまま PyTorch 互換のデータセットに変換します。各アイテムには "
 ":class:`torchfont.io.pens.TensorPen` "
-"が出力するペンコマンド種別と正規化座標、さらにスタイル／コンテンツのラベルが含まれます。"
+"が出力するペンコマンド種別と正規化座標、さらにスタイル・コンテンツのラベルが含まれます。"
 
 #: ../../source/getting_started/index.rst:96 ccf3d78c56824b03b562b87dcebcc248
 msgid "Working with Google Fonts"
@@ -130,7 +130,7 @@ msgstr "次のステップ"
 msgid ""
 "Continue to the :doc:`/user_guide/index` for a deeper dive into the "
 "dataset, transform, and I/O utilities."
-msgstr "データセット／Transform／I/O ユーティリティの詳細は :doc:`/user_guide/index` へ。"
+msgstr "データセット・Transform・I/O ユーティリティの詳細は :doc:`/user_guide/index` へ。"
 
 #: ../../source/getting_started/index.rst:119 85731ec6ae6c40e6b8dab90de5be805c
 msgid ""

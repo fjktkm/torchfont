@@ -65,7 +65,7 @@ msgstr "グリフのアウトラインを PyTorch Tensor として記録する F
 #~ msgstr "グリフを Tensor として取得::"
 
 #~ msgid "Design Notes:"
-#~ msgstr "設計メモ:"
+#~ msgstr "設計メモ："
 
 #~ msgid ""
 #~ "Command indices are appended with an "

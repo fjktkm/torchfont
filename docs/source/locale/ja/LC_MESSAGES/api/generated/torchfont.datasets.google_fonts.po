@@ -68,4 +68,4 @@ msgstr "Google Fonts プロジェクトからグリフサンプルを取得す�
 #~ msgstr "最新の Google Fonts インデックスを利用してデータセットを構築::"
 
 #~ msgid "Resources:"
-#~ msgstr "リソース:"
+#~ msgstr "リソース："

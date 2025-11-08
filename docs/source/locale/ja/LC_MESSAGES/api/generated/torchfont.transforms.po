@@ -67,7 +67,7 @@ msgstr "学習前の Tensor 化グリフを磨き上げるための、合成し�
 #~ msgstr "グリフ Tensor 向けの前処理 Transform パイプラインを構築::"
 
 #~ msgid "Overview:"
-#~ msgstr "概要:"
+#~ msgstr "概要："
 
 #~ msgid ""
 #~ "The exported classes cover sequencing, "

@@ -99,7 +99,7 @@ msgstr "グリフ系列に必要な分だけパディングを施し、モデル
 #~ msgstr "複数の処理を ``Compose`` で束ねてグリフ Tensor を正規化::"
 
 #~ msgid "Background:"
-#~ msgstr "背景:"
+#~ msgstr "背景："
 
 #~ msgid "Compose multiple operations to normalize glyph tensors::"
 #~ msgstr "複数の処理を組み合わせてグリフ Tensor を正規化::"

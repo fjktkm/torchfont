@@ -98,7 +98,7 @@ msgstr "フォントファイルのディレクトリからグリフサンプル
 #~ msgstr "フォントを収めたディレクトリからグリフサンプルを順に取得::"
 
 #~ msgid "Guidance:"
-#~ msgstr "ガイダンス:"
+#~ msgstr "ガイダンス："
 
 #~ msgid "Font folder dataset utilities for glyph loading and indexing."
 #~ msgstr "グリフの読み込みと索引付けを行うフォントフォルダ用データセットユーティリティ。"

@@ -28,7 +28,7 @@ msgstr "フォントアウトラインを Tensor 形式へ変換するための�
 
 #: 47f58affc7ea4c4a9fa13cc1d0e28384 of torchfont.io:3
 msgid "Highlights:"
-msgstr "ハイライト:"
+msgstr "ハイライト："
 
 #: 887a94308a83437487ddeb8deaa42d28 of torchfont.io:4
 msgid ""

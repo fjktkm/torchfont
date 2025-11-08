@@ -69,4 +69,4 @@ msgstr "スパースな Git チェックアウトからグリフを同期する�
 #~ msgstr "Git ベースのフォントコーパスをローカルに同期::"
 
 #~ msgid "Requirements:"
-#~ msgstr "要件:"
+#~ msgstr "要件："

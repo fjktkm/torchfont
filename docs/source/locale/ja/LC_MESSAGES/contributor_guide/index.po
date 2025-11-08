@@ -89,7 +89,7 @@ msgstr ""
 
 #: ../../../../CONTRIBUTING.rst:31 7edb982883e748beb273d76b834edb7c
 msgid "Testing & Linting"
-msgstr "テストとリント"
+msgstr "テストと Lint"
 
 #: ../../../../CONTRIBUTING.rst:33 49c79f73bfc347ccb3736816f82fbf39
 msgid ""
@@ -97,7 +97,7 @@ msgid ""
 "you open a pull request. Keep an eye on the workflow status and address "
 "any failures that appear. To reproduce issues locally, run:"
 msgstr ""
-"プルリクエストを作成すると GitHub Actions が lint／型チェック／テストを自動で実行します。ワークフローの状態を確認し、"
+"Pull Request を作成すると GitHub Actions が Lint・型チェック・テストを自動で実行します。ワークフローの状態を確認し、"
 "失敗があれば対応してください。ローカルで再現したい場合は次のコマンドを実行します。"
 
 #: ../../../../CONTRIBUTING.rst:43 022ce51f7b294faaaa829aa706a43432
@@ -151,17 +151,17 @@ msgstr "作業ブランチは ``main`` から切ってください。"
 msgid ""
 "Write descriptive commit messages. Mention the relevant issue when "
 "applicable."
-msgstr "コミットメッセージは内容が伝わるものにし、必要に応じて関連 issue を明記します。"
+msgstr "コミットメッセージは内容が伝わるものにし、必要に応じて関連 Issue を明記します。"
 
 #: ../../../../CONTRIBUTING.rst:75 c17b84695fc1435f9678d83f9aed916a
 msgid ""
 "Keep pull requests focused. Separate unrelated refactors or formatting "
 "changes into their own PRs."
-msgstr "プルリクエストは焦点を絞り、無関係なリファクタリングや整形は別 PR としてください。"
+msgstr "Pull Request は焦点を絞り、無関係なリファクタリングや整形は別 PR としてください。"
 
 #: ../../../../CONTRIBUTING.rst:77 752d27c2552547a28ab95f94d41e840c
 msgid "Ensure CI (lint, type-check, tests, docs) passes before requesting review."
-msgstr "レビュー依頼の前に CI（lint・型チェック・テスト・ドキュメント）がすべて通っていることを確認します。"
+msgstr "レビュー依頼の前に CI（Lint・型チェック・テスト・ドキュメント）がすべて通っていることを確認します。"
 
 #: ../../../../CONTRIBUTING.rst:80 8f1bac29149541ee954a51add64626be
 msgid "Need Help?"
@@ -173,11 +173,11 @@ msgid ""
 "context you provide (logs, screenshots, sample fonts), the faster "
 "reviewers can help."
 msgstr ""
-"不明点があれば GitHub Discussion か issue "
+"不明点があれば GitHub Discussion か Issue "
 "で相談してください。ログやスクリーンショット、問題のあるフォントなどの情報が多いほど早くサポートできます。"
 
 #~ msgid "Contributing to TorchFont"
 #~ msgstr "TorchFont への貢献について"
 
 #~ msgid "Run the automated checks before opening a pull request:"
-#~ msgstr "プルリクエストを開く前に以下の自動チェックを通してください。"
+#~ msgstr "Pull Request を開く前に以下の自動チェックを通してください。"
