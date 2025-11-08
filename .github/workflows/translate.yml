@@ -71,12 +71,12 @@ jobs:
 
           pr_number=$(gh pr list --head codex-translation-update --base main --json number --jq '.[0].number')
           if [ -n "$pr_number" ]; then
-            echo "PR #$pr_number already exists. Updating branch."
-            gh pr update "$pr_number" --base main --head codex-translation-update
-          else
-            gh pr create \
-              --base main \
-              --head codex-translation-update \
-              --title "Update translations via Codex" \
-              --body "This PR updates gettext translation files automatically using Codex Actions."
+            echo "PR #$pr_number already exists. Skipping creation."
+            exit 0
           fi
+
+          gh pr create \
+            --base main \
+            --head codex-translation-update \
+            --title "Update translations via Codex" \
+            --body "This PR updates gettext translation files automatically using Codex Actions."
