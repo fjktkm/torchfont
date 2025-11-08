@@ -21,6 +21,7 @@ jobs:
       OPENAI_API_KEY: "${{ secrets.OPENAI_API_KEY }}"
       GH_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
       LANGUAGES: "ja"
+      STOP_WORKFLOW: ""
 
     steps:
       - name: "Checkout repository"
@@ -36,20 +37,38 @@ jobs:
         run: |
           uv run sphinx-build -b gettext docs/source docs/build/gettext
 
-      - name: "Update .po files"
+      - name: "Merge gettext into .po files"
+        id: "merge"
         run: |
           uv run sphinx-intl update -p docs/build/gettext -d docs/locale -l "$LANGUAGES"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -B codex-translation-update
+          git add docs/locale/**/*.po || true
+          if git diff --cached --quiet; then
+            echo "No merge changes detected. Exiting workflow."
+            echo "STOP_WORKFLOW=true" >> "$GITHUB_ENV"
+          else
+            git commit -m "Merge updated gettext catalogs"
+          fi
 
       - name: "Find untranslated .po files"
         id: "po-files"
+        if: env.STOP_WORKFLOW != 'true'
         run: |
-          files=$(grep -rl "msgstr \"\"" docs/locale/${LANGUAGES}/LC_MESSAGES || true)
-          echo "files<<EOF" >> "$GITHUB_OUTPUT"
-          echo "$files" >> "$GITHUB_OUTPUT"
-          echo "EOF" >> "$GITHUB_OUTPUT"
+          files=$(grep -rl 'msgstr ""' docs/locale/${LANGUAGES}/LC_MESSAGES || true)
+          if [ -z "$files" ]; then
+            echo "No untranslated .po files found. Exiting workflow."
+            echo "STOP_WORKFLOW=true" >> "$GITHUB_ENV"
+          else
+            echo "files<<EOF" >> "$GITHUB_OUTPUT"
+            echo "$files" >> "$GITHUB_OUTPUT"
+            echo "EOF" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: "Translate with Codex"
-        if: steps.po-files.outputs.files != ''
+        id: "codex"
+        if: env.STOP_WORKFLOW != 'true'
         uses: "openai/codex-action@v1"
         with:
           openai-api-key: "${{ secrets.OPENAI_API_KEY }}"
@@ -63,25 +82,28 @@ jobs:
             ${{ steps.po-files.outputs.files }}
 
       - name: "Commit translation updates"
+        id: "commit"
+        if: env.STOP_WORKFLOW != 'true'
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git checkout -B codex-translation-update
-          git add docs/locale/**/*.po docs/build/gettext/**/*.pot || true
+          git add docs/locale/**/*.po || true
           if git diff --cached --quiet; then
-            echo "No translation updates to commit."
+            echo "No translation updates detected after Codex. Exiting workflow."
+            echo "STOP_WORKFLOW=true" >> "$GITHUB_ENV"
           else
-            git commit -m "chore: update translations via Codex"
+            git commit -m "Update translations via Codex"
+            git push -f origin codex-translation-update
           fi
 
-      - name: "Create Pull Request"
+      - name: "Create or update Pull Request"
+        if: env.STOP_WORKFLOW != 'true'
         run: |
-          if git log -1 --pretty=%B | grep -q "chore: update translations via Codex"; then
+          existing_pr=$(gh pr list --head codex-translation-update --base main --json number --jq '.[0].number')
+          if [ -n "$existing_pr" ]; then
+            echo "PR #$existing_pr already exists. Updating branch only."
+          else
             gh pr create \
               --base main \
               --head codex-translation-update \
               --title "Update translations via Codex" \
               --body "This PR updates gettext translation files automatically using Codex Actions."
-          else
-            echo "No new translation changes. Skipping PR creation."
           fi
