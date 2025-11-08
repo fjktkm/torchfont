@@ -43,8 +43,7 @@ jobs:
           git checkout -B codex-translation-update origin/main
 
       - name: Merge gettext into .po files
-        run: |
-          uv run sphinx-intl update -p docs/build/gettext -d docs/locale -l "$LANGUAGES"
+        run: uv run sphinx-intl update -p docs/build/gettext -d docs/locale -l "$LANGUAGES"
 
       - name: Translate with Codex
         id: codex
