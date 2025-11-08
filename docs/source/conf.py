@@ -3,6 +3,8 @@
 # For the full list of built-in configuration values, see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 
+import os
+
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
@@ -33,7 +35,7 @@ exclude_patterns = []
 html_theme = "furo"
 html_static_path = ["_static"]
 
-language = "en"
+language = os.environ.get("READTHEDOCS_LANGUAGE", "en")
 locale_dirs = ["locale/"]
 gettext_compact = False
 gettext_uuid = True
