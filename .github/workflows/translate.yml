@@ -1,0 +1,86 @@
+name: Translate
+
+on:
+  push:
+    branches:
+      - "main"
+    paths:
+      - "docs/source/**"
+      - "src/**"
+
+permissions:
+  contents: "write"
+  pull-requests: "write"
+
+jobs:
+  translate:
+    runs-on: "ubuntu-latest"
+
+    env:
+      OPENAI_API_KEY: "${{ secrets.OPENAI_API_KEY }}"
+      GH_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+      LANGUAGES: "ja"
+
+    steps:
+      - name: "Checkout repository"
+        uses: "actions/checkout@v5"
+
+      - name: "Setup uv"
+        uses: "astral-sh/setup-uv@v6"
+
+      - name: "Sync dependencies (docs group)"
+        run: "uv sync --group docs"
+
+      - name: "Build gettext catalogs (.pot)"
+        run: |
+          uv run sphinx-build -b gettext docs/source docs/build/gettext
+
+      - name: "Update .po files"
+        run: |
+          uv run sphinx-intl update -p docs/build/gettext -l "$LANGUAGES"
+
+      - name: "Find untranslated .po files"
+        id: "po-files"
+        run: |
+          files=$(grep -rl "msgstr \"\"" docs/locale/${LANGUAGES}/LC_MESSAGES || true)
+          echo "files<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$files" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+
+      - name: "Translate with Codex"
+        if: steps.po-files.outputs.files != ''
+        uses: "openai/codex-action@v1"
+        with:
+          openai-api-key: "${{ secrets.OPENAI_API_KEY }}"
+          prompt: |
+            You are a professional translator for Sphinx documentation (.po files using gettext format).
+            For each .po file below, translate only msgid entries that have empty msgstr ("").
+            Preserve Sphinx roles (e.g. :ref:, :class:, etc.), inline code marked with double backticks, and variable placeholders.
+            Return the full updated .po file content with msgstr filled in.
+
+            Files to process:
+            ${{ steps.po-files.outputs.files }}
+
+      - name: "Commit translation updates"
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -B codex-translation-update
+          git add docs/locale/**/*.po docs/build/gettext/**/*.pot || true
+          if git diff --cached --quiet; then
+            echo "No translation updates to commit."
+          else
+            git commit -m "chore: update translations via Codex"
+          fi
+
+      - name: "Create Pull Request"
+        run: |
+          if git log -1 --pretty=%B | grep -q "chore: update translations via Codex"; then
+            gh pr create \
+              --base main \
+              --head codex-translation-update \
+              --title "Update translations via Codex" \
+              --body "This PR updates gettext translation files automatically using Codex Actions."
+          else
+            echo "No new translation changes. Skipping PR creation."
+          fi
