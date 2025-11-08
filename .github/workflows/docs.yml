@@ -7,7 +7,6 @@ on:
     paths:
       - ".github/workflows/docs.yml"
       - "docs/**"
-      - "mkdocs.yml"
   workflow_dispatch:
 permissions:
   contents: read

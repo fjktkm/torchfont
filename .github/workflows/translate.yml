@@ -5,7 +5,7 @@ on:
     branches:
       - "main"
     paths:
-      - "docs/source/**"
+      - "docs/source/**/*.rst"
       - "src/**"
       - "CONTRIBUTING.rst"
   workflow_dispatch:
