@@ -1,13 +1,13 @@
-"""Dataset utilities for working with the Google Fonts repository.
+"""Dataset utilities tailored to the official Google Fonts repository.
+
+References:
+    Repository layout and licensing details are documented at
+    https://github.com/google/fonts.
 
 Examples:
     Assemble a dataset backed by the live Google Fonts index::
 
         ds = GoogleFonts(root="data/google_fonts", ref="main", download=True)
-
-Resources:
-    The repository layout and licensing details can be explored at
-    https://github.com/google/fonts.
 
 """
 
@@ -31,7 +31,8 @@ class GoogleFonts(FontRepo):
     """Dataset that materializes glyph samples from the Google Fonts project.
 
     See Also:
-        FontRepo: Base class that implements sparse Git checkout handling.
+        torchfont.datasets.repo.FontRepo: Implements the sparse Git checkout
+        handling shared with this dataset.
 
     """
 
@@ -52,19 +53,21 @@ class GoogleFonts(FontRepo):
         """Initialize a sparse clone of Google Fonts and index glyph samples.
 
         Args:
-            root: Local directory that stores the sparse checkout of the Google
-                Fonts repository.
-            ref: Git reference (branch, tag, or commit) to fetch.
-            patterns: Optional sparse-checkout patterns describing which files to
-                materialize. Defaults to ``DEFAULT_PATTERNS`` if omitted. Refer to
-                the Google Fonts contributor docs for directory structure details:
-                <https://github.com/google/fonts/tree/main#readme>.
-            codepoint_filter: Optional iterable of Unicode code points to include
-                when indexing glyph samples.
-            loader: Callable that loads glyph data for a font/code point pair.
-            transform: Optional callable applied to each sample returned from the
-                loader.
-            download: Whether to perform the repository clone and sparse checkout
+            root (Path | str): Local directory that stores the sparse checkout of
+                the Google Fonts repository.
+            ref (str): Git reference (branch, tag, or commit) to fetch.
+            patterns (Sequence[str] | None): Optional sparse-checkout patterns
+                describing which files to materialize. Defaults to
+                ``DEFAULT_PATTERNS``. See the contributor guide at
+                https://github.com/google/fonts/tree/main#readme for directory
+                conventions.
+            codepoint_filter (Sequence[int] | None): Optional iterable of Unicode
+                code points to include when indexing glyph samples.
+            loader (Callable[[str, SupportsIndex | None, SupportsIndex], object]):
+                Callable that loads glyph data for a font/code point pair.
+            transform (Callable[[object], object] | None): Optional callable
+                applied to each sample returned from the loader.
+            download (bool): Whether to perform the clone and sparse checkout
                 when the directory is missing or empty.
 
         Examples:

@@ -1,4 +1,9 @@
-"""Conversion utilities that draw vector glyphs into tensor representations.
+"""Utilities for replaying vector glyphs into dense tensor representations.
+
+Notes:
+    Every stroke recorded by :class:`TensorPen` is finalized with an explicit
+    end-of-sequence token, which makes batching and masking downstream far less
+    error-prone.
 
 Examples:
     Capture a glyph as tensors::
@@ -6,10 +11,6 @@ Examples:
         pen = TensorPen(glyph_set)
         glyph.draw(pen)
         types, coords = pen.get_tensor()
-
-Design Notes:
-    Command indices are appended with an explicit end-of-sequence token to
-    simplify batching downstream.
 
 """
 
@@ -38,11 +39,13 @@ class TensorPen(BasePen):
     """FontTools pen that records glyph outlines as PyTorch tensors.
 
     Attributes:
-        types: Recorded command indices collected during drawing.
-        coords: Flattened control-point tuples aligned with ``types``.
+        types (list[int]): Recorded command indices collected during drawing.
+        coords (list[tuple[float, float, float, float, float, float]]): Flattened
+            control-point tuples aligned with ``types``.
 
     See Also:
-        fontTools.pens.basePen.BasePen: Base class providing the drawing hooks.
+        fontTools.pens.basePen.BasePen: Provides the drawing hooks being
+        overridden.
 
     """
 
@@ -53,8 +56,9 @@ class TensorPen(BasePen):
         """Create a TensorPen for a given glyph set.
 
         Args:
-            glyph_set: Glyph mapping used by the base pen when resolving glyph
-                names. Can be ``None`` when the pen is only used for drawing.
+            glyph_set (_TTGlyphSet | Mapping[str, _TTGlyph] | None): Glyph mapping
+                used by the base pen when resolving glyph names. Pass ``None`` to
+                record commands without consulting a glyph set.
 
         Examples:
             Create a stand-alone pen that accumulates commands::
@@ -91,9 +95,8 @@ class TensorPen(BasePen):
         """Return the recorded drawing commands as padded tensors.
 
         Returns:
-            tuple[Tensor, Tensor]:
-                Pair of tensors where the first stores command
-                indices and the second stores flattened control-point coordinates.
+            tuple[Tensor, Tensor]: Pair where the first tensor stores command
+            indices and the second stores flattened control-point coordinates.
 
         Examples:
             Extract tensors after completing a drawing pass::

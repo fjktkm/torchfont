@@ -1,13 +1,16 @@
-"""Transform primitives for manipulating tensorized glyph sequences.
+"""Transform primitives tailored to tensorized glyph sequences.
+
+Notes:
+    Each exported utility focuses on a single responsibility—sequencing,
+    truncation, or patchification—so pipelines remain easy to audit and
+    extend.
 
 Examples:
-    Compose a preprocessing pipeline for glyph tensors::
+    Compose a lightweight preprocessing pipeline::
 
         from torchfont.transforms import Compose, LimitSequenceLength
-        transform = Compose([LimitSequenceLength(256)])
 
-Overview:
-    The re-exported classes cover sequencing, truncation, and patch-based reshaping.
+        transform = Compose([LimitSequenceLength(256)])
 
 """
 

@@ -1,14 +1,14 @@
-"""Composable transforms for preprocessing tensor glyph sequences.
+"""Composable transforms for polishing tensor glyph sequences before training.
+
+Notes:
+    Each transform is intentionally small and deterministic, allowing you to mix
+    and match them in :class:`torch.utils.data.Dataset` pipelines without losing
+    track of where normalization occurs.
 
 Examples:
-    ``Compose`` multiple operations to normalize glyph tensors::
+    Normalize and patch glyph tensors in a single pipeline::
 
         pipeline = Compose([LimitSequenceLength(256), Patchify(32)])
-
-Background:
-    The transforms aim to cover the common preprocessing steps for vectorized
-    glyph data while still integrating cleanly with PyTorch ``Dataset``
-    instances.
 
 """
 
@@ -19,10 +19,11 @@ from torch import Tensor
 
 
 class Compose:
-    """Apply a sequence of transform callables to each sample.
+    """Apply a curated list of transform callables to every sample.
 
     See Also:
-        LimitSequenceLength: Common building block for truncating sequences.
+        LimitSequenceLength: Useful when a hard cap is required before adding
+        more expensive stages.
 
     """
 
@@ -30,10 +31,12 @@ class Compose:
         """Store the ordered transform pipeline.
 
         Args:
-            transforms: Operations that accept and return matching sample types.
+            transforms (Sequence[Callable[..., object]]): Operations that accept
+                and return compatible sample types. Ordering matters, so place
+                stateful or lossy transforms later in the list.
 
         Examples:
-            Compose truncation with patching::
+            Combine truncation with patching::
 
                 Compose([LimitSequenceLength(256), Patchify(32)])
 
@@ -44,13 +47,13 @@ class Compose:
         """Apply every transform in order to the provided sample.
 
         Args:
-            sample: Input sample passed to the first transform in the sequence.
+            sample (object): Input passed to the first transform in the sequence.
 
         Returns:
             object: Resulting sample after all transformations are applied.
 
         Examples:
-            Apply the composed operations to a glyph sample::
+            Run the composed pipeline on a glyph sample::
 
                 sample = pipeline(sample)
 
@@ -61,10 +64,11 @@ class Compose:
 
 
 class LimitSequenceLength:
-    """Trim glyph sequences to a fixed maximum length.
+    """Trim glyph sequences to a predictable maximum length.
 
     See Also:
-        Patchify: Converts sequences into fixed-size blocks after truncation.
+        Patchify: Converts sequences into fixed-size blocks after truncation so
+        transformer-style models see a uniform layout.
 
     """
 
@@ -72,10 +76,11 @@ class LimitSequenceLength:
         """Initialize the transform with the desired maximum length.
 
         Args:
-            max_len: Maximum number of time steps to retain.
+            max_len (int): Maximum number of time steps to keep. Any surplus
+                command or coordinate pairs are discarded.
 
         Examples:
-            Keep at most 512 steps per glyph::
+            Cap sequences at 512 steps::
 
                 LimitSequenceLength(512)
 
@@ -86,16 +91,15 @@ class LimitSequenceLength:
         """Clip the sequence and coordinate tensors to the specified length.
 
         Args:
-            sample: Tuple of ``(types, coords)`` tensors representing pen commands
-                and control points.
+            sample (tuple[Tensor, Tensor]): Tuple of ``(types, coords)`` tensors
+                representing pen commands and control points.
 
         Returns:
-            tuple[Tensor, Tensor]: Tuple with both tensors truncated to
-            ``max_len`` elements.
+            tuple[Tensor, Tensor]: Tensors truncated to ``max_len`` elements.
 
-        Warning:
-            Extra elements beyond ``max_len`` are discarded without padding or
-            aggregation.
+        Warnings:
+            Elements beyond ``max_len`` are removed rather than padded or
+            aggregated, so downstream code should account for the shorter tail.
 
         Examples:
             Clamp a sample to 128 steps::
@@ -112,11 +116,11 @@ class LimitSequenceLength:
 
 
 class Patchify:
-    """Pad glyph sequences and reshape them into equal-sized patches.
+    """Pad glyph sequences and reshape them into uniform, model-friendly patches.
 
     See Also:
-        LimitSequenceLength: Use together to enforce a strict maximum before
-        patching.
+        LimitSequenceLength: Apply beforehand when you need a strict ceiling on
+        the number of emitted patches.
 
     """
 
@@ -124,7 +128,9 @@ class Patchify:
         """Configure the patch length for reshaping sequences.
 
         Args:
-            patch_size: Number of steps captured in each patch.
+            patch_size (int): Number of time steps captured in each patch. Choose
+                values that align with the receptive field of your downstream
+                model.
 
         Examples:
             Create 32-step patches for transformer models::
@@ -138,16 +144,17 @@ class Patchify:
         """Pad and reshape sequences into contiguous patches.
 
         Args:
-            sample: Tuple of ``(types, coords)`` tensors representing pen commands
-                and control points.
+            sample (tuple[Tensor, Tensor]): Tuple of ``(types, coords)``
+                tensors representing pen commands and control points.
 
         Returns:
-            tuple[Tensor, Tensor]: Tensors grouped into patches of ``patch_size``
-            steps, including any zero padding required for alignment.
+            tuple[Tensor, Tensor]: Tensors grouped into patches of
+            ``patch_size`` steps. Trailing zeros are added only when needed for
+            alignment.
 
         Tips:
-            Combine with :class:`LimitSequenceLength` to bound the number of
-            generated patches.
+            Pair with :class:`LimitSequenceLength` to bound the worst-case number
+            of patches in a batch.
 
         Examples:
             Reshape a glyph sequence into patches of 64 steps::

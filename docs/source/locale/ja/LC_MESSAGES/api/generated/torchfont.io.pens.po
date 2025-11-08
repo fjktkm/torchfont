@@ -2,12 +2,12 @@
 # Copyright (C) 2025, Takumu Fujioka
 # This file is distributed under the same license as the TorchFont package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: TorchFont \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-07 18:54+0000\n"
+"POT-Creation-Date: 2025-11-08 13:29+0000\n"
 "PO-Revision-Date: 2025-11-08 05:55+0000\n"
 "Last-Translator: Codex AI <codex@example.com>\n"
 "Language: ja\n"
@@ -18,42 +18,57 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.17.0\n"
 
-#: ../../api/generated/torchfont.io.pens.rst:2 428067d6d3fd4c41a4fda919d3298c55
+#: ../../source/api/generated/torchfont.io.pens.rst:2
+#: f2f844350cac4441824073c22eee25ab
 msgid "torchfont.io.pens"
 msgstr "torchfont.io.pens"
 
-#: 94ea232b0a4240e4ba75dcbe28f92652 of torchfont.io.pens:1
-msgid "Conversion utilities that draw vector glyphs into tensor representations."
-msgstr "ベクターグリフを Tensor 表現として描画する Transform ユーティリティ。"
+#: 764070bcdbc54103be020fedf9a8cecb of torchfont.io.pens:1
+msgid "Utilities for replaying vector glyphs into dense tensor representations."
+msgstr "ベクター形式のグリフを緻密な Tensor 表現へ再生するためのユーティリティ群。"
 
-#: 1be4f4edeb31418595e5744126205db8 of torchfont.io.pens:4
+#: 8187d47bddfd4d1d9a382ad8594f3c97 of torchfont.io.pens:4
+msgid "Notes"
+msgstr "注記"
+
+#: f5e928a1c701457faf40b15bc791fb52 of torchfont.io.pens:5
+msgid ""
+"Every stroke recorded by :class:`TensorPen` is finalized with an explicit"
+" end-of-sequence token, which makes batching and masking downstream far "
+"less error-prone."
+msgstr ":class:`TensorPen` が記録するすべてのストロークには明示的な終端トークンが追加されるため、後段でのバッチ処理やマスキングに伴うミスを大幅に抑えられます。"
+
+#: 43e0b0c806df4b2e80c51bf9dfdfc896 of torchfont.io.pens:10
 msgid "Examples"
 msgstr "使用例"
 
-#: 475acf4b17684bdf80e3c39e0cb4f662 of torchfont.io.pens:5
+#: c2a384c1492844c0a8e1e1240a785e4f of torchfont.io.pens:11
 msgid "Capture a glyph as tensors::"
 msgstr "グリフを Tensor として取得::"
 
-#: f50478512a934062bfbc02c008d26121 of torchfont.io.pens:11
-msgid "Design Notes:"
-msgstr "設計メモ:"
-
-#: c8fb94794af14741a5a02bc78bb41184 of torchfont.io.pens:12
-msgid ""
-"Command indices are appended with an explicit end-of-sequence token to "
-"simplify batching downstream."
-msgstr "後段のバッチ処理を単純化するため、コマンドインデックスには明示的な終端トークンが付加されます。"
-
-#: ../../api/generated/torchfont.io.pens.rst:8 c8b49f44f4fe4002ad63d199dc5bb96d
+#: ../../source/api/generated/torchfont.io.pens.rst:8
+#: 3d43a3562bcf48779f0987eb7b349106
 msgid "Classes"
 msgstr "クラス"
 
-#: ../../api/generated/torchfont.io.pens.rst:11:<autosummary>:1
-#: 8542ac6dc2b746e39b8e1654a9321f84
+#: ../../source/api/generated/torchfont.io.pens.rst:11:<autosummary>:1
+#: 4f670c8c0f9d419981477fda31fec34f
 msgid ":py:obj:`TensorPen <torchfont.io.pens.TensorPen>`\\ \\(glyph\\_set\\)"
 msgstr ":py:obj:`TensorPen <torchfont.io.pens.TensorPen>`\\ \\(glyph\\_set\\)"
 
-#: ../../api/generated/torchfont.io.pens.rst:11:<autosummary>:1
-#: e1e02c32847e428c8b965abb4754d71a
+#: ../../source/api/generated/torchfont.io.pens.rst:11:<autosummary>:1
+#: 33679a20d2b8478da574d7af87af824d
 msgid "FontTools pen that records glyph outlines as PyTorch tensors."
 msgstr "グリフのアウトラインを PyTorch Tensor として記録する FontTools ペン。"
+
+#~ msgid "Capture a glyph as tensors::"
+#~ msgstr "グリフを Tensor として取得::"
+
+#~ msgid "Design Notes:"
+#~ msgstr "設計メモ:"
+
+#~ msgid ""
+#~ "Command indices are appended with an "
+#~ "explicit end-of-sequence token to "
+#~ "simplify batching downstream."
+#~ msgstr "後段のバッチ処理を単純化するため、コマンドインデックスには明示的な終端トークンが付加されます。"

@@ -2,12 +2,12 @@
 # Copyright (C) 2025, Takumu Fujioka
 # This file is distributed under the same license as the TorchFont package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: TorchFont \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-07 18:54+0000\n"
+"POT-Creation-Date: 2025-11-08 13:29+0000\n"
 "PO-Revision-Date: 2025-11-08 05:55+0000\n"
 "Last-Translator: Codex AI <codex@example.com>\n"
 "Language: ja\n"
@@ -18,44 +18,58 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.17.0\n"
 
-#: ../../api/generated/torchfont.transforms.rst:2
-#: 008043bb78cf4c5f842031fbba47a16f
+#: ../../source/api/generated/torchfont.transforms.rst:2
+#: 60abc668d248497aac4bf5397eca1acd
 msgid "torchfont.transforms"
 msgstr "torchfont.transforms"
 
-#: 465abc4e8f1444aab522a995aeb31718 of torchfont.transforms:1
-msgid "Transform primitives for manipulating tensorized glyph sequences."
-msgstr "Tensor 化されたグリフ系列を扱う Transform プリミティブ群。"
+#: f47425304f354ea49125f280d2f49f5f of torchfont.transforms:1
+msgid "Transform primitives tailored to tensorized glyph sequences."
+msgstr "Tensor 化されたグリフ系列に合わせて設計された Transform プリミティブ群。"
 
-#: 703640f218de46bab946cbe2be56cabc of torchfont.transforms:4
+#: 8f2911d9931140f88aa48f94c395ae9a of torchfont.transforms:4
+msgid "Notes"
+msgstr "注記"
+
+#: 57ca8e28d68744c0ba684be9c6f4f62e of torchfont.transforms:5
+msgid ""
+"Each exported utility focuses on a single responsibility—sequencing, "
+"truncation, or patchification—so pipelines remain easy to audit and "
+"extend."
+msgstr "公開しているユーティリティは「シーケンス化」「トリミング」「パッチ化」と責務を厳密に分けており、前処理パイプラインの点検や拡張がしやすい構成になっています。"
+
+#: b4f28d29023d40b794717c66756c1c6a of torchfont.transforms:10
 msgid "Examples"
 msgstr "使用例"
 
-#: c7eb0672887649cf8f97466b9de558d6 of torchfont.transforms:5
-msgid "Compose a preprocessing pipeline for glyph tensors::"
-msgstr "グリフ Tensor 向けの前処理 Transform パイプラインを構築::"
+#: fd72fbfc5d52435eae6842d386531cf6 of torchfont.transforms:11
+msgid "Compose a lightweight preprocessing pipeline::"
+msgstr "軽量な前処理パイプラインを構築::"
 
-#: 4bb1f65df56e465aacb4f8f4e7531143 of torchfont.transforms:10
-msgid "Overview:"
-msgstr "概要:"
-
-#: 2268c40f85504c879b9188f473b09f49 of torchfont.transforms:11
-msgid ""
-"The re-exported classes cover sequencing, truncation, and patch-based "
-"reshaping."
-msgstr "再エクスポートされたクラスは、系列化やトリミング、パッチ単位での再構成までカバーする Transform 群。"
-
-#: ../../api/generated/torchfont.transforms.rst:8
-#: e556ab2de0df43a2ad5c1a79aa4370bd
+#: ../../source/api/generated/torchfont.transforms.rst:8
+#: 8f2911d9931140f88aa48f94c395ae9a
 msgid "Modules"
 msgstr "モジュール"
 
-#: ../../api/generated/torchfont.transforms.rst:13:<autosummary>:1
-#: dfa04bce332f4a3abda4d600b499b575
+#: ../../source/api/generated/torchfont.transforms.rst:13:<autosummary>:1
+#: baff20defd204123aa39df764d794c1a
 msgid ":py:obj:`transforms <torchfont.transforms.transforms>`\\"
 msgstr ":py:obj:`transforms <torchfont.transforms.transforms>`\\"
 
-#: ../../api/generated/torchfont.transforms.rst:13:<autosummary>:1
-#: 4ffc677ec35a476483da079bf69a741a
-msgid "Composable transforms for preprocessing tensor glyph sequences."
-msgstr "Tensor 化されたグリフ系列の前処理に組み合わせて使える Transform 群。"
+#: ../../source/api/generated/torchfont.transforms.rst:13:<autosummary>:1
+#: fd72fbfc5d52435eae6842d386531cf6
+msgid ""
+"Composable transforms for polishing tensor glyph sequences before "
+"training."
+msgstr "学習前の Tensor 化グリフを磨き上げるための、合成しやすい Transform 群。"
+
+#~ msgid "Compose a preprocessing pipeline for glyph tensors::"
+#~ msgstr "グリフ Tensor 向けの前処理 Transform パイプラインを構築::"
+
+#~ msgid "Overview:"
+#~ msgstr "概要:"
+
+#~ msgid ""
+#~ "The exported classes cover sequencing, "
+#~ "truncation, and patch-based reshaping."
+#~ msgstr "再エクスポートされたクラスは、系列化やトリミング、パッチ単位での再構成までカバーする Transform 群。"

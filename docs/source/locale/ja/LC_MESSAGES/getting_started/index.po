@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TorchFont \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-08 06:39+0000\n"
+"POT-Creation-Date: 2025-11-08 13:38+0000\n"
 "PO-Revision-Date: 2025-11-08 06:40+0000\n"
 "Last-Translator: Codex AI <codex@example.com>\n"
 "Language: ja\n"
@@ -18,114 +18,121 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.17.0\n"
 
-#: ../../getting_started/index.rst:2 83094eacf47044aeac78371f776c87ce
+#: ../../source/getting_started/index.rst:2 6b4210b832774ea6a97feb9c6eae81d1
 msgid "Getting Started"
 msgstr "はじめに"
 
-#: ../../getting_started/index.rst:4 fdceb6d3f9864000b0cb77a20d5c999f
+#: ../../source/getting_started/index.rst:4 6865bbbdc5ee4822a3ea643e7f494d4a
 msgid ""
 "TorchFont ships a small but opinionated toolbox for working with vector "
 "fonts in PyTorch. This page walks you through installation, validates the"
 " environment, and provides a short end-to-end example that loads glyphs, "
 "applies transforms, and feeds them into a dataloader."
-msgstr "TorchFont は PyTorch でベクターフォントを扱うための小さくもこだわりのあるツールボックスです。このページではインストールから環境確認、グリフの読み込み・Transform 適用・データローダー投入までを通しで体験できる例を紹介します。"
+msgstr ""
+"TorchFont は PyTorch "
+"でベクターフォントを扱うための小さくもこだわりのあるツールボックスです。このページではインストールから環境確認、グリフの読み込み・Transform"
+" 適用・データローダー投入までを通しで体験できる例を紹介します。"
 
-#: ../../getting_started/index.rst:10 7a4ab9bab8084333b4b1fa4c3c1ca9e3
+#: ../../source/getting_started/index.rst:10 b5d8b5ff370742d1a76f02bc46f8bc31
 msgid "Prerequisites"
 msgstr "前提条件"
 
-#: ../../getting_started/index.rst:12 6c89651984eb423495e0e8b9df063b97
+#: ../../source/getting_started/index.rst:12 230faf94484f43008f15ac5936947b9a
 msgid "Python 3.10 or newer"
 msgstr "Python 3.10 以上"
 
-#: ../../getting_started/index.rst:13 897a479aebbc4e8da87d0170b556b132
-msgid "PyTorch 2.6 or newer (CPU-only wheels are enough to get started)"
-msgstr "PyTorch 2.6 以上（入門段階では CPU 版ホイールで十分です）"
+#: ../../source/getting_started/index.rst:13 549b8b4bbb6b4a02b61eadba16395e45
+msgid "PyTorch 2.6 or newer"
+msgstr "PyTorch 2.6 以上"
 
-#: ../../getting_started/index.rst:14 20f7e529ea3643afa35608be6628fc2e
+#: ../../source/getting_started/index.rst:14 5ec6de1a137d43a6ac2736ee3c093bae
 msgid ""
-"``fonttools`` for parsing outlines (installed automatically as a "
-"dependency)"
-msgstr "アウトラインを解析するための fonttools（依存関係として自動で入ります）"
-
-#: ../../getting_started/index.rst:15 29f8d4e5c9f94e609891d45bff742365
-msgid ""
-"``git`` when you plan to use :class:`torchfont.datasets.GoogleFonts` or "
+"Git when you plan to use :class:`torchfont.datasets.GoogleFonts` or "
 ":class:`torchfont.datasets.FontRepo`"
-msgstr ":class:`torchfont.datasets.GoogleFonts` や :class:`torchfont.datasets.FontRepo` を使う場合に備えて git"
+msgstr ""
+":class:`torchfont.datasets.GoogleFonts` や "
+":class:`torchfont.datasets.FontRepo` を利用する際に備えて Git を用意しておきましょう。"
 
-#: ../../getting_started/index.rst:19 cad877290a724b7d9287e1f81b06498b
+#: ../../source/getting_started/index.rst:18 f599157cf4614e4f948485eaab41d501
 msgid "Installation"
 msgstr "インストール"
 
-#: ../../getting_started/index.rst:21 5880c1e24fca48fa81c42990a9d0f582
+#: ../../source/getting_started/index.rst:20 b4316c939d1c419aaaebba0ff05f554e
 msgid ""
 "The recommended path is to manage dependencies with `uv "
 "<https://docs.astral.sh/uv/>`_."
 msgstr "依存関係は `uv <https://docs.astral.sh/uv/>`_ で管理するのが推奨です。"
 
-#: ../../getting_started/index.rst:27 f503663756d24b2a8940c92a2a54a798
-msgid "If you prefer pip:"
-msgstr "pip を使う場合はこちら。"
+#: ../../source/getting_started/index.rst:26 ff65df37e8fd4a04894ba1970200b96b
+msgid "If you prefer pip, run:"
+msgstr "pip を使う場合は次を実行します。"
 
-#: ../../getting_started/index.rst:33 b1aa704356124df48a6119c16b9a5f95
+#: ../../source/getting_started/index.rst:32 321d190c55f549da9d9d40007126167f
 msgid ""
-"You can confirm the installation by importing the package and printing "
-"the version number:"
-msgstr "インポートしてバージョン番号を表示できればインストール完了です。"
+"Confirm the installation by importing the package and printing the "
+"version number:"
+msgstr "インポートしてバージョン番号を表示し、インストール済みであることを確認します。"
 
-#: ../../getting_started/index.rst:42 3aace4aa1f3c4fad8ce5b8b153de0ff1
+#: ../../source/getting_started/index.rst:40 b5db737e635e426e95bec9709f25ba57
 msgid "Downloading Fonts"
 msgstr "フォントの取得"
 
-#: ../../getting_started/index.rst:44 efb38ee4519149baa19617f26988194c
+#: ../../source/getting_started/index.rst:42 428835550cc64dba957fd14eacfbac1d
 msgid ""
 "TorchFont does not bundle any font assets. For a lightweight sandbox, "
 "clone a subset of Google Fonts into ``data/google_fonts`` with the "
 "provided dataset helper:"
-msgstr "TorchFont 本体にはフォントは同梱されません。手軽に試すなら、以下のヘルパーで Google Fonts の一部を ``data/google_fonts`` にスパースクローンしてください。"
+msgstr ""
+"TorchFont 本体にはフォントは同梱されません。手軽に試すなら、以下のヘルパーで Google Fonts の一部を "
+"``data/google_fonts`` にスパースクローンしてください。"
 
-#: ../../getting_started/index.rst:58 4727545164634f7aa3a2d862c6f1d6cc
+#: ../../source/getting_started/index.rst:55 88cc390097ee432bba384696873b04c0
 msgid ""
-"The dataset transparently keeps the sparse checkout up to date on "
-"subsequent runs. You can point ``root`` to any writable cache directory."
-msgstr "このデータセットは次回以降も自動でスパースチェックアウトを更新します。``root`` には書き込み可能な任意のキャッシュディレクトリを指定できます。"
+"The dataset keeps the sparse checkout up to date on subsequent runs. "
+"Point ``root`` to any writable cache directory."
+msgstr ""
+"このデータセットは次回以降も自動でスパースチェックアウトを更新します。``root`` は書き込み可能な任意のキャッシュディレクトリを指し示してください。"
 
-#: ../../getting_started/index.rst:62 a994826920fa4ade854f8c30c8e487b3
+#: ../../source/getting_started/index.rst:58 168300cb59ec4cd29217dc54acbad78d
 msgid "First Glyph Dataset"
 msgstr "最初のグリフデータセット"
 
-#: ../../getting_started/index.rst:64 5675e357c9e64e8cbabc553785f5cbea
+#: ../../source/getting_started/index.rst:60 891cc8948fc54b7688cf3845abfcc380
 msgid ""
 "The :class:`torchfont.datasets.FontFolder` dataset turns a directory of "
 "``.otf`` or ``.ttf`` files into an indexable PyTorch-style dataset. Each "
 "item contains the pen command types and normalized coordinates emitted by"
 " :class:`torchfont.io.pens.TensorPen`, plus style/content labels."
-msgstr ":class:`torchfont.datasets.FontFolder` は ``.otf`` や ``.ttf`` が入ったディレクトリをそのまま PyTorch 互換のデータセットに変換します。各アイテムには :class:`torchfont.io.pens.TensorPen` が出力するペンコマンド種別と正規化座標、さらにスタイル／コンテンツのラベルが含まれます。"
-
-#: ../../getting_started/index.rst:103 f6f51f27b5174a6182c8e234c40687d4
-msgid "Working with Google Fonts"
 msgstr ""
+":class:`torchfont.datasets.FontFolder` は ``.otf`` や ``.ttf`` "
+"が入ったディレクトリをそのまま PyTorch 互換のデータセットに変換します。各アイテムには "
+":class:`torchfont.io.pens.TensorPen` "
+"が出力するペンコマンド種別と正規化座標、さらにスタイル／コンテンツのラベルが含まれます。"
 
-#: ../../getting_started/index.rst:105 faa6317ee0d54c1991450ac08e8b2ee3
+#: ../../source/getting_started/index.rst:96 ccf3d78c56824b03b562b87dcebcc248
+msgid "Working with Google Fonts"
+msgstr "Google Fonts を扱う"
+
+#: ../../source/getting_started/index.rst:98 af23e093a0464139ba0a4704fc79ceea
 msgid ""
 "The :class:`torchfont.datasets.GoogleFonts` dataset mirrors the official "
 "repository via sparse checkout. It exposes the same sample structure as "
-":class:`FontFolder`, so you can reuse the exact transforms and "
+":class:`FontFolder`, so you can reuse the same transforms and "
 "dataloaders:"
-msgstr ":class:`torchfont.datasets.GoogleFonts` は公式リポジトリをスパースチェックアウトでミラーします。サンプル構造は :class:`FontFolder` と同一なので、Transform やデータローダーをそのまま共有できます。"
+msgstr ""
+":class:`torchfont.datasets.GoogleFonts` は公式リポジトリをスパースチェックアウトでミラーします。サンプル構造は :class:`FontFolder` と同一なので、Transform やデータローダーをそのまま共有できます。"
 
-#: ../../getting_started/index.rst:124 75b4532a136a4f578863ec36f26f061f
+#: ../../source/getting_started/index.rst:115 0ab34cd8bcf34a3b96d8f112d058547d
 msgid "Next Steps"
 msgstr "次のステップ"
 
-#: ../../getting_started/index.rst:126 447232d9ac7b48a4b8ecd5fb43977498
+#: ../../source/getting_started/index.rst:117 bcf4ec2a607e4f3499b67e3c16aeda1e
 msgid ""
 "Continue to the :doc:`/user_guide/index` for a deeper dive into the "
 "dataset, transform, and I/O utilities."
 msgstr "データセット／Transform／I/O ユーティリティの詳細は :doc:`/user_guide/index` へ。"
 
-#: ../../getting_started/index.rst:128 77fd578168a449a3a368f48493eea83b
+#: ../../source/getting_started/index.rst:119 85731ec6ae6c40e6b8dab90de5be805c
 msgid ""
 "Review :doc:`/contributor_guide/index` if you plan to submit fixes or new"
 " features."
@@ -148,3 +155,11 @@ msgstr "修正や機能追加を予定している場合は :doc:`/contributor_g
 
 #~ msgid "A minimal example showing how to import and initialize TorchFont:"
 #~ msgstr "TorchFont をインポートして初期化する最小の例です。"
+
+#~ msgid "PyTorch 2.6 or newer (CPU-only wheels are enough to get started)"
+#~ msgstr "PyTorch 2.6 以上（入門段階では CPU 版ホイールで十分です）"
+
+#~ msgid ""
+#~ "``fonttools`` for parsing outlines (installed"
+#~ " automatically as a dependency)"
+#~ msgstr "アウトラインを解析するための fonttools（依存関係として自動で入ります）"

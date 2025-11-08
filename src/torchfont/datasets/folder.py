@@ -1,15 +1,16 @@
-"""Font folder dataset utilities for glyph loading and indexing.
+"""Utilities for turning local font folders into indexed glyph datasets.
+
+Notes:
+    Fonts are cached by absolute path to minimize redundant disk access during
+    dataset iteration, so edits on disk require an explicit cache clear.
 
 Examples:
     Iterate glyph samples from a directory of fonts::
 
         from torchfont.datasets import FontFolder
+
         dataset = FontFolder(root="~/fonts")
         sample, target = dataset[0]
-
-Guidance:
-    Fonts are cached by absolute path to limit redundant disk access during
-    dataset iteration.
 
 """
 
@@ -35,14 +36,15 @@ def _load_meta(
     """Load metadata required to enumerate glyph samples from a font file.
 
     Args:
-        file: Path to the font file that will be inspected.
-        cps_filter: Optional iterable of code points to retain. If provided, only
-            code points present in this filter and the font's cmap are kept.
+        file (str): Absolute path to the font file that will be inspected.
+        cps_filter (Sequence[SupportsIndex] | None): Optional iterable of code
+            points to retain. Only code points present in both this filter and
+            the font's cmap survive.
 
     Returns:
         tuple[bool, SupportsIndex, np.ndarray]: Flag indicating whether the font
-            exposes variable instances, the number of available instances (``1``
-            for static fonts), and the code points available after filtering.
+        exposes variable instances, the number of available instances (``1`` for
+        static fonts), and the code points available after filtering.
 
     See Also:
         FontFolder: Consumes this metadata to construct dataset indices.
@@ -68,15 +70,16 @@ def _load_meta(
 def load_font(file: str) -> TTFont:
     """Load a font file and cache the resulting ``TTFont`` instance.
 
-    Warning:
-        Editing a font file on disk is not reflected unless
-        ``load_font.cache_clear()`` is invoked before the next access.
-
     Args:
-        file: Path to the font file to load.
+        file (str): Path to the font file to load.
 
     Returns:
         TTFont: Cached font instance for the supplied ``file``.
+
+    Warnings:
+        Editing a font file on disk is not reflected unless
+        ``load_font.cache_clear()`` is invoked before the next access, because
+        ``TTFont`` instances are memoized for performance.
 
     """
     return TTFont(file)
@@ -90,14 +93,15 @@ def default_loader(
     """Convert a glyph outline to tensor representations.
 
     Args:
-        file: Path to the font containing the glyph.
-        instance_index: Optional index for the font variation instance. ``None``
-            selects the default font master.
-        codepoint: Unicode code point mapped to the glyph to be converted.
+        file (str): Path to the font containing the glyph.
+        instance_index (SupportsIndex | None): Optional index for the font
+            variation instance. ``None`` selects the default font master.
+        codepoint (SupportsIndex): Unicode code point mapped to the glyph to be
+            converted.
 
     Returns:
         tuple[Tensor, Tensor]: First element contains pen instruction types and
-            the second contains normalized outline coordinates in EM units.
+        the second contains normalized outline coordinates in EM units.
 
     Examples:
         Create tensors for the lowercase letter ``a``::
@@ -134,13 +138,14 @@ class FontFolder(Dataset[object]):
     style and content targets.
 
     Attributes:
-        files: Sorted list of discovered font file paths.
-        num_content_classes: Total number of unique Unicode code points present.
-        num_style_classes: Total number of variation instances across fonts.
+        files (list[str]): Sorted list of discovered font file paths.
+        num_content_classes (int): Total number of unique Unicode code points.
+        num_style_classes (int): Total number of variation instances across
+            fonts.
 
     See Also:
-        FontRepo: Adds sparse Git checkout support on top of the same indexing
-        machinery.
+        torchfont.datasets.repo.FontRepo: Extends the same indexing machinery
+        with sparse Git checkout support.
 
     """
 
@@ -158,13 +163,15 @@ class FontFolder(Dataset[object]):
         """Initialize the dataset by scanning font files and indexing samples.
 
         Args:
-            root: Directory containing font files. Both OTF and TTF files are
-                discovered recursively.
-            codepoint_filter: Optional iterable of Unicode code points to
-                restrict the dataset content.
-            loader: Callable that loads a glyph sample from a font file.
-            transform: Optional transformation applied to each loader output
-                before the item is returned.
+            root (Path | str): Directory containing font files. Both OTF and TTF
+                files are discovered recursively.
+            codepoint_filter (Sequence[SupportsIndex] | None): Optional iterable
+                of Unicode code points used to restrict the dataset content.
+            loader (Callable[[str, SupportsIndex | None, SupportsIndex], object]):
+                Callable that loads a glyph sample from a font file.
+            transform (Callable[[object], object] | None): Optional
+                transformation applied to each loader output before the item is
+                returned.
 
         Examples:
             Restrict the dataset to uppercase ASCII glyphs::
@@ -224,14 +231,14 @@ class FontFolder(Dataset[object]):
         """Load a glyph sample and its associated targets.
 
         Args:
-            idx: Zero-based index locating a sample across all fonts, code points,
-                and instances.
+            idx (int): Zero-based index locating a sample across all fonts, code
+                points, and instances.
 
         Returns:
-            tuple[object, tuple[int, int]]:
-                ``(sample, target)`` pair where ``sample`` is produced by the
-                configured loader and ``target`` is ``(style_idx, content_idx)``,
-                describing the variation instance and Unicode code point class.
+            tuple[object, tuple[int, int]]: ``(sample, target)`` pair where
+            ``sample`` is produced by the configured loader and ``target`` is
+            ``(style_idx, content_idx)``, describing the variation instance and
+            Unicode code point class.
 
         Raises:
             IndexError: If ``idx`` falls outside the range ``[0, len(self))``.

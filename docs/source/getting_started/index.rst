@@ -10,9 +10,8 @@ Prerequisites
 -------------
 
 * Python 3.10 or newer
-* PyTorch 2.6 or newer (CPU-only wheels are enough to get started)
-* ``fonttools`` for parsing outlines (installed automatically as a dependency)
-* ``git`` when you plan to use :class:`torchfont.datasets.GoogleFonts` or
+* PyTorch 2.6 or newer
+* Git when you plan to use :class:`torchfont.datasets.GoogleFonts` or
   :class:`torchfont.datasets.FontRepo`
 
 Installation
@@ -24,14 +23,13 @@ The recommended path is to manage dependencies with `uv <https://docs.astral.sh/
 
    uv add torchfont
 
-If you prefer pip:
+If you prefer pip, run:
 
 .. code-block:: bash
 
    pip install torchfont
 
-You can confirm the installation by importing the package and printing the
-version number:
+Confirm the installation by importing the package and printing the version number:
 
 .. code-block:: python
 
@@ -42,8 +40,7 @@ Downloading Fonts
 -----------------
 
 TorchFont does not bundle any font assets. For a lightweight sandbox, clone a
-subset of Google Fonts into ``data/google_fonts`` with the provided dataset
-helper:
+subset of Google Fonts into ``data/google_fonts`` with the provided dataset helper:
 
 .. code-block:: python
 
@@ -52,19 +49,15 @@ helper:
    dataset = GoogleFonts(
        root="data/google_fonts",
        ref="main",
-       download=True,   # performs a sparse checkout the first time
+       download=True,  # performs a sparse checkout the first time
    )
 
-The dataset transparently keeps the sparse checkout up to date on subsequent
-runs. You can point ``root`` to any writable cache directory.
+The dataset keeps the sparse checkout up to date on subsequent runs. Point ``root`` to any writable cache directory.
 
 First Glyph Dataset
 -------------------
 
-The :class:`torchfont.datasets.FontFolder` dataset turns a directory of ``.otf``
-or ``.ttf`` files into an indexable PyTorch-style dataset. Each item contains the
-pen command types and normalized coordinates emitted by
-:class:`torchfont.io.pens.TensorPen`, plus style/content labels.
+The :class:`torchfont.datasets.FontFolder` dataset turns a directory of ``.otf`` or ``.ttf`` files into an indexable PyTorch-style dataset. Each item contains the pen command types and normalized coordinates emitted by :class:`torchfont.io.pens.TensorPen`, plus style/content labels.
 
 .. code-block:: python
 
@@ -81,7 +74,7 @@ pen command types and normalized coordinates emitted by
    )
 
    dataset = FontFolder(
-       root="~/fonts",                 # scans recursively
+       root="~/fonts",  # scans recursively
        codepoint_filter=[ord("A"), ord("B"), ord("C")],
        transform=transform,
    )
@@ -102,9 +95,7 @@ pen command types and normalized coordinates emitted by
 Working with Google Fonts
 -------------------------
 
-The :class:`torchfont.datasets.GoogleFonts` dataset mirrors the official
-repository via sparse checkout. It exposes the same sample structure as
-:class:`FontFolder`, so you can reuse the exact transforms and dataloaders:
+The :class:`torchfont.datasets.GoogleFonts` dataset mirrors the official repository via sparse checkout. It exposes the same sample structure as :class:`FontFolder`, so you can reuse the same transforms and dataloaders:
 
 .. code-block:: python
 

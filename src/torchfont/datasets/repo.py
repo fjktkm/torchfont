@@ -1,5 +1,9 @@
 """Dataset wrapper that materializes fonts from remote Git repositories.
 
+Notes:
+    The host system must expose ``git`` on ``PATH`` and allow network access when
+    ``download`` is ``True``; otherwise sparse checkouts cannot be refreshed.
+
 Examples:
     Synchronize a Git-based font corpus locally::
 
@@ -10,10 +14,6 @@ Examples:
             patterns=("**/*.ttf",),
             download=True,
         )
-
-Requirements:
-    The system must have ``git`` available in ``PATH`` and network access when
-    ``download`` is set to ``True``.
 
 """
 
@@ -30,7 +30,8 @@ class FontRepo(FontFolder):
     """Font dataset that synchronizes glyphs from a sparse Git checkout.
 
     See Also:
-        FontFolder: Provides the glyph indexing logic reused here.
+        torchfont.datasets.folder.FontFolder: Provides the glyph indexing logic
+        reused by this dataset.
 
     """
 
@@ -52,27 +53,30 @@ class FontRepo(FontFolder):
         """Clone and index a Git repository of fonts.
 
         Args:
-            root: Local directory that contains the Git working tree.
-            url: Remote origin URL for the repository.
-            ref: Git reference (branch, tag, or commit hash) to synchronize.
-            patterns: Sparse-checkout patterns that describe which files to
-                materialize. See the `git sparse-checkout` docs for syntax:
-                <https://git-scm.com/docs/git-sparse-checkout>.
-            codepoint_filter: Optional iterable that limits Unicode code points
-                when indexing glyphs.
-            loader: Callable that constructs a sample from a font/code point pair.
-            transform: Optional callable applied to each sample from the loader.
-            download: Whether to clone and check out the repository contents if
-                the working tree is empty.
+            root (Path | str): Local directory that contains the Git working tree.
+            url (str): Remote origin URL for the repository.
+            ref (str): Git reference (branch, tag, or commit hash) to synchronize.
+            patterns (Sequence[str]): Sparse-checkout patterns describing which
+                files to materialize. Consult the git ``sparse-checkout`` docs
+                for syntax and troubleshooting tips.
+            codepoint_filter (Sequence[SupportsIndex] | None): Optional iterable
+                that limits Unicode code points when indexing glyphs.
+            loader (Callable[[str, SupportsIndex | None, SupportsIndex], object]):
+                Callable that constructs a sample from a font/code point pair.
+            transform (Callable[[object], object] | None): Optional callable
+                applied to each sample from the loader.
+            download (bool): Whether to clone and check out the repository
+                contents when the working tree is empty or stale.
 
         Raises:
-            RuntimeError: If Git is not available or the existing repository does
+            RuntimeError: If Git is unavailable or the existing repository does
                 not match the requested configuration.
             FileNotFoundError: If the repository does not exist locally and
                 ``download`` is ``False``.
 
         Examples:
-            Skip cloning when the working tree already matches the desired state::
+            Skip cloning when the working tree already matches the desired
+            state::
 
                 ds = FontRepo(
                     root="data/fonts",

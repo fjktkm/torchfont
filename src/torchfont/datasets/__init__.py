@@ -1,9 +1,10 @@
-"""Dataset utilities for loading glyph samples from font files.
+"""Dataset utilities that turn font files into model-ready glyph samples.
 
 Examples:
-    Build a dataset sourced from the Google Fonts index::
+    Mirror the Google Fonts index into a training dataset::
 
         from torchfont.datasets import GoogleFonts
+
         ds = GoogleFonts(root="data/google_fonts", ref="main", download=True)
 
 """
