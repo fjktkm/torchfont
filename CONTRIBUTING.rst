@@ -62,10 +62,10 @@ Every significant feature should include user-facing documentation:
 
    .. code-block:: bash
 
-      uv run sphinx-build -b gettext docs/source docs/source/locale/gettext
-      uv run sphinx-intl update -p docs/source/locale/gettext -l ja
+      uv run sphinx-build -b gettext docs/source docs/locale/gettext
+      uv run sphinx-intl update -p docs/locale/gettext -l ja
 
-4. Translate the new strings inside ``docs/source/locale/ja/LC_MESSAGES``. The
+4. Translate the new strings inside ``docs/locale/ja/LC_MESSAGES``. The
    Japanese docs should stay reasonably idiomatic—feel free to adapt phrasing
    instead of providing literal translations.
 
