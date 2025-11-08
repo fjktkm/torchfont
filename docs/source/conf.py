@@ -36,7 +36,7 @@ html_theme = "furo"
 html_static_path = ["_static"]
 
 language = os.environ.get("READTHEDOCS_LANGUAGE", "en")
-locale_dirs = ["locale/"]
+locale_dirs = ["../locale/"]
 gettext_compact = False
 gettext_uuid = True
 gettext_encoding = "utf-8"
