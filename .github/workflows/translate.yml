@@ -37,7 +37,7 @@ jobs:
 
       - name: "Update .po files"
         run: |
-          uv run sphinx-intl update -p docs/build/gettext -l "$LANGUAGES"
+          uv run sphinx-intl update -p docs/build/gettext -d docs/locale -l "$LANGUAGES"
 
       - name: "Find untranslated .po files"
         id: "po-files"
