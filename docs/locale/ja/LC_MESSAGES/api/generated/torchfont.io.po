@@ -2,12 +2,12 @@
 # Copyright (C) 2025, Takumu Fujioka
 # This file is distributed under the same license as the TorchFont package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: TorchFont \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-07 18:54+0000\n"
+"POT-Creation-Date: 2025-11-08 16:53+0000\n"
 "PO-Revision-Date: 2025-11-08 05:55+0000\n"
 "Last-Translator: Codex AI <codex@example.com>\n"
 "Language: ja\n"
@@ -18,34 +18,40 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.17.0\n"
 
-#: ../../api/generated/torchfont.io.rst:2 d1bcddd9a48e4fe6bbb945832be62c60
+#: ../../source/api/generated/torchfont.io.rst:2
+#: fec10cd625344b239114ab075338e03c
 msgid "torchfont.io"
 msgstr "torchfont.io"
 
-#: 8a6f893762cc44b18de0b495d2a579bc of torchfont.io:1
+#: bd9b5f8b6d1144a3aa538bab32ce9074 of torchfont.io:1
 msgid "Input/output helpers for converting font outlines to tensor formats."
 msgstr "フォントアウトラインを Tensor 形式へ変換するための入出力ヘルパー。"
 
-#: 47f58affc7ea4c4a9fa13cc1d0e28384 of torchfont.io:3
+#: 17127199a61845ef8c4cf13cd3622591 of torchfont.io:3
 msgid "Highlights:"
 msgstr "ハイライト："
 
-#: 887a94308a83437487ddeb8deaa42d28 of torchfont.io:4
+#: 93bf2aee959b45b684e32999614d5847 of torchfont.io:4
 msgid ""
 "The :mod:`torchfont.io.pens` module bridges FontTools pens and PyTorch "
 "tensor representations via the ``TensorPen`` class."
-msgstr ":mod:`torchfont.io.pens` モジュールは ``TensorPen`` クラスを介して FontTools のペンと PyTorch の Tensor 表現をつなぎます。"
+msgstr ""
+":mod:`torchfont.io.pens` モジュールは ``TensorPen`` クラスを介して FontTools のペンと "
+"PyTorch の Tensor 表現をつなぎます。"
 
-#: ../../api/generated/torchfont.io.rst:8 ee1b45aa837b4f378a2ac0ea2342b720
+#: ../../source/api/generated/torchfont.io.rst:8
+#: ffe90d4f3ce64cab91b82f0e7b09046e
 msgid "Modules"
 msgstr "モジュール"
 
-#: ../../api/generated/torchfont.io.rst:13:<autosummary>:1
-#: 1ac646255359410cad75a909b5945c0f
+#: ../../source/api/generated/torchfont.io.rst:13:<autosummary>:1
+#: e58fe1e54e0342bba331a95ae5aef5ec
 msgid ":py:obj:`pens <torchfont.io.pens>`\\"
 msgstr ":py:obj:`pens <torchfont.io.pens>`\\"
 
-#: ../../api/generated/torchfont.io.rst:13:<autosummary>:1
-#: 3cbca02ee3424a48bb9275df9c5cd0fe
-msgid "Conversion utilities that draw vector glyphs into tensor representations."
+#: ../../source/api/generated/torchfont.io.rst:13:<autosummary>:1
+#: 0907ccbf510245f7a84ee385b4ea771b
+#, fuzzy
+msgid "Utilities for replaying vector glyphs into dense tensor representations."
 msgstr "ベクターグリフを Tensor 表現として描画する Transform ユーティリティ。"
+

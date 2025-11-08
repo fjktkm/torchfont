@@ -2,12 +2,12 @@
 # Copyright (C) 2025, Takumu Fujioka
 # This file is distributed under the same license as the TorchFont package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: TorchFont \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-07 18:54+0000\n"
+"POT-Creation-Date: 2025-11-08 16:53+0000\n"
 "PO-Revision-Date: 2025-11-08 05:55+0000\n"
 "Last-Translator: Codex AI <codex@example.com>\n"
 "Language: ja\n"
@@ -18,16 +18,20 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.17.0\n"
 
-#: ../../api/index.rst:2 e1be1e1a3f3344ceb6c71c885d438a5a
+#: ../../source/api/index.rst:2 6afa518818a7468383ba7b65d4ca22d5
 msgid "API Reference"
 msgstr "API リファレンス"
 
-#: ../../api/index.rst:8:<autosummary>:1 5bd4a8049f8845078015d8a814280145
+#: ../../source/api/index.rst:8:<autosummary>:1
+#: 055fd0f6a9fb4cbaad2c2b05dea482d5
 msgid ":py:obj:`torchfont <torchfont>`\\"
 msgstr ":py:obj:`torchfont <torchfont>`\\"
 
-#: ../../api/index.rst:8:<autosummary>:1 7690da20d8e44f14bf0424e0abbbeffc
+#: ../../source/api/index.rst:8:<autosummary>:1
+#: 32551edbdc494a0b8e2ceeb5b347d3cf
+#, fuzzy
 msgid ""
-"TorchFont: A PyTorch-based library for learning and processing vector "
+"TorchFont: A PyTorch-native toolkit for modeling and processing vector "
 "fonts."
 msgstr "TorchFont：ベクトルフォントの学習と処理のための PyTorch ベースのライブラリです。"
+
