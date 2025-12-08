@@ -321,7 +321,7 @@ dependencies = [
 
 [[package]]
 name = "torchfont"
-version = "0.1.0"
+version = "0.5.2"
 dependencies = [
  "memmap2",
  "pyo3",
