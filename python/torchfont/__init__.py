@@ -7,8 +7,8 @@ Notes:
 
 Features:
     * Seamless Google Fonts integration through sparse Git checkouts.
-    * ``fontTools``-backed pens that render glyph outlines directly into
-      PyTorch tensors.
+    * A Rust backend that renders glyph outlines directly into PyTorch-ready
+      tensors.
     * Composable transform primitives for truncation, batching, and patch-based
       reshaping.
 

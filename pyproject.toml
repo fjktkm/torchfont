@@ -11,10 +11,8 @@ classifiers = [
     "Programming Language :: Python :: Implementation :: PyPy",
 ]
 dependencies = [
-    "fonttools>=4.60",
-    "numpy>=1.21.3",
+    "numpy>=2.2.6",
     "torch>=2.6.0",
-    "tqdm>=4.63.0",
 ]
 
 [build-system]
@@ -37,7 +35,10 @@ docs = [
     "sphinx-design>=0.6.1",
     "sphinx-intl>=2.3.2",
 ]
-examples = ["lightning>=2.5.5"]
+examples = [
+    "lightning>=2.5.5",
+    "tqdm>=4.67.1",
+]
 
 [tool.uv.sources]
 torch = [{ index = "pytorch-cpu" }]
@@ -73,6 +74,7 @@ ignore = ["EXE002"]
 
 [tool.maturin]
 python-source = "python"
+module-name = "torchfont._torchfont"
 
 [tool.setuptools.package-data]
 "torchfont" = ["py.typed"]

@@ -23,7 +23,7 @@ from collections.abc import Callable, Sequence
 from pathlib import Path
 from typing import SupportsIndex
 
-from torchfont.datasets.folder import FontFolder, default_loader
+from torchfont.datasets.folder import FontFolder
 
 
 class FontRepo(FontFolder):
@@ -43,10 +43,6 @@ class FontRepo(FontFolder):
         *,
         patterns: Sequence[str],
         codepoint_filter: Sequence[SupportsIndex] | None = None,
-        loader: Callable[
-            [str, SupportsIndex | None, SupportsIndex],
-            object,
-        ] = default_loader,
         transform: Callable[[object], object] | None = None,
         download: bool = False,
     ) -> None:
@@ -61,10 +57,8 @@ class FontRepo(FontFolder):
                 for syntax and troubleshooting tips.
             codepoint_filter (Sequence[SupportsIndex] | None): Optional iterable
                 that limits Unicode code points when indexing glyphs.
-            loader (Callable[[str, SupportsIndex | None, SupportsIndex], object]):
-                Callable that constructs a sample from a font/code point pair.
             transform (Callable[[object], object] | None): Optional callable
-                applied to each sample from the loader.
+                applied to each sample from the backend.
             download (bool): Whether to clone and check out the repository
                 contents when the working tree is empty or stale.
 
@@ -156,6 +150,5 @@ class FontRepo(FontFolder):
         super().__init__(
             root=self.root,
             codepoint_filter=codepoint_filter,
-            loader=loader,
             transform=transform,
         )
