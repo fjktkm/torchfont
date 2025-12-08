@@ -1,22 +1,16 @@
-import logging
 from collections.abc import Sequence
 
-import numpy as np
 import torch
-from lightning.pytorch.utilities.combined_loader import CombinedLoader
 from torch import Tensor
 from torch.nn.utils.rnn import pad_sequence
-from torch.utils.data import DataLoader, Subset
-from tqdm import tqdm
-
+from torch.utils.data import DataLoader
 from torchfont.datasets import GoogleFonts
 from torchfont.transforms import (
     Compose,
     LimitSequenceLength,
     Patchify,
 )
-
-logging.getLogger("fontTools").setLevel(logging.ERROR)
+from tqdm import tqdm
 
 transform = Compose(
     (
@@ -31,12 +25,6 @@ dataset = GoogleFonts(
     transform=transform,
     download=True,
 )
-
-num_splits = 8
-n = len(dataset)
-indices = torch.arange(n)
-splits = torch.tensor_split(indices, num_splits)
-subsets = [Subset(dataset, idxs.numpy().tolist()) for idxs in splits]
 
 
 def collate_fn(
@@ -56,58 +44,14 @@ def collate_fn(
     return types_tensor, coords_tensor, style_label_tensor, content_label_tensor
 
 
-def combine_fn(
-    batch: Sequence[tuple[Tensor, Tensor, Tensor, Tensor]],
-) -> tuple[Tensor, Tensor, Tensor, Tensor]:
-    types_list = [types for types, _, _, _ in batch]
-    coords_list = [coords for _, coords, _, _ in batch]
-    style_label_list = [style for _, _, style, _ in batch]
-    content_label_list = [content for _, _, _, content in batch]
+dataloader = DataLoader(
+    dataset,
+    batch_size=64,
+    shuffle=True,
+    num_workers=8,
+    prefetch_factor=2,
+    collate_fn=collate_fn,
+)
 
-    sizes = [t.size(0) for t in types_list]
-    offsets = np.r_[0, np.cumsum(sizes)]
-    total_samples = offsets[-1]
-
-    max_seq_len = max(x.size(1) for x in types_list)
-    types_ref, coords_ref = types_list[0], coords_list[0]
-
-    combined_types = types_ref.new_zeros(
-        total_samples,
-        max_seq_len,
-        types_ref.size(2),
-    )
-    combined_coords = coords_ref.new_zeros(
-        total_samples,
-        max_seq_len,
-        coords_ref.size(2),
-        coords_ref.size(3),
-    )
-
-    for i, (types, coords) in enumerate(zip(types_list, coords_list, strict=True)):
-        start, end = offsets[i], offsets[i + 1]
-        seq_len = types.size(1)
-        combined_types[start:end, :seq_len] = types
-        combined_coords[start:end, :seq_len] = coords
-
-    combined_style_label = torch.cat(style_label_list)
-    combined_content_label = torch.cat(content_label_list)
-
-    return combined_types, combined_coords, combined_style_label, combined_content_label
-
-
-loaders = [
-    DataLoader(
-        subset,
-        batch_size=64,
-        shuffle=True,
-        num_workers=1,
-        prefetch_factor=2,
-        collate_fn=collate_fn,
-    )
-    for subset in subsets
-]
-dataloader = CombinedLoader(loaders)
-_ = iter(dataloader)
-
-for batch, _, _ in tqdm(dataloader, desc="Iterating over datasets"):
-    types, coords, style_labels, content_labels = combine_fn(batch)
+for batch in tqdm(dataloader, desc="Iterating over datasets"):
+    sample = batch
