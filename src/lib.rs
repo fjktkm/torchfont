@@ -1,13 +1,11 @@
-use pyo3::prelude::*;
+mod dataset;
+mod pen;
 
-/// A Python module implemented in Rust.
+use dataset::FontDataset;
+use pyo3::{Bound, prelude::*, types::PyModule};
+
 #[pymodule]
-mod torchfont {
-    use pyo3::prelude::*;
-
-    /// Formats the sum of two numbers as string.
-    #[pyfunction]
-    fn sum_as_string(a: usize, b: usize) -> PyResult<String> {
-        Ok((a + b).to_string())
-    }
+fn _torchfont(_py: Python<'_>, m: Bound<'_, PyModule>) -> PyResult<()> {
+    m.add_class::<FontDataset>()?;
+    Ok(())
 }
