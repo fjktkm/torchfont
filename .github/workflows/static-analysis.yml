@@ -7,7 +7,7 @@ on:
     paths:
       - ".github/workflows/static-analysis.yml"
       - "examples/**"
-      - "src/**"
+      - "python/**"
       - "tests/**"
       - "typings/**"
       - ".python-version"
@@ -17,7 +17,7 @@ on:
     paths:
       - ".github/workflows/static-analysis.yml"
       - "examples/**"
-      - "src/**"
+      - "python/**"
       - "tests/**"
       - "typings/**"
       - ".python-version"
@@ -56,4 +56,4 @@ jobs:
         run: uv sync --group examples
 
       - name: Run mypy
-        run: uv run mypy src tests examples
+        run: uv run mypy python tests examples

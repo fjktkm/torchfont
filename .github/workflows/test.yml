@@ -6,14 +6,14 @@ on:
       - main
     paths:
       - ".github/workflows/test.yml"
-      - "src/**"
+      - "python/**"
       - "tests/**"
       - "pyproject.toml"
       - "uv.lock"
   pull_request:
     paths:
       - ".github/workflows/test.yml"
-      - "src/**"
+      - "python/**"
       - "tests/**"
       - "pyproject.toml"
       - "uv.lock"

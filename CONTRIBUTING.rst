@@ -39,7 +39,7 @@ that appear. To reproduce issues locally, run:
 .. code-block:: bash
 
    uv run ruff check .
-   uv run mypy src/torchfont
+   uv run mypy python/torchfont
    uv run pytest
 
 The repository contains small integration samples inside ``examples/``. Please
