@@ -5,6 +5,11 @@ description = "Datasets, Transforms and Models specific to Vector Fonts"
 readme = "README.md"
 authors = [{ name = "Takumu Fujioka", email = "fjktkm@gmail.com" }]
 requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Rust",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
+]
 dependencies = [
     "fonttools>=4.60",
     "numpy>=1.21.3",
@@ -13,11 +18,12 @@ dependencies = [
 ]
 
 [build-system]
-requires = ["uv_build>=0.8.13,<0.9.0"]
-build-backend = "uv_build"
+requires = ["maturin>=1.10,<2.0"]
+build-backend = "maturin"
 
 [dependency-groups]
 dev = [
+    "maturin>=1.10.2",
     "mypy>=1.18.2",
     "pytest>=8.4.2",
     "ruff>=0.12.4",
@@ -64,6 +70,9 @@ ignore = ["EXE002"]
 "python/torchfont/io/pens.py" = ["N802"]
 "tests/**/*.py" = ["D", "S101"]
 "typings/**/*.pyi" = ["D", "N"]
+
+[tool.maturin]
+python-source = "python"
 
 [tool.setuptools.package-data]
 "torchfont" = ["py.typed"]
