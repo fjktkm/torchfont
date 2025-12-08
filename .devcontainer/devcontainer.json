@@ -2,10 +2,8 @@
 	"name": "uv",
 	"image": "ghcr.io/astral-sh/uv:python3.13-trixie",
 	"features": {
-		"ghcr.io/devcontainers/features/common-utils:2": {}
-	},
-	"hostRequirements": {
-		"gpu": "optional"
+		"ghcr.io/devcontainers/features/common-utils:2": {},
+		"ghcr.io/devcontainers/features/rust:1": {}
 	},
 	"mounts": [
 		{
@@ -15,6 +13,10 @@
 		},
 		{
 			"target": "${containerWorkspaceFolder}/.venv",
+			"type": "volume"
+		},
+		{
+			"target": "${containerWorkspaceFolder}/target",
 			"type": "volume"
 		},
 		{
@@ -32,6 +34,7 @@
 			"extensions": [
 				"charliermarsh.ruff",
 				"ms-python.python",
+				"rust-lang.rust-analyzer",
 				"tamasfe.even-better-toml"
 			]
 		}
