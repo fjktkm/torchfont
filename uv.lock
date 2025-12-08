@@ -1834,8 +1834,6 @@ name = "torchfont"
 version = "0.5.2"
 source = { editable = "." }
 dependencies = [
-    { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
-    { name = "numpy", version = "2.3.4", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "torch", version = "2.9.0", source = { registry = "https://download.pytorch.org/whl/cpu" }, marker = "sys_platform == 'darwin'" },
     { name = "torch", version = "2.9.0+cpu", source = { registry = "https://download.pytorch.org/whl/cpu" }, marker = "sys_platform != 'darwin'" },
 ]
@@ -1844,6 +1842,8 @@ dependencies = [
 dev = [
     { name = "maturin" },
     { name = "mypy" },
+    { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
+    { name = "numpy", version = "2.3.4", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "pytest" },
     { name = "ruff" },
     { name = "types-tqdm" },
@@ -1865,15 +1865,13 @@ examples = [
 ]
 
 [package.metadata]
-requires-dist = [
-    { name = "numpy", specifier = ">=2.2.6" },
-    { name = "torch", specifier = ">=2.6.0", index = "https://download.pytorch.org/whl/cpu" },
-]
+requires-dist = [{ name = "torch", specifier = ">=2.6.0", index = "https://download.pytorch.org/whl/cpu" }]
 
 [package.metadata.requires-dev]
 dev = [
     { name = "maturin", specifier = ">=1.10.2" },
     { name = "mypy", specifier = ">=1.18.2" },
+    { name = "numpy", specifier = ">=2.2.6" },
     { name = "pytest", specifier = ">=8.4.2" },
     { name = "ruff", specifier = ">=0.12.4" },
     { name = "types-tqdm", specifier = ">=4.67.0.20250809" },
