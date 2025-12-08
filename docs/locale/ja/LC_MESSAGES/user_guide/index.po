@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TorchFont \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-08 06:39+0000\n"
+"POT-Creation-Date: 2025-12-08 20:45+0000\n"
 "PO-Revision-Date: 2025-11-08 06:40+0000\n"
 "Last-Translator: Codex AI <codex@example.com>\n"
 "Language: ja\n"
@@ -18,161 +18,218 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.17.0\n"
 
-#: ../../user_guide/index.rst:2 ee0c6fea77b54b76ba25262d86ac2c16
+#: ../../source/user_guide/index.rst:2 f78bef752bca459cbb3b7dbb244c0e3b
 msgid "User Guide"
 msgstr "ユーザーガイド"
 
-#: ../../user_guide/index.rst:4 c123fd4e6b2740a5879a608d57524e98
+#: ../../source/user_guide/index.rst:4 51217094d30a4662af5a555e0a4b9fe6
 msgid ""
 "The sections below explain how the high-level modules fit together and "
 "provide short recipes that you can adapt for your own training pipelines."
 msgstr "以下では各モジュールの関係性を整理し、実際の学習パイプラインに応用しやすいレシピを紹介します。"
 
-#: ../../user_guide/index.rst:8 b9694e8833074cd7986423a5ddd741ea
+#: ../../source/user_guide/index.rst:8 fe6527ee335c4f4d99d912398ee00030
 msgid "Datasets"
 msgstr "データセット"
 
-#: ../../user_guide/index.rst:10 1ac25ff0363c40ea8af6d73e74f9093b
+#: ../../source/user_guide/index.rst:10 e803d8512c4d47afa9e30465790c8f44
 msgid "TorchFont exposes three dataset wrappers under :mod:`torchfont.datasets`."
 msgstr ":mod:`torchfont.datasets` には 3 種類のデータセットラッパーが用意されています。"
 
-#: ../../user_guide/index.rst:12 5d1a5a01d1a649238ccb5eb3e7a8202d
+#: ../../source/user_guide/index.rst:12 03510cd794614a37978d84391769da2a
 msgid "``FontFolder``"
 msgstr "``FontFolder``"
 
-#: ../../user_guide/index.rst:13 af7a491c96454426b8a9ec76933df5f2
+#: ../../source/user_guide/index.rst:13 f41a43dc1a4a432f901b2912844316f2
 msgid ""
 "Scans a directory of ``.otf``/``.ttf`` files. Every available Unicode "
 "code point and variation instance becomes an item. Use the "
 "``codepoint_filter`` argument to limit the content and plug in a custom "
 "``loader`` when you need extra preprocessing."
-msgstr "``.otf`` や ``.ttf`` が入ったディレクトリを走査し、利用可能な Unicode コードポイントとバリアントを 1 サンプルとして並べます。``codepoint_filter`` で対象文字を制限したり、追加の前処理が必要な場合は ``loader`` を差し替えられます。"
+msgstr ""
+"``.otf`` や ``.ttf`` が入ったディレクトリを走査し、利用可能な Unicode コードポイントとバリアントを 1 "
+"サンプルとして並べます。``codepoint_filter`` で対象文字を制限したり、追加の前処理が必要な場合は ``loader`` "
+"を差し替えられます。"
 
-#: ../../user_guide/index.rst:18 be0e3b479dc64b14a180ed7396aafe1a
+#: ../../source/user_guide/index.rst:18 3399e740780c426ca3a679e1be2096f2
 msgid "``GoogleFonts``"
 msgstr "``GoogleFonts``"
 
-#: ../../user_guide/index.rst:19 ddf83c16b6e048509051a5f911aaf354
+#: ../../source/user_guide/index.rst:19 0af01473c1204a50b36ced63a120f52f
 msgid ""
 "Maintains a sparse checkout of the `google/fonts` repository. Pass "
 "``patterns`` to restrict which directories are materialized, and set "
 "``download=True`` to ensure the checkout exists. The dataset inherits the"
 " same indexing and label structure as :class:`FontFolder`."
-msgstr "`google/fonts` リポジトリをスパースチェックアウトで維持します。 ``patterns`` で取り込むディレクトリを絞り、 ``download=True`` を指定すると初回にクローンが確実に作られます。インデックスとラベルの構造は :class:`FontFolder` と同じです。"
+msgstr ""
+"`google/fonts` リポジトリをスパースチェックアウトで維持します。 ``patterns`` で取り込むディレクトリを絞り、 "
+"``download=True`` を指定すると初回にクローンが確実に作られます。インデックスとラベルの構造は "
+":class:`FontFolder` と同じです。"
 
-#: ../../user_guide/index.rst:24 a516e3f4d9dc4b3d8a3f679960e79e89
+#: ../../source/user_guide/index.rst:24 34dbff213c0a4ff3b1850a10c31b052f
 msgid "``FontRepo``"
 msgstr "``FontRepo``"
 
-#: ../../user_guide/index.rst:25 e66ebb99f4f54c92aee039ab45660cb9
+#: ../../source/user_guide/index.rst:25 69381c45263f40428430e538831f8504
 msgid ""
 "Generalizes the sparse checkout logic to arbitrary Git repositories. "
 "Provide a ``url``, ``ref``, and optional ``patterns`` describing what to "
 "materialize."
-msgstr "スパースチェックアウトの仕組みを任意の Git リポジトリに拡張したものです。``url`` と ``ref``、必要であれば展開したい ``patterns`` を指定します。"
+msgstr ""
+"スパースチェックアウトの仕組みを任意の Git リポジトリに拡張したものです。``url`` と ``ref``、必要であれば展開したい "
+"``patterns`` を指定します。"
 
-#: ../../user_guide/index.rst:29 69f53c05325248a2a6abd0e05390003b
+#: ../../source/user_guide/index.rst:29 8b032bd0c4514f4e989b474e922daa07
 msgid "Example – `FontRepo`"
 msgstr "例 – `FontRepo`"
 
-#: ../../user_guide/index.rst:46 9cbe2ebb8779464886cd63656f059c0d
+#: ../../source/user_guide/index.rst:46 f00e112a39f947ce9cde3e2bf3d53016
 msgid "Transforms"
 msgstr "Transform"
 
-#: ../../user_guide/index.rst:48 d8654d6e1c4644e7a6697874964e3e15
+#: ../../source/user_guide/index.rst:48 5c82dfff558c4fdab6c6ea65a85a629f
 msgid ""
 "Sequential transformations live under :mod:`torchfont.transforms`. "
 "Combine them with :class:`torchfont.transforms.Compose` to keep "
 "preprocessing modules declarative."
-msgstr "シーケンシャルな前処理は :mod:`torchfont.transforms` にまとまっています。:class:`torchfont.transforms.Compose` と組み合わせることで宣言的にパイプラインを記述できます。"
+msgstr ""
+"シーケンシャルな前処理は :mod:`torchfont.transforms` "
+"にまとまっています。:class:`torchfont.transforms.Compose` "
+"と組み合わせることで宣言的にパイプラインを記述できます。"
 
-#: ../../user_guide/index.rst:66 33ba9de64a8d4639afc5bee87570f4f3
+#: ../../source/user_guide/index.rst:66 d9fdf84f8b1848d6947286aeaa5e747d
 msgid "``LimitSequenceLength``"
 msgstr "``LimitSequenceLength``"
 
-#: ../../user_guide/index.rst:67 61fa133992424a9399ed1ae1d4312779
+#: ../../source/user_guide/index.rst:67 0c6efa7827d348f089573254d5a543ee
 msgid ""
 "Clips both the command-type tensor and the coordinate tensor to "
 "``max_len``."
 msgstr "ペンコマンド種別と座標の両方を ``max_len`` までクリップします。"
 
-#: ../../user_guide/index.rst:69 f24660994eac49e18cba81e57eecabc3
+#: ../../source/user_guide/index.rst:69 e0d2926157c947d1b82b19ccdb27647e
 msgid "``Patchify``"
 msgstr "``Patchify``"
 
-#: ../../user_guide/index.rst:70 7a0ad78d148e428a9feda5a1510aa275
+#: ../../source/user_guide/index.rst:70 9c68e338d45e482a835c66d74c470462
 msgid ""
 "Zero-pads sequences to the next ``patch_size`` boundary, then reshapes "
 "them into contiguous patches—useful for transformer-style models."
-msgstr "シーケンスを ``patch_size`` の倍数までゼロ埋めし、連続したパッチへ整形します。Transformer 系モデルで扱いやすくなる定番の処理です。"
+msgstr ""
+"シーケンスを ``patch_size`` の倍数までゼロ埋めし、連続したパッチへ整形します。Transformer "
+"系モデルで扱いやすくなる定番の処理です。"
 
-#: ../../user_guide/index.rst:74 bc02c9431e11477dbb5d296ddd6fa8c5
-msgid "I/O Utilities"
-msgstr "I/O ユーティリティ"
+#: ../../source/user_guide/index.rst:74 bc56e2d32bfa4e4c80c070d914de1a56
+msgid "Glyph Encoding"
+msgstr "グリフエンコード"
 
-#: ../../user_guide/index.rst:76 1b2132c13f9a4e5f9062b854f1dbea50
+#: ../../source/user_guide/index.rst:76 976491ba2dd642e5afd82691fd82729d
 msgid ""
-"The :mod:`torchfont.io` namespace contains helpers for converting raw "
-"outlines to Tensors."
-msgstr ":mod:`torchfont.io` にはアウトラインを Tensor に変換するヘルパー群があります。"
+"TorchFont renders glyph outlines through the compiled "
+"``torchfont._torchfont`` extension. Dataset wrappers call into the same "
+"Rust backend, so the ``(types, coords)`` tensors they return are "
+"normalized and ready for PyTorch."
+msgstr ""
+"TorchFont はコンパイル済みの ``torchfont._torchfont`` "
+"拡張を介してグリフアウトラインをレンダリングします。各データセットラッパーも同じ Rust "
+"バックエンドを呼び出すため、返される ``(types, coords)`` テンソルは常に正規化済みで、そのまま PyTorch "
+"に食わせることができます。"
 
-#: ../../user_guide/index.rst:79 349c383b9864498cb0589a5b7234656f
-msgid "``torchfont.io.pens.TensorPen``"
-msgstr "``torchfont.io.pens.TensorPen``"
+#: ../../source/user_guide/index.rst:80 9361a21979a6444f88dae89cdffb0758
+msgid "Use the native module directly if you need lower-level access:"
+msgstr "より低レベルな制御が必要な場合はネイティブモジュールを直接呼び出せます。"
 
-#: ../../user_guide/index.rst:80 172e80a17e174601a9bfed9f28aad64c
-msgid ""
-"Implements a FontTools-compatible pen that records every command as "
-"PyTorch tensors. The resulting tensors are what the datasets return, so "
-"you can reuse the pen when building custom loaders."
-msgstr "FontTools 互換のペンとして動作し、すべてのコマンドを PyTorch Tensor として記録します。データセットが返すテンソルと同一なので、独自ローダーを作る際にも再利用できます。"
-
-#: ../../user_guide/index.rst:97 1ab25cf178ca4b1886cddff570082b22
+#: ../../source/user_guide/index.rst:90 e95b5cee3a7648f2ab525e59d862e4d7
 msgid "Data Loading Tips"
 msgstr "データローディングのヒント"
 
-#: ../../user_guide/index.rst:99 e0957bad577b434b82b77ed766a55336
+#: ../../source/user_guide/index.rst:92 64b1061a3c354e6983bb6a56838e137b
 msgid ""
 "Glyph sequences vary in length. Always supply a ``collate_fn`` that pads "
 "or truncates samples before they are stacked into a batch."
 msgstr "グリフシーケンスは長さがまちまちです。バッチ化する前にパディングまたはトリミングする ``collate_fn`` を必ず用意しましょう。"
 
-#: ../../user_guide/index.rst:101 c1ed6d69d4934ea09e67559d1f14bc74
+#: ../../source/user_guide/index.rst:94 eea4ded964f14a73843e074f95495bf7
 msgid ""
 "When working with ``GoogleFonts`` consider splitting the dataset into "
 "several :class:`torch.utils.data.Subset` objects and feeding them to "
 "Lightning's "
 ":class:`lightning.pytorch.utilities.combined_loader.CombinedLoader` (see "
 "``examples/dataloader.py``) to parallelize IO."
-msgstr "``GoogleFonts`` を扱う際は、データセットを複数の :class:`torch.utils.data.Subset` に分割し、Lightning の :class:`lightning.pytorch.utilities.combined_loader.CombinedLoader`（``examples/dataloader.py`` を参照）へ渡すことで IO を並列化できます。"
+msgstr ""
+"``GoogleFonts`` を扱う際は、データセットを複数の :class:`torch.utils.data.Subset` "
+"に分割し、Lightning の "
+":class:`lightning.pytorch.utilities.combined_loader.CombinedLoader`（``examples/dataloader.py``"
+" を参照）へ渡すことで IO を並列化できます。"
 
-#: ../../user_guide/index.rst:105 30cd727b1bf9430ea4024c0afcb66780
+#: ../../source/user_guide/index.rst:98 dc0ce2b3c96c4dd0980508b15d56267a
 msgid ""
 "Cache-heavy datasets benefit from setting ``num_workers`` to at least the"
 " number of CPU cores available during preprocessing and inferencing."
 msgstr "キャッシュを多用するデータセットでは、前処理や推論時の CPU コア数に合わせて ``num_workers`` を十分に確保すると効果的です。"
 
-#: ../../user_guide/index.rst:109 a6194b68f41e434c8b3d7326ec96bacf
+#: ../../source/user_guide/index.rst:102 df1a023cfaf54a19b5949a16248402af
 msgid "Best Practices"
 msgstr "ベストプラクティス"
 
-#: ../../user_guide/index.rst:111 22e7838d0ed84fb4b0cee9375b2c8fb6
+#: ../../source/user_guide/index.rst:104 7765b74822644ddf95219334f420571a
 msgid ""
-"**Keep raw fonts immutable.** The caching performed by "
-":func:`torchfont.datasets.folder.load_font` assumes files on disk are not"
-" modified while the process is running. Call ``load_font.cache_clear()`` "
-"if you need to invalidate the cache."
-msgstr "**生のフォントは更新しない。** :func:`torchfont.datasets.folder.load_font` のキャッシュは、実行中にファイルが変更されない前提で動作します。無効化したい場合は ``load_font.cache_clear()`` を呼び出してください。"
+"**Keep raw fonts immutable.** The native dataset caches parsed fonts for "
+"the lifetime of the process. Rebuild the dataset if you edit files on "
+"disk."
+msgstr ""
+"**生のフォントを変更しない。** ネイティブデータセットはプロセスの寿命中、解析済みフォントをキャッシュします。ディスク上の"
+" ファイルを編集した場合はデータセットを作り直してください。"
 
-#: ../../user_guide/index.rst:115 19b9f451e95e4810b30452a2cdde4493
+#: ../../source/user_guide/index.rst:106 4e9408a35fe24485a9b870934389e9eb
 msgid ""
 "**Separate style and content labels.** Every dataset returns both. Treat "
 "style (font instance) as one task and content (code point) as another so "
 "that your losses stay interpretable."
-msgstr "**スタイルとコンテンツのラベルを分けて扱う。** どのデータセットも両方を返すので、スタイル（フォントインスタンス）とコンテンツ（コードポイント）を別タスクとして扱うと損失の解釈が容易になります。"
+msgstr ""
+"**スタイルとコンテンツのラベルを分けて扱う。** "
+"どのデータセットも両方を返すので、スタイル（フォントインスタンス）とコンテンツ（コードポイント）を別タスクとして扱うと損失の解釈が容易になります。"
 
-#: ../../user_guide/index.rst:118 41e3a528011f4d41a9f8e33563959231
+#: ../../source/user_guide/index.rst:109 ccafd5b2641442c8a692cd9a0c592069
 msgid ""
 "**Document your Transform pipeline.** Store the pipeline configuration "
 "next to model checkpoints to keep glyph preprocessing reproducible."
-msgstr "**Transform パイプラインを記録する。** グリフ前処理を再現できるよう、モデルのチェックポイントと一緒にパイプライン設定を保存しておきましょう。"
+msgstr ""
+"**Transform パイプラインを記録する。** "
+"グリフ前処理を再現できるよう、モデルのチェックポイントと一緒にパイプライン設定を保存しておきましょう。"
+
+#~ msgid "I/O Utilities"
+#~ msgstr "I/O ユーティリティ"
+
+#~ msgid ""
+#~ "The :mod:`torchfont.io` namespace contains "
+#~ "helpers for converting raw outlines to"
+#~ " Tensors."
+#~ msgstr ":mod:`torchfont.io` にはアウトラインを Tensor に変換するヘルパー群があります。"
+
+#~ msgid "``torchfont.io.pens.TensorPen``"
+#~ msgstr "``torchfont.io.pens.TensorPen``"
+
+#~ msgid ""
+#~ "Implements a FontTools-compatible pen "
+#~ "that records every command as PyTorch"
+#~ " tensors. The resulting tensors are "
+#~ "what the datasets return, so you "
+#~ "can reuse the pen when building "
+#~ "custom loaders."
+#~ msgstr ""
+#~ "FontTools 互換のペンとして動作し、すべてのコマンドを PyTorch Tensor "
+#~ "として記録します。データセットが返すテンソルと同一なので、独自ローダーを作る際にも再利用できます。"
+
+#~ msgid ""
+#~ "**Keep raw fonts immutable.** The "
+#~ "caching performed by "
+#~ ":func:`torchfont.datasets.folder.load_font` assumes files"
+#~ " on disk are not modified while "
+#~ "the process is running. Call "
+#~ "``load_font.cache_clear()`` if you need to "
+#~ "invalidate the cache."
+#~ msgstr ""
+#~ "**生のフォントは更新しない。** :func:`torchfont.datasets.folder.load_font`"
+#~ " のキャッシュは、実行中にファイルが変更されない前提で動作します。無効化したい場合は "
+#~ "``load_font.cache_clear()`` を呼び出してください。"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TorchFont \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-08 16:53+0000\n"
+"POT-Creation-Date: 2025-12-08 20:45+0000\n"
 "PO-Revision-Date: 2025-11-08 06:40+0000\n"
 "Last-Translator: Codex AI <codex@example.com>\n"
 "Language: ja\n"
@@ -18,17 +18,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.17.0\n"
 
-#: ../../source/contributor_guide/index.rst:2 b03654084083488586b2468dbb7d97e7
+#: ../../source/contributor_guide/index.rst:2 9fc5c41945d3465882c54c7a70b6884f
 msgid "Contributor Guide"
 msgstr "コントリビューターガイド"
 
-#: ../../source/contributor_guide/index.rst:4 144eb24aaee3439cb2be8ac9b277f995
+#: ../../source/contributor_guide/index.rst:4 0aeab7fcef72479b95ab19afc478fcd2
 msgid ""
 "This document provides guidelines for contributors, including setup "
 "instructions, development workflow, and contribution rules."
 msgstr "このドキュメントでは、セットアップ手順、開発フロー、貢献に関するルールなど、コントリビューター向けのガイドラインを示します。"
 
-#: ../../../CONTRIBUTING.rst:1 827eb6eb70264fc4947598f9adf4c707
+#: ../../../CONTRIBUTING.rst:1 97f2d2c12e194de1888339155215447a
 msgid ""
 "Thank you for taking the time to improve TorchFont! The guidelines below "
 "keep the project healthy and make it easier for maintainers to review "
@@ -37,11 +37,11 @@ msgstr ""
 "TorchFont "
 "の改善に時間を割いてくださりありがとうございます。以下のガイドラインは、プロジェクトを健全に保ちレビューを円滑に進めるためのものです。"
 
-#: ../../../CONTRIBUTING.rst:5 9b192a031db94f6596e7192ec9e76c8e
+#: ../../../CONTRIBUTING.rst:5 3067282937584dc4883d4897fe63031d
 msgid "Project Setup"
 msgstr "プロジェクトのセットアップ"
 
-#: ../../../CONTRIBUTING.rst:7 08adf989fcfa4f29b1561a4656738fe8
+#: ../../../CONTRIBUTING.rst:7 28207230382e43699b92b34ff4b6ab09
 msgid ""
 "TorchFont uses `uv <https://docs.astral.sh/uv/>`_ to manage virtual "
 "environments and dependency locks."
@@ -49,7 +49,7 @@ msgstr ""
 "TorchFont では仮想環境と依存関係のロックを `uv <https://docs.astral.sh/uv/>`_ で管理しており、まず "
 "``uv sync --all-groups`` を実行して環境を整えます。"
 
-#: ../../../CONTRIBUTING.rst:14 47c0dc75eb964b6389f8e8115ca5aa7c
+#: ../../../CONTRIBUTING.rst:14 4f25115c3179469da29a79ddf50d0827
 msgid ""
 "This installs the runtime package, development tooling (linters, tests), "
 "and the documentation toolchain in a single isolated environment. "
@@ -59,17 +59,17 @@ msgstr ""
 "このコマンドでランタイム、開発ツール（リンター・テスト）、ドキュメント生成ツールをひとつの分離された環境にまとめて導入できます。以降は ``uv "
 "run`` を付けるか、ここに示したコマンド例をそのまま利用してください。"
 
-#: ../../../CONTRIBUTING.rst:19 8df184051da24a52bd4cfc66266ef664
+#: ../../../CONTRIBUTING.rst:19 f891d2e26b284840b20b912adbceeb9b
 msgid "Coding Standards"
 msgstr "コーディング規約"
 
-#: ../../../CONTRIBUTING.rst:21 49bb6378f6cf40abb98a86cb21a139c9
+#: ../../../CONTRIBUTING.rst:21 cc510c00ed4e4389a1136d0531c23591
 msgid ""
 "The minimum supported Python version is 3.10. Avoid syntax that would "
 "break on that interpreter."
 msgstr "サポートする最小の Python は 3.10 です。このバージョンで動かない構文は避けてください。"
 
-#: ../../../CONTRIBUTING.rst:23 214c8a2c9739435a861a80a0e1774d7e
+#: ../../../CONTRIBUTING.rst:23 a16047a496b24c0fa8a70d81762dd9b5
 msgid ""
 "Keep modules typed. ``pyproject.toml`` ships ``py.typed`` metadata, so "
 "mypy warnings matter."
@@ -77,21 +77,21 @@ msgstr ""
 "各モジュールには型注釈を付けましょう。``pyproject.toml`` には ``py.typed`` が含まれているため mypy "
 "の警告はそのままユーザーに伝わります。"
 
-#: ../../../CONTRIBUTING.rst:25 a50bf4cfc2374ddeb1a0df8b57fb16db
+#: ../../../CONTRIBUTING.rst:25 0ea000e7820a453b86a1a3822f87b75f
 msgid ""
-"Public APIs live under ``torchfont.datasets``, ``torchfont.transforms`` "
-"and ``torchfont.io``. When adding modules, update ``docs/source/api`` so "
-"that Sphinx picks them up."
+"Public APIs live under ``torchfont.datasets`` and "
+"``torchfont.transforms``. When adding modules, update ``docs/source/api``"
+" so that Sphinx picks them up."
 msgstr ""
-"公開 API は ``torchfont.datasets``、``torchfont.transforms``、``torchfont.io``"
-" にまとまっています。モジュールを追加したら ``docs/source/api`` も更新し、Sphinx "
+"公開 API は ``torchfont.datasets`` と ``torchfont.transforms`` "
+"にまとまっています。モジュールを追加したら ``docs/source/api`` も更新し、Sphinx "
 "の自動ドキュメントに反映させてください。"
 
-#: ../../../CONTRIBUTING.rst:30 46fc6e1c0e454d77861cb6d5113052e7
+#: ../../../CONTRIBUTING.rst:29 fc06d5e5770a40a1b151e4bf3cb3f5e8
 msgid "Testing & Linting"
 msgstr "テストと Lint"
 
-#: ../../../CONTRIBUTING.rst:32 a6d7bdd859634102885c63cf955135e4
+#: ../../../CONTRIBUTING.rst:31 fa6cf4de389742c38e47f7e52886dee4
 msgid ""
 "GitHub Actions runs linting, type-checking, and tests automatically after"
 " you open a pull request. Keep an eye on the workflow status and address "
@@ -100,75 +100,74 @@ msgstr ""
 "Pull Request を作成すると GitHub Actions が "
 "Lint・型チェック・テストを自動で実行します。ワークフローの状態を確認し、失敗があれば対応してください。ローカルで再現したい場合は次のコマンドを実行します。"
 
-#: ../../../CONTRIBUTING.rst:42 55658f0012f04bd19ba9919d522dd9fa
+#: ../../../CONTRIBUTING.rst:41 aa6d40af1cdb44dcba542ba3f2861779
 msgid ""
 "The repository contains small integration samples inside ``examples/``. "
 "Please exercise or extend them if your change alters their behavior."
 msgstr "``examples/`` 配下には小さな統合サンプルがあります。挙動に影響する変更を行った場合は、必要に応じて実行・更新してください。"
 
-#: ../../../CONTRIBUTING.rst:46 cf6aba0f053c48539d101ed6660ead6a
+#: ../../../CONTRIBUTING.rst:45 71b664c51c42404881d81e48a09c3139
 msgid "Documentation"
 msgstr "ドキュメント"
 
-#: ../../../CONTRIBUTING.rst:48 3911973f1c354e97b04931c069e9549c
+#: ../../../CONTRIBUTING.rst:47 69d3a8f2398e45ffb125b81020b5a743
 msgid "Every significant feature should include user-facing documentation:"
 msgstr "大きな機能追加には必ずユーザー向けドキュメントを添えてください。"
 
-#: ../../../CONTRIBUTING.rst:50 8e49f152d0004b3793770256fbba59a7
+#: ../../../CONTRIBUTING.rst:49 bf61b849a0b04c96b0f68abb37225c78
 msgid "Update ``docs/source`` with narrative text or API references."
 msgstr "まず ``docs/source`` に説明文や API リファレンスを追加します。"
 
-#: ../../../CONTRIBUTING.rst:51 8a138da20eac491bbd370bcacad0bbdb
+#: ../../../CONTRIBUTING.rst:50 2d84b454d52b4c91928809e1fd018828
 msgid "Build the docs locally to ensure nothing regresses:"
 msgstr ""
 "そのうえで ``uv run sphinx-build -b html docs/source docs/build`` "
 "を実行し、ローカルでビルドして退行がないか確認します。"
 
-#: ../../../CONTRIBUTING.rst:57 3a3161d4e6714e65ba02a635a987028f
+#: ../../../CONTRIBUTING.rst:56 2753c6e53b534c43ac6e5efdf9cc37fb
 msgid ""
 "If you touched any ``.rst`` files, regenerate message catalogs and "
 "refresh translations:"
 msgstr "``.rst`` ファイルを編集した場合はメッセージカタログを再生成し、日本語訳を更新してください。"
 
-#: ../../../CONTRIBUTING.rst:65 6063c252c4994f4592a0cd7f1ca0f344
-#, fuzzy
+#: ../../../CONTRIBUTING.rst:64 cc0e8b13209b448a8a5e178b0cb6355e
 msgid ""
 "Translate the new strings inside ``docs/locale/ja/LC_MESSAGES``. The "
 "Japanese docs should stay reasonably idiomatic—feel free to adapt "
 "phrasing instead of providing literal translations."
 msgstr ""
-"追加された文字列は ``docs/source/locale/ja/LC_MESSAGES`` "
+"追加された文字列は ``docs/locale/ja/LC_MESSAGES`` "
 "内で翻訳します。逐語訳にこだわらず、自然な日本語になるよう意訳して構いません。"
 
-#: ../../../CONTRIBUTING.rst:70 e1d05cab92474cec8fd3b873f3c1505b
+#: ../../../CONTRIBUTING.rst:69 256fd8b537704792bc5000af06c7fa6f
 msgid "Git Workflow"
 msgstr "Git ワークフロー"
 
-#: ../../../CONTRIBUTING.rst:72 ab1852d64eca4f2e9a0fc70a777d0384
+#: ../../../CONTRIBUTING.rst:71 3d191f5fa93445ceb1eec308b0f27bff
 msgid "Create topic branches off ``main``."
 msgstr "作業ブランチは ``main`` から切ってください。"
 
-#: ../../../CONTRIBUTING.rst:73 22e3dfe5f20c443280ea84d76b04db52
+#: ../../../CONTRIBUTING.rst:72 b4e1707e2fbd4c37a11ddf534eccb862
 msgid ""
 "Write descriptive commit messages. Mention the relevant issue when "
 "applicable."
 msgstr "コミットメッセージは内容が伝わるものにし、必要に応じて関連 Issue を明記します。"
 
-#: ../../../CONTRIBUTING.rst:74 e74d689ce7e94381bc59846ac8be61fe
+#: ../../../CONTRIBUTING.rst:73 3dbb9a35d61c4c489cc6ea28bda39f60
 msgid ""
 "Keep pull requests focused. Separate unrelated refactors or formatting "
 "changes into their own PRs."
 msgstr "Pull Request は焦点を絞り、無関係なリファクタリングや整形は別 PR としてください。"
 
-#: ../../../CONTRIBUTING.rst:76 4ac9b9747f594ba2ae5858a92510427a
+#: ../../../CONTRIBUTING.rst:75 fbd483cd6a4f4d3db21d57ae5e88e568
 msgid "Ensure CI (lint, type-check, tests, docs) passes before requesting review."
 msgstr "レビュー依頼の前に CI（Lint・型チェック・テスト・ドキュメント）がすべて通っていることを確認します。"
 
-#: ../../../CONTRIBUTING.rst:79 efd347ce31964ac8b51d52c939da62cb
+#: ../../../CONTRIBUTING.rst:78 77c16ee1a9174809a9810e7a8a0af2b7
 msgid "Need Help?"
 msgstr "困ったときは"
 
-#: ../../../CONTRIBUTING.rst:81 b3382372659849bcb5eea3f1f1680a3a
+#: ../../../CONTRIBUTING.rst:80 3466f89a37284b97a92128d40f290a8c
 msgid ""
 "Open a GitHub Discussion or issue if anything here is unclear. The more "
 "context you provide (logs, screenshots, sample fonts), the faster "
@@ -182,4 +181,3 @@ msgstr ""
 
 #~ msgid "Run the automated checks before opening a pull request:"
 #~ msgstr "Pull Request を開く前に以下の自動チェックを通してください。"
-

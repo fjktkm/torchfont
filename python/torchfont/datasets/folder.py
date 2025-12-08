@@ -1,8 +1,9 @@
 """Utilities for turning local font folders into indexed glyph datasets.
 
 Notes:
-    Fonts are cached by absolute path to minimize redundant disk access during
-    dataset iteration, so edits on disk require an explicit cache clear.
+    Glyph data is cached inside the native backend for the lifetime of each
+    dataset instance. Recreate the dataset when editing font files on disk to
+    ensure changes are observed.
 
 Examples:
     Iterate glyph samples from a directory of fonts::
@@ -34,10 +35,10 @@ class FontFolder(Dataset[object]):
     style and content targets.
 
     Attributes:
-        files (list[str]): Sorted list of discovered font file paths.
-        num_content_classes (int): Total number of unique Unicode code points.
-        num_style_classes (int): Total number of variation instances across
-            fonts.
+        num_content_classes (int): Total number of unique Unicode code points
+            discoverable across the indexed fonts.
+        num_style_classes (int): Total number of variation instances across the
+            indexed fonts.
 
     See Also:
         torchfont.datasets.repo.FontRepo: Extends the same indexing machinery

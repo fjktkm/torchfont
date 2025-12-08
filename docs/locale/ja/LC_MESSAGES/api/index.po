@@ -29,9 +29,7 @@ msgstr ":py:obj:`torchfont <torchfont>`\\"
 
 #: ../../source/api/index.rst:8:<autosummary>:1
 #: 32551edbdc494a0b8e2ceeb5b347d3cf
-#, fuzzy
 msgid ""
 "TorchFont: A PyTorch-native toolkit for modeling and processing vector "
 "fonts."
-msgstr "TorchFont：ベクトルフォントの学習と処理のための PyTorch ベースのライブラリです。"
-
+msgstr "TorchFont：ベクターフォントのモデリングと処理に特化した PyTorch ネイティブのツールキット。"

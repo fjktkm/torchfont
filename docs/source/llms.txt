@@ -32,8 +32,8 @@ Machine-readable guide for AI agents that need TorchFont’s most important refe
   https://github.com/fjktkm/torchfont/tree/main/python/torchfont/datasets
 - `python/torchfont/transforms/` – sequence transforms such as `LimitSequenceLength`, `Patchify`  
   https://github.com/fjktkm/torchfont/tree/main/python/torchfont/transforms
-- `python/torchfont/io/pens.py` – `TensorPen` implementation that turns glyph outlines into tensors  
-  https://github.com/fjktkm/torchfont/blob/main/python/torchfont/io/pens.py
+- `src/pen.rs` – Rust pen that records glyph outlines into normalized tensors  
+  https://github.com/fjktkm/torchfont/blob/main/src/pen.rs
 - `examples/` – runnable notebooks/scripts (e.g., combined dataloaders)  
   https://github.com/fjktkm/torchfont/tree/main/examples
 - `data/` – user-provided font caches (empty placeholder in repo; the code expects writable paths)
@@ -41,7 +41,7 @@ Machine-readable guide for AI agents that need TorchFont’s most important refe
 ## Dataset & transform guidance
 
 - `getting_started/index.rst` documents `GoogleFonts` sparse checkout usage and the minimal `FontFolder` pipeline.
-- `user_guide/index.rst` describes how to compose transforms and gives caching cautions (immutable font files, `load_font.cache_clear()` instructions).
+- `user_guide/index.rst` describes how to compose transforms and gives caching cautions (datasets cache parsed fonts for the process lifetime).
 - For large repos, prefer `torchfont.datasets.FontRepo` with selective `patterns` to keep sparse checkouts lightweight.
 - Always pair datasets with a custom `collate_fn` that pads/clips sequences before batching (`See Getting Started > First Glyph Dataset`).
 
