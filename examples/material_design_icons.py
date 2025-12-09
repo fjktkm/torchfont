@@ -4,25 +4,13 @@ import torch
 from torch import Tensor
 from torch.nn.utils.rnn import pad_sequence
 from torch.utils.data import DataLoader
-from torchfont.datasets import GoogleFonts
-from torchfont.transforms import (
-    Compose,
-    LimitSequenceLength,
-    Patchify,
-)
-from tqdm import tqdm
+from torchfont.datasets import FontRepo
 
-transform = Compose(
-    (
-        LimitSequenceLength(max_len=512),
-        Patchify(patch_size=32),
-    ),
-)
-
-dataset = GoogleFonts(
-    root="data/google_fonts",
-    ref="main",
-    transform=transform,
+dataset = FontRepo(
+    root="data/material_design_icons",
+    url="https://github.com/google/material-design-icons",
+    ref="master",
+    patterns=("variablefont/*.ttf",),
     download=True,
 )
 
@@ -53,5 +41,11 @@ dataloader = DataLoader(
     collate_fn=collate_fn,
 )
 
-for batch in tqdm(dataloader, desc="Iterating over datasets"):
+print(f"{len(dataset)=}")
+print(f"{dataset.num_content_classes=}")
+print(f"{dataset.num_style_classes=}")
+
+for batch in dataloader:
     sample = batch
+    print(sample)
+    break
