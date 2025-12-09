@@ -1,6 +1,6 @@
-use super::py_err;
+use super::{io::map_font, py_err};
 use crate::pen::TensorPen;
-use memmap2::{Mmap, MmapOptions};
+use memmap2::Mmap;
 use pyo3::prelude::*;
 use skrifa::raw::TableProvider;
 use skrifa::{
@@ -9,15 +9,13 @@ use skrifa::{
     instance::{Location, LocationRef, Size},
     outline::DrawSettings,
 };
-use std::{fs::File, mem, path::Path, sync::Arc};
+use std::sync::Arc;
 
 pub(super) struct FontEntry {
     pub(super) path: String,
-    #[allow(dead_code)]
     data: Arc<Mmap>,
-    font: skrifa::FontRef<'static>,
-    glyph_map: Vec<(u32, GlyphId)>,
     pub(super) codepoints: Vec<u32>,
+    glyph_ids: Vec<GlyphId>,
     units_per_em: f32,
     locations: Vec<Location>,
 }
@@ -25,28 +23,24 @@ pub(super) struct FontEntry {
 impl FontEntry {
     pub(super) fn load(path: &str, filter: Option<&[u32]>) -> PyResult<Self> {
         let mapped = map_font(path)?;
-        let font = skrifa::FontRef::from_index(&mapped[..], 0)
-            .map_err(|err| py_err(format!("failed to parse '{path}': {err}")))?;
-        let static_font: skrifa::FontRef<'static> = unsafe { mem::transmute(font) };
+        let font = font_ref(&mapped, path)?;
 
-        let head = static_font
+        let upem = font
             .head()
-            .map_err(|_| py_err(format!("font '{path}' is missing a head table")))?;
-        let upem = head.units_per_em();
+            .map_err(|_| py_err(format!("font '{path}' is missing a head table")))?
+            .units_per_em();
 
-        let charmap = Charmap::new(&static_font);
-        let mut glyph_map: Vec<_> = charmap
+        let mut mappings: Vec<_> = Charmap::new(&font)
             .mappings()
             .filter(|(codepoint, _)| accept_codepoint(filter, *codepoint))
             .collect();
-        glyph_map.sort_unstable_by_key(|entry| entry.0);
-        let codepoints = glyph_map.iter().map(|(cp, _)| *cp).collect();
+        mappings.sort_unstable_by_key(|entry| entry.0);
+        let (codepoints, glyph_ids): (Vec<_>, Vec<_>) = mappings.into_iter().unzip();
 
-        let axes = static_font.axes();
-        let axes_count = axes.len();
-        let named_instances = static_font.named_instances();
-        let locations = (0..named_instances.len())
-            .filter_map(|idx| named_instances.get(idx))
+        let axes_count = font.axes().len();
+        let locations = font
+            .named_instances()
+            .iter()
             .map(|instance| {
                 let mut location = Location::new(axes_count);
                 instance.location_to_slice(location.coords_mut());
@@ -57,9 +51,8 @@ impl FontEntry {
         Ok(Self {
             path: path.to_string(),
             data: mapped,
-            font: static_font,
-            glyph_map,
             codepoints,
+            glyph_ids,
             units_per_em: upem as f32,
             locations,
         })
@@ -71,8 +64,8 @@ impl FontEntry {
         instance_index: Option<usize>,
     ) -> PyResult<(Vec<i32>, Vec<f32>)> {
         let glyph_id = self.lookup_glyph(codepoint)?;
-        let outlines = self.font.outline_glyphs();
-        let glyph = outlines.get(glyph_id).ok_or_else(|| {
+        let font = font_ref(&self.data, &self.path)?;
+        let glyph = font.outline_glyphs().get(glyph_id).ok_or_else(|| {
             py_err(format!(
                 "glyph id {} missing from '{}'",
                 glyph_id.to_u32(),
@@ -80,10 +73,12 @@ impl FontEntry {
             ))
         })?;
 
-        let location = self.location_ref(instance_index)?;
         let mut pen = TensorPen::new(self.units_per_em);
         glyph
-            .draw(DrawSettings::unhinted(Size::unscaled(), location), &mut pen)
+            .draw(
+                DrawSettings::unhinted(Size::unscaled(), self.location_ref(instance_index)?),
+                &mut pen,
+            )
             .map_err(|err| py_err(format!("failed to draw glyph: {err}")))?;
 
         Ok(pen.finish())
@@ -98,9 +93,9 @@ impl FontEntry {
     }
 
     fn lookup_glyph(&self, codepoint: u32) -> PyResult<GlyphId> {
-        self.glyph_map
-            .binary_search_by_key(&codepoint, |entry| entry.0)
-            .map(|idx| self.glyph_map[idx].1)
+        self.codepoints
+            .binary_search(&codepoint)
+            .map(|idx| self.glyph_ids[idx])
             .map_err(|_| {
                 py_err(format!(
                     "codepoint U+{codepoint:04X} missing from '{}'",
@@ -125,16 +120,10 @@ impl FontEntry {
 }
 
 fn accept_codepoint(filter: Option<&[u32]>, codepoint: u32) -> bool {
-    match filter {
-        Some(values) => values.binary_search(&codepoint).is_ok(),
-        None => true,
-    }
+    filter.map_or(true, |values| values.binary_search(&codepoint).is_ok())
 }
 
-fn map_font(path: &str) -> PyResult<Arc<Mmap>> {
-    let file = File::open(Path::new(path))
-        .map_err(|err| py_err(format!("failed to open '{path}': {err}")))?;
-    let mmap = unsafe { MmapOptions::new().map(&file) }
-        .map_err(|err| py_err(format!("failed to map '{path}': {err}")))?;
-    Ok(Arc::new(mmap))
+fn font_ref<'a>(data: &'a Mmap, path: &str) -> PyResult<skrifa::FontRef<'a>> {
+    skrifa::FontRef::from_index(&data[..], 0)
+        .map_err(|err| py_err(format!("failed to parse '{path}': {err}")))
 }

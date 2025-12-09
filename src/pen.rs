@@ -39,6 +39,11 @@ impl TensorPen {
         }
     }
 
+    fn push_endpoint(&mut self, command: Command, x: f32, y: f32) {
+        self.push(command, [0.0, 0.0, 0.0, 0.0, x, y]);
+        self.current = Some((x, y));
+    }
+
     fn cubic(&mut self, coords: [f32; 6]) {
         self.push(Command::CurveTo, coords);
         self.current = Some((coords[4], coords[5]));
@@ -47,14 +52,12 @@ impl TensorPen {
 
 impl OutlinePen for TensorPen {
     fn move_to(&mut self, x: f32, y: f32) {
-        self.push(Command::MoveTo, [0.0, 0.0, 0.0, 0.0, x, y]);
-        self.current = Some((x, y));
+        self.push_endpoint(Command::MoveTo, x, y);
         self.contour_start = Some((x, y));
     }
 
     fn line_to(&mut self, x: f32, y: f32) {
-        self.push(Command::LineTo, [0.0, 0.0, 0.0, 0.0, x, y]);
-        self.current = Some((x, y));
+        self.push_endpoint(Command::LineTo, x, y);
     }
 
     fn quad_to(&mut self, cx0: f32, cy0: f32, x: f32, y: f32) {
