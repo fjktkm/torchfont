@@ -1831,7 +1831,6 @@ wheels = [
 
 [[package]]
 name = "torchfont"
-version = "0.5.2"
 source = { editable = "." }
 dependencies = [
     { name = "torch", version = "2.9.0", source = { registry = "https://download.pytorch.org/whl/cpu" }, marker = "sys_platform == 'darwin'" },
