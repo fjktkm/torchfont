@@ -25,9 +25,8 @@ Coding Standards
   that interpreter.
 * Keep modules typed. ``pyproject.toml`` ships ``py.typed`` metadata, so mypy
   warnings matter.
-* Public APIs live under ``torchfont.datasets``, ``torchfont.transforms`` and
-  ``torchfont.io``. When adding modules, update ``docs/source/api`` so that
-  Sphinx picks them up.
+* Public APIs live under ``torchfont.datasets`` and ``torchfont.transforms``.
+  When adding modules, update ``docs/source/api`` so that Sphinx picks them up.
 
 Testing & Linting
 -----------------
@@ -39,7 +38,7 @@ that appear. To reproduce issues locally, run:
 .. code-block:: bash
 
    uv run ruff check .
-   uv run mypy src/torchfont
+   uv run mypy python/torchfont
    uv run pytest
 
 The repository contains small integration samples inside ``examples/``. Please

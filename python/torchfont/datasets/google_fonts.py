@@ -13,9 +13,7 @@ Examples:
 
 from collections.abc import Callable, Sequence
 from pathlib import Path
-from typing import SupportsIndex
 
-from torchfont.datasets.folder import default_loader
 from torchfont.datasets.repo import FontRepo
 
 REPO_URL = "https://github.com/google/fonts"
@@ -43,10 +41,6 @@ class GoogleFonts(FontRepo):
         *,
         patterns: Sequence[str] | None = None,
         codepoint_filter: Sequence[int] | None = None,
-        loader: Callable[
-            [str, SupportsIndex | None, SupportsIndex],
-            object,
-        ] = default_loader,
         transform: Callable[[object], object] | None = None,
         download: bool = False,
     ) -> None:
@@ -63,10 +57,8 @@ class GoogleFonts(FontRepo):
                 conventions.
             codepoint_filter (Sequence[int] | None): Optional iterable of Unicode
                 code points to include when indexing glyph samples.
-            loader (Callable[[str, SupportsIndex | None, SupportsIndex], object]):
-                Callable that loads glyph data for a font/code point pair.
             transform (Callable[[object], object] | None): Optional callable
-                applied to each sample returned from the loader.
+                applied to each sample returned from the backend.
             download (bool): Whether to perform the clone and sparse checkout
                 when the directory is missing or empty.
 
@@ -85,7 +77,6 @@ class GoogleFonts(FontRepo):
             ref=ref,
             patterns=patterns,
             codepoint_filter=codepoint_filter,
-            loader=loader,
             transform=transform,
             download=download,
         )

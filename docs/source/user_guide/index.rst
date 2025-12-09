@@ -70,28 +70,21 @@ declarative.
    Zero-pads sequences to the next ``patch_size`` boundary, then reshapes them
    into contiguous patches—useful for transformer-style models.
 
-I/O Utilities
--------------
+Glyph Encoding
+--------------
 
-The :mod:`torchfont.io` namespace contains helpers for converting raw outlines
-to Tensors.
+TorchFont renders glyph outlines through the compiled ``torchfont._torchfont``
+extension. Dataset wrappers call into the same Rust backend, so the ``(types,
+coords)`` tensors they return are normalized and ready for PyTorch.
 
-``torchfont.io.pens.TensorPen``
-   Implements a FontTools-compatible pen that records every command as PyTorch
-   tensors. The resulting tensors are what the datasets return, so you can reuse
-   the pen when building custom loaders.
+Use the native module directly if you need lower-level access:
 
 .. code-block:: python
 
-   from fontTools.ttLib import TTFont
-   from torchfont.io.pens import TensorPen
+   from torchfont import _torchfont
 
-   font = TTFont("MyFont-Regular.otf")
-   glyph_set = font.getGlyphSet()
-   glyph = glyph_set["A"]
-   pen = TensorPen(glyph_set)
-   glyph.draw(pen)
-   command_types, coords = pen.get_tensor()
+   dataset = _torchfont.FontDataset("data/fonts", codepoint_filter=None)
+   command_types, coords, style_idx, content_idx = dataset.item(0)
 
 Data Loading Tips
 -----------------
@@ -108,10 +101,8 @@ Data Loading Tips
 Best Practices
 --------------
 
-* **Keep raw fonts immutable.** The caching performed by
-  :func:`torchfont.datasets.folder.load_font` assumes files on disk are not
-  modified while the process is running. Call ``load_font.cache_clear()`` if you
-  need to invalidate the cache.
+* **Keep raw fonts immutable.** The native dataset caches parsed fonts for the
+  lifetime of the process. Rebuild the dataset if you edit files on disk.
 * **Separate style and content labels.** Every dataset returns both. Treat style
   (font instance) as one task and content (code point) as another so that your
   losses stay interpretable.

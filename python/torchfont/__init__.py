@@ -1,14 +1,14 @@
 """TorchFont: A PyTorch-native toolkit for modeling and processing vector fonts.
 
 Notes:
-    TorchFont ships cohesive building blocks—dataset wrappers, tensor pens, and
-    preprocessing transforms—that keep glyph-centric machine learning pipelines
-    declarative and reproducible.
+    TorchFont ships cohesive building blocks—dataset wrappers, a compiled glyph
+    renderer, and preprocessing transforms—that keep glyph-centric machine
+    learning pipelines declarative and reproducible.
 
 Features:
     * Seamless Google Fonts integration through sparse Git checkouts.
-    * ``fontTools``-backed pens that render glyph outlines directly into
-      PyTorch tensors.
+    * A Rust backend that renders glyph outlines directly into PyTorch-ready
+      tensors.
     * Composable transform primitives for truncation, batching, and patch-based
       reshaping.
 

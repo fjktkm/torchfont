@@ -1,15 +1,10 @@
-import logging
-
-from tqdm import tqdm
-
 from torchfont.datasets import GoogleFonts
 from torchfont.transforms import (
     Compose,
     LimitSequenceLength,
     Patchify,
 )
-
-logging.getLogger("fontTools").setLevel(logging.ERROR)
+from tqdm import tqdm
 
 transforms = Compose(
     (

@@ -1,0 +1,18 @@
+[package]
+name = "torchfont"
+version = "0.5.2"
+edition = "2024"
+
+[lib]
+name = "_torchfont"
+crate-type = ["cdylib"]
+
+[dependencies]
+memmap2 = "0.9.9"
+skrifa = "0.39.0"
+walkdir = "2.5"
+shellexpand = "3.1"
+
+[dependencies.pyo3]
+version = "0.27.0"
+features = ["abi3-py38"]

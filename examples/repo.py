@@ -1,16 +1,10 @@
-import logging
-
 from torchfont.datasets import FontRepo
-
-logging.getLogger("fontTools").setLevel(logging.ERROR)
-
 
 dataset = FontRepo(
     root="data/source_han_sans",
     url="https://github.com/adobe-fonts/source-han-sans",
     ref="release",
     patterns=("Variable/TTF/*.ttf",),
-    loader=lambda x, y, z: (x, y, z),
     download=True,
 )
 

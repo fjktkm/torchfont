@@ -57,7 +57,7 @@ The dataset keeps the sparse checkout up to date on subsequent runs. Point ``roo
 First Glyph Dataset
 -------------------
 
-The :class:`torchfont.datasets.FontFolder` dataset turns a directory of ``.otf`` or ``.ttf`` files into an indexable PyTorch-style dataset. Each item contains the pen command types and normalized coordinates emitted by :class:`torchfont.io.pens.TensorPen`, plus style/content labels.
+The :class:`torchfont.datasets.FontFolder` dataset turns a directory of ``.otf`` or ``.ttf`` files into an indexable PyTorch-style dataset. Each item contains the pen command types and normalized coordinates emitted by the compiled Rust backend, plus style/content labels.
 
 .. code-block:: python
 

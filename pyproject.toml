@@ -5,20 +5,24 @@ description = "Datasets, Transforms and Models specific to Vector Fonts"
 readme = "README.md"
 authors = [{ name = "Takumu Fujioka", email = "fjktkm@gmail.com" }]
 requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Rust",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
+]
 dependencies = [
-    "fonttools>=4.60",
-    "numpy>=1.21.3",
     "torch>=2.6.0",
-    "tqdm>=4.63.0",
 ]
 
 [build-system]
-requires = ["uv_build>=0.8.13,<0.9.0"]
-build-backend = "uv_build"
+requires = ["maturin>=1.10,<2.0"]
+build-backend = "maturin"
 
 [dependency-groups]
 dev = [
+    "maturin>=1.10.2",
     "mypy>=1.18.2",
+    "numpy>=2.2.6",
     "pytest>=8.4.2",
     "ruff>=0.12.4",
     "types-tqdm>=4.67.0.20250809",
@@ -31,7 +35,10 @@ docs = [
     "sphinx-design>=0.6.1",
     "sphinx-intl>=2.3.2",
 ]
-examples = ["lightning>=2.5.5"]
+examples = [
+    "lightning>=2.5.5",
+    "tqdm>=4.67.1",
+]
 
 [tool.uv.sources]
 torch = [{ index = "pytorch-cpu" }]
@@ -59,11 +66,14 @@ ignore = ["EXE002"]
 ".github/scripts/**/*.py" = ["D", "INP001"]
 "docs/**/*.py" = ["A001", "D", "INP001"]
 "examples/**/*.py" = ["D", "T201"]
-"src/torchfont/datasets/repo.py" = ["S603"]
-"src/torchfont/datasets/*.py" = ["PLR0913"]
-"src/torchfont/io/pens.py" = ["N802"]
+"python/torchfont/datasets/repo.py" = ["S603"]
+"python/torchfont/datasets/*.py" = ["PLR0913"]
 "tests/**/*.py" = ["D", "S101"]
 "typings/**/*.pyi" = ["D", "N"]
+
+[tool.maturin]
+python-source = "python"
+module-name = "torchfont._torchfont"
 
 [tool.setuptools.package-data]
 "torchfont" = ["py.typed"]
