@@ -24,3 +24,12 @@ References:
     guidelines in greater depth.
 
 """
+
+from torchfont.constants import CMD_DIM, COORD_DIM, TYPE_DIM, TYPE_TO_IDX
+
+__all__ = [
+    "CMD_DIM",
+    "COORD_DIM",
+    "TYPE_DIM",
+    "TYPE_TO_IDX",
+]
