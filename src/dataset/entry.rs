@@ -120,7 +120,7 @@ impl FontEntry {
 }
 
 fn accept_codepoint(filter: Option<&[u32]>, codepoint: u32) -> bool {
-    filter.map_or(true, |values| values.binary_search(&codepoint).is_ok())
+    filter.is_none_or(|values| values.binary_search(&codepoint).is_ok())
 }
 
 fn font_ref<'a>(data: &'a Mmap, path: &str) -> PyResult<skrifa::FontRef<'a>> {
