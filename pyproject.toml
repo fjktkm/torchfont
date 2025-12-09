@@ -68,7 +68,6 @@ ignore = ["EXE002"]
 "examples/**/*.py" = ["D", "T201"]
 "python/torchfont/datasets/repo.py" = ["S603"]
 "python/torchfont/datasets/*.py" = ["PLR0913"]
-"python/torchfont/io/pens.py" = ["N802"]
 "tests/**/*.py" = ["D", "S101"]
 "typings/**/*.pyi" = ["D", "N"]
 
