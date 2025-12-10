@@ -5,7 +5,7 @@ Examples:
 
         from torchfont.datasets import GoogleFonts
 
-        ds = GoogleFonts(root="data/google_fonts", ref="main", download=True)
+        ds = GoogleFonts(root="data/google/fonts", ref="main", download=True)
 
 """
 

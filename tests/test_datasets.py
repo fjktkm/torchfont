@@ -3,7 +3,7 @@ from torchfont.datasets import GoogleFonts
 
 def test_dataset_init() -> None:
     dataset = GoogleFonts(
-        root="data/google_fonts",
+        root="data/google/fonts",
         ref="main",
         patterns=("ufl/*/*.ttf",),
         codepoint_filter=range(0x80),
@@ -21,7 +21,7 @@ def test_dataset_init() -> None:
 
 def test_dataset_len() -> None:
     dataset = GoogleFonts(
-        root="data/google_fonts",
+        root="data/google/fonts",
         ref="main",
         patterns=("ufl/*/*.ttf",),
         codepoint_filter=range(0x80),
@@ -32,7 +32,7 @@ def test_dataset_len() -> None:
 
 def test_dataset_getitem() -> None:
     dataset = GoogleFonts(
-        root="data/google_fonts",
+        root="data/google/fonts",
         ref="main",
         patterns=("ufl/*/*.ttf",),
         codepoint_filter=range(0x80),

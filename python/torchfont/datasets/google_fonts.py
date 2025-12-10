@@ -7,7 +7,7 @@ References:
 Examples:
     Assemble a dataset backed by the live Google Fonts index::
 
-        ds = GoogleFonts(root="data/google_fonts", ref="main", download=True)
+        ds = GoogleFonts(root="data/google/fonts", ref="main", download=True)
 
 """
 
@@ -65,7 +65,7 @@ class GoogleFonts(FontRepo):
         Examples:
             Reuse an existing checkout without hitting the network::
 
-                ds = GoogleFonts(root="data/google_fonts", ref="main", download=False)
+                ds = GoogleFonts(root="data/google/fonts", ref="main", download=False)
 
         """
         if patterns is None:

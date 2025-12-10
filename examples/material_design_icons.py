@@ -7,7 +7,7 @@ from torch.utils.data import DataLoader
 from torchfont.datasets import FontRepo
 
 dataset = FontRepo(
-    root="data/material_design_icons",
+    root="data/google/material_design_icons",
     url="https://github.com/google/material-design-icons",
     ref="master",
     patterns=("variablefont/*.ttf",),

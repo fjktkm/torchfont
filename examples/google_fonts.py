@@ -20,7 +20,7 @@ transform = Compose(
 )
 
 dataset = GoogleFonts(
-    root="data/google_fonts",
+    root="data/google/fonts",
     ref="main",
     transform=transform,
     download=True,
