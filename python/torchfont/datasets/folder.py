@@ -23,8 +23,7 @@ import torch
 from torch.utils.data import Dataset
 
 from torchfont import _torchfont
-
-COORD_DIM = 6
+from torchfont.constants import COORD_DIM
 
 
 class FontFolder(Dataset[object]):
