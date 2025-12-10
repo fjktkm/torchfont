@@ -2,6 +2,7 @@ mod entry;
 mod index;
 mod io;
 
+use crate::error::py_err;
 use entry::FontEntry;
 use index::{DatasetIndex, load_entries_and_index};
 use io::{canonicalize_root, discover_font_files};
@@ -92,8 +93,4 @@ impl FontDataset {
             .glyph(codepoint, inst_idx)
             .map(|(types, coords)| (types, coords, style_idx, content_idx))
     }
-}
-
-pub(crate) fn py_err(msg: String) -> PyErr {
-    PyErr::new::<pyo3::exceptions::PyValueError, _>(msg)
 }

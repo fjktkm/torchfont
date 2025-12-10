@@ -1,4 +1,4 @@
-use super::py_err;
+use crate::error::py_err;
 use memmap2::{Mmap, MmapOptions};
 use pyo3::prelude::*;
 use std::{
@@ -43,10 +43,11 @@ pub(super) fn discover_font_files(root: &Path) -> PyResult<Vec<String>> {
 }
 
 fn has_font_extension(path: &Path) -> bool {
-    matches!(
-        path.extension().and_then(|ext| ext.to_str()),
-        Some(ext) if ext.eq_ignore_ascii_case("ttf") || ext.eq_ignore_ascii_case("otf")
-    )
+    path.extension()
+        .and_then(|ext| ext.to_str())
+        .map(|ext| ext.to_ascii_lowercase())
+        .map(|ext| matches!(ext.as_str(), "ttf" | "otf" | "ttc" | "otc"))
+        .unwrap_or(false)
 }
 
 pub(super) fn map_font(path: &str) -> PyResult<Arc<Mmap>> {

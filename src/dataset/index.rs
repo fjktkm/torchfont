@@ -1,4 +1,5 @@
-use super::{entry::FontEntry, py_err};
+use super::entry::FontEntry;
+use crate::error::py_err;
 use pyo3::prelude::*;
 
 pub(super) struct DatasetIndex {
@@ -19,29 +20,38 @@ pub(super) fn load_entries_and_index(
     files: Vec<String>,
     filter: Option<&[u32]>,
 ) -> PyResult<(Vec<FontEntry>, DatasetIndex)> {
-    let mut entries = Vec::with_capacity(files.len());
-    let mut sample_offsets = Vec::with_capacity(files.len() + 1);
-    let mut inst_offsets = Vec::with_capacity(files.len() + 1);
+    let mut entries = Vec::new();
     let mut all_cps = Vec::new();
 
-    let (mut sample_total, mut inst_total) = (0usize, 0usize);
-    sample_offsets.push(sample_total);
-    inst_offsets.push(inst_total);
-
     for path in files {
-        let entry = FontEntry::load(&path, filter)?;
-        let cp_count = entry.codepoints.len();
-        let inst_count = entry.instance_count();
-
-        sample_total += cp_count * inst_count;
-        sample_offsets.push(sample_total);
-
-        inst_total += inst_count;
-        inst_offsets.push(inst_total);
-
-        all_cps.extend_from_slice(&entry.codepoints);
-        entries.push(entry);
+        let mut faces = FontEntry::load_faces(&path, filter)?;
+        all_cps.extend(
+            faces
+                .iter()
+                .flat_map(|entry| entry.codepoints.iter().copied()),
+        );
+        entries.append(&mut faces);
     }
+
+    let sample_offsets = std::iter::once(0)
+        .chain(
+            entries
+                .iter()
+                .map(|entry| entry.codepoints.len() * entry.instance_count()),
+        )
+        .scan(0usize, |total, delta| {
+            *total += delta;
+            Some(*total)
+        })
+        .collect();
+
+    let inst_offsets = std::iter::once(0)
+        .chain(entries.iter().map(FontEntry::instance_count))
+        .scan(0usize, |total, delta| {
+            *total += delta;
+            Some(*total)
+        })
+        .collect();
 
     let mut content_classes = all_cps;
     content_classes.sort_unstable();

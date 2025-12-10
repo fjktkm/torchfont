@@ -1,4 +1,5 @@
 mod dataset;
+mod error;
 mod pen;
 
 use dataset::FontDataset;
