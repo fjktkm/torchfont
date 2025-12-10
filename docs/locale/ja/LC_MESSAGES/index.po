@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TorchFont \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-08 20:45+0000\n"
+"POT-Creation-Date: 2025-12-10 08:03+0000\n"
 "PO-Revision-Date: 2025-11-08 05:55+0000\n"
 "Last-Translator: Codex AI <codex@example.com>\n"
 "Language: ja\n"
@@ -18,70 +18,74 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.17.0\n"
 
-#: ../../source/index.rst:2 4eb08189db754f998099356cb2872b22
+#: ../../source/index.rst:2 fbac42c610604744aa5d4ca77380f689
 msgid "TorchFont Documentation"
 msgstr "TorchFont ドキュメント"
 
-#: ../../source/index.rst:4 90b73b07fbd14c33a05593c783e36e6b
+#: ../../source/index.rst:4 0a8da54fd1164b5fb2a8588bc258e02f
 msgid ""
 "Welcome to the TorchFont documentation. The sections below provide "
 "guidance for users, developers, and contributors."
 msgstr "TorchFont のドキュメントへようこそ。以下のセクションでは、ユーザー、開発者、コントリビューター向けのガイドを提供します。"
 
-#: ../../source/index.rst:10 4fa3c2d9c1f849e68bfe086c4da5b1b7
+#: ../../source/index.rst:10 2ca173edca45493294081720a584e22d
 msgid "Getting Started"
 msgstr "はじめに"
 
-#: ../../source/index.rst:15 654372ec380c4951a7cca44ab6292227
+#: ../../source/index.rst:15 b21296f7b228414bab82c3526792210a
 msgid "Quick installation and first steps to use TorchFont."
 msgstr "TorchFont を素早くインストールし使い始めるための手順です。"
 
-#: ../../source/index.rst:17 f89fb6cffd8d44b6ae79e662e466f9e9
+#: ../../source/index.rst:17 c9d2d261d1a84e04aaa55e361add0b10
 msgid "User Guide"
 msgstr "ユーザーガイド"
 
-#: ../../source/index.rst:22 b2bacf3ee2ee40259a052f5ef3f370f0
+#: ../../source/index.rst:22 8cbba69510054163bce9ce33cc9b3bd3
 msgid "Learn how to use TorchFont effectively with practical examples."
 msgstr "TorchFont を実践的な例とともに効果的に使う方法を学びます。"
 
-#: ../../source/index.rst:24 9ff21dcf36c44ff79bdf1156ec8618ba
+#: ../../source/index.rst:24 0370aa57a95c4425829c81c914b3d1e2
 msgid "API Reference"
 msgstr "API リファレンス"
 
-#: ../../source/index.rst:29 cd0daa0da04046c4b1ddbc215c916921
+#: ../../source/index.rst:29 4e1b29f0392e4955af7f01747147f5bc
 msgid "Detailed documentation for TorchFont’s public API."
 msgstr "TorchFont の公開 API についての詳細なリファレンスです。"
 
-#: ../../source/index.rst:31 e7fd71325bd844488421c6c82101af23
+#: ../../source/index.rst:31 d226a1ed91f44f28a38269aae5318107
 msgid "Contributor Guide"
 msgstr "コントリビューターガイド"
 
-#: ../../source/index.rst:36 bc5e92c7b6694e61b43f959de3f5ed9c
+#: ../../source/index.rst:36 a824f641e5fb47f69a8d8c37a5719088
 msgid ""
 "Instructions for contributing to TorchFont and setting up a development "
 "environment."
 msgstr "TorchFont への貢献方法や開発環境の構築手順を説明します。"
 
-#: ../../source/index.rst:39 141cd921a5d04e3d859740d66545364c
+#: ../../source/index.rst:39 aafb2c5bc21f4bcd8fc6a7aef18080ca
 msgid "Citation"
 msgstr "引用"
 
-#: ../../source/index.rst:41 332772dc549c4902809a7841079c00b4
+#: ../../source/index.rst:41 cbbedd62773c411698dea0bb9d63c224
 msgid ""
 "If you find TorchFont useful in your work, please consider citing the "
 "following BibTeX entry:"
 msgstr "TorchFont が研究や業務で役立った場合は、以下の BibTeX を引用することをご検討ください。"
 
-#: ../../source/index.rst:63 c23cd28f67d44bea9d0de6dcbddeb0e1
-msgid "Test for Translate Workflow"
-msgstr ""
+#~ msgid "Test for Translate Workflow"
+#~ msgstr ""
 
-#: ../../source/index.rst:65 5d0d9b52a462474487a7a18036639f87
-msgid ""
-"The quick brown fox jumps over the lazy dog. Quick nymph bugs vex fjord "
-"waltz. Waltz, bad nymph, for quick jigs vex. Glib jocks quiz nymph to vex"
-" dwarf. Sphinx of black quartz, judge my vow. How quickly daft jumping "
-"zebras vex. The five boxing wizards jump quickly. Jackdaws love my big "
-"sphinx of quartz. Pack my box with five dozen liquor jugs."
-msgstr ""
+#~ msgid ""
+#~ "The quick brown fox jumps over the"
+#~ " lazy dog. Quick nymph bugs vex "
+#~ "fjord waltz. Waltz, bad nymph, for "
+#~ "quick jigs vex. Glib jocks quiz "
+#~ "nymph to vex dwarf. Sphinx of "
+#~ "black quartz, judge my vow. How "
+#~ "quickly daft jumping zebras vex. The "
+#~ "five boxing wizards jump quickly. "
+#~ "Jackdaws love my big sphinx of "
+#~ "quartz. Pack my box with five "
+#~ "dozen liquor jugs."
+#~ msgstr ""
 

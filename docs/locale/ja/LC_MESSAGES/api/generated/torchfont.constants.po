@@ -1,0 +1,29 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Takumu Fujioka
+# This file is distributed under the same license as the TorchFont package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TorchFont \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-10 08:03+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../source/api/generated/torchfont.constants.rst:2
+#: b6a15cf8fa6e441fa6398caa89510ac2
+msgid "torchfont.constants"
+msgstr "torchfont.constants"
+
+#: 698694fab25a41e8b50bad96de908edb of torchfont.constants:1
+msgid "Shared constants for glyph command encoding."
+msgstr "グリフコマンドのエンコーディングで共有される定数群。"
