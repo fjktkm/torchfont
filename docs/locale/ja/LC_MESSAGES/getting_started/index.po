@@ -42,8 +42,8 @@ msgid "Python 3.10 or newer"
 msgstr "Python 3.10 以上"
 
 #: ../../source/getting_started/index.rst:13 b9e0d5552c7b4d99810ab87f722c21c1
-msgid "PyTorch 2.6 or newer"
-msgstr "PyTorch 2.6 以上"
+msgid "PyTorch 2.3 or newer"
+msgstr "PyTorch 2.3 以上"
 
 #: ../../source/getting_started/index.rst:14 2ef31733b91c4a7e8cbce63f3c11b04f
 msgid ""
@@ -143,8 +143,8 @@ msgstr "修正や機能追加を予定している場合は :doc:`/contributor_g
 #~ msgid "This section explains how to install and start using TorchFont."
 #~ msgstr "TorchFont のインストール方法と使い始めるまでの流れを説明します。"
 
-#~ msgid "The package requires Python 3.10+ and PyTorch 2.6+."
-#~ msgstr "このパッケージには Python 3.10 以上と PyTorch 2.6 以上が必要です。"
+#~ msgid "The package requires Python 3.10+ and PyTorch 2.3+."
+#~ msgstr "このパッケージには Python 3.10 以上と PyTorch 2.3 以上が必要です。"
 
 #~ msgid "Install TorchFont with **uv**:"
 #~ msgstr "TorchFont を **uv** でインストールするには次を実行します。"
@@ -158,8 +158,8 @@ msgstr "修正や機能追加を予定している場合は :doc:`/contributor_g
 #~ msgid "A minimal example showing how to import and initialize TorchFont:"
 #~ msgstr "TorchFont をインポートして初期化する最小の例です。"
 
-#~ msgid "PyTorch 2.6 or newer (CPU-only wheels are enough to get started)"
-#~ msgstr "PyTorch 2.6 以上（入門段階では CPU 版ホイールで十分です）"
+#~ msgid "PyTorch 2.3 or newer (CPU-only wheels are enough to get started)"
+#~ msgstr "PyTorch 2.3 以上（入門段階では CPU 版ホイールで十分です）"
 
 #~ msgid ""
 #~ "``fonttools`` for parsing outlines (installed"

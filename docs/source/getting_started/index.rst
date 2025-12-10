@@ -10,7 +10,7 @@ Prerequisites
 -------------
 
 * Python 3.10 or newer
-* PyTorch 2.6 or newer
+* PyTorch 2.3 or newer
 * Git when you plan to use :class:`torchfont.datasets.GoogleFonts` or
   :class:`torchfont.datasets.FontRepo`
 

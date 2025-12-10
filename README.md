@@ -5,7 +5,7 @@ It is not affiliated with or endorsed by the PyTorch project.
 
 ## Installation
 
-The package requires Python 3.10+ and PyTorch 2.6+.
+The package requires Python 3.10+ and PyTorch 2.3+.
 
 Install TorchFont with **uv**:
 

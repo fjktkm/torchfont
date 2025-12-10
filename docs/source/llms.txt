@@ -48,7 +48,7 @@ Machine-readable guide for AI agents that need TorchFont’s most important refe
 ## Build, test, and docs workflow
 
 - Dependency manager: [`uv`](https://docs.astral.sh/uv/) (`uv add torchfont`), alternatively `pip install torchfont`.
-- Python version: >=3.10; PyTorch >=2.6 (`pyproject.toml`).
+- Python version: >=3.10; PyTorch >=2.3 (`pyproject.toml`).
 - Run lint/tests via `uv run ruff check`, `uv run mypy`, `uv run pytest` (see `CONTRIBUTING.rst` for exact commands).
 - Docs built with Sphinx + Furo; entry point `docs/source/index.rst`. To build locally: `uv run sphinx-build -b html docs/source docs/build/html`.
 

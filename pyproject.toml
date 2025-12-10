@@ -10,9 +10,7 @@ classifiers = [
     "Programming Language :: Python :: Implementation :: PyPy",
 ]
 dynamic = ["version"]
-dependencies = [
-    "torch>=2.6.0",
-]
+dependencies = ["torch>=2.3.0"]
 
 [build-system]
 requires = ["maturin>=1.10,<2.0"]
@@ -20,11 +18,13 @@ build-backend = "maturin"
 
 [dependency-groups]
 dev = [
+    "lightning>=2.6.0",
     "maturin>=1.10.2",
     "mypy>=1.18.2",
     "numpy>=2.2.6",
     "pytest>=8.4.2",
     "ruff>=0.12.4",
+    "tqdm>=4.67.1",
     "types-tqdm>=4.67.0.20250809",
 ]
 docs = [
@@ -34,10 +34,6 @@ docs = [
     "sphinx-autodoc-typehints>=3.0.1",
     "sphinx-design>=0.6.1",
     "sphinx-intl>=2.3.2",
-]
-examples = [
-    "lightning>=2.5.5",
-    "tqdm>=4.67.1",
 ]
 
 [tool.uv.sources]
