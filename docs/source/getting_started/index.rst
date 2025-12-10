@@ -40,14 +40,14 @@ Downloading Fonts
 -----------------
 
 TorchFont does not bundle any font assets. For a lightweight sandbox, clone a
-subset of Google Fonts into ``data/google_fonts`` with the provided dataset helper:
+subset of Google Fonts into ``data/google/fonts`` with the provided dataset helper:
 
 .. code-block:: python
 
    from torchfont.datasets import GoogleFonts
 
    dataset = GoogleFonts(
-       root="data/google_fonts",
+       root="data/google/fonts",
        ref="main",
        download=True,  # performs a sparse checkout the first time
    )
@@ -101,8 +101,8 @@ The :class:`torchfont.datasets.GoogleFonts` dataset mirrors the official reposit
 
    from torchfont.datasets import GoogleFonts
 
-   google_fonts = GoogleFonts(
-       root="data/google_fonts",
+   google/fonts = GoogleFonts(
+       root="data/google/fonts",
        ref="main",
        transform=transform,
        download=True,
