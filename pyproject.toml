@@ -48,9 +48,6 @@ explicit = true
 filterwarnings = ["ignore:.*fork.*:DeprecationWarning"]
 testpaths = ["tests"]
 
-[tool.mypy]
-mypy_path = "typings"
-
 [tool.ruff]
 unsafe-fixes = true
 
@@ -65,7 +62,6 @@ ignore = ["EXE002"]
 "python/torchfont/datasets/repo.py" = ["S603"]
 "python/torchfont/datasets/*.py" = ["PLR0913"]
 "tests/**/*.py" = ["D", "S101"]
-"typings/**/*.pyi" = ["D", "N"]
 
 [tool.maturin]
 python-source = "python"
