@@ -1,5 +1,5 @@
 use super::{io::map_font, py_err};
-use crate::pen::TensorPen;
+use crate::pen::SegmentPen;
 use memmap2::Mmap;
 use pyo3::prelude::*;
 use skrifa::raw::TableProvider;
@@ -73,7 +73,7 @@ impl FontEntry {
             ))
         })?;
 
-        let mut pen = TensorPen::new(self.units_per_em);
+        let mut pen = SegmentPen::new(self.units_per_em);
         glyph
             .draw(
                 DrawSettings::unhinted(Size::unscaled(), self.location_ref(instance_index)?),

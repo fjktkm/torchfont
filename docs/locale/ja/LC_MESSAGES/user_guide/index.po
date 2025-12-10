@@ -207,8 +207,8 @@ msgstr ""
 #~ " Tensors."
 #~ msgstr ":mod:`torchfont.io` にはアウトラインを Tensor に変換するヘルパー群があります。"
 
-#~ msgid "``torchfont.io.pens.TensorPen``"
-#~ msgstr "``torchfont.io.pens.TensorPen``"
+#~ msgid "``torchfont.io.pens.SegmentPen``"
+#~ msgstr "``torchfont.io.pens.SegmentPen``"
 
 #~ msgid ""
 #~ "Implements a FontTools-compatible pen "
