@@ -65,8 +65,4 @@ msgstr ""
 msgid "Font dataset that synchronizes glyphs from a sparse Git checkout."
 msgstr "スパースな Git チェックアウトからグリフを同期するフォントデータセット。"
 
-#~ msgid "Synchronize a Git-based font corpus locally::"
-#~ msgstr "Git ベースのフォントコーパスをローカルに同期::"
 
-#~ msgid "Requirements:"
-#~ msgstr "要件："

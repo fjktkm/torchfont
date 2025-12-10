@@ -140,28 +140,10 @@ msgid ""
 " features."
 msgstr "修正や機能追加を予定している場合は :doc:`/contributor_guide/index` もご覧ください。"
 
-#~ msgid "This section explains how to install and start using TorchFont."
-#~ msgstr "TorchFont のインストール方法と使い始めるまでの流れを説明します。"
 
-#~ msgid "The package requires Python 3.10+ and PyTorch 2.3+."
-#~ msgstr "このパッケージには Python 3.10 以上と PyTorch 2.3 以上が必要です。"
 
-#~ msgid "Install TorchFont with **uv**:"
-#~ msgstr "TorchFont を **uv** でインストールするには次を実行します。"
 
-#~ msgid "Or with **pip**:"
-#~ msgstr "または **pip** を使用します。"
 
-#~ msgid "Quick Example"
-#~ msgstr "簡単な例"
 
-#~ msgid "A minimal example showing how to import and initialize TorchFont:"
-#~ msgstr "TorchFont をインポートして初期化する最小の例です。"
 
-#~ msgid "PyTorch 2.3 or newer (CPU-only wheels are enough to get started)"
-#~ msgstr "PyTorch 2.3 以上（入門段階では CPU 版ホイールで十分です）"
 
-#~ msgid ""
-#~ "``fonttools`` for parsing outlines (installed"
-#~ " automatically as a dependency)"
-#~ msgstr "アウトラインを解析するための fonttools（依存関係として自動で入ります）"

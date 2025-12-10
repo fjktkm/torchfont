@@ -95,20 +95,6 @@ msgstr ""
 msgid "Pad glyph sequences and reshape them into uniform, model-friendly patches."
 msgstr "グリフ系列に必要な分だけパディングを施し、モデルが扱いやすい均一パッチへ再構成します。"
 
-#~ msgid "``Compose`` multiple operations to normalize glyph tensors::"
-#~ msgstr "複数の処理を ``Compose`` で束ねてグリフ Tensor を正規化::"
 
-#~ msgid "Background:"
-#~ msgstr "背景："
 
-#~ msgid "Compose multiple operations to normalize glyph tensors::"
-#~ msgstr "複数の処理を組み合わせてグリフ Tensor を正規化::"
 
-#~ msgid ""
-#~ "The transforms cover common preprocessing "
-#~ "steps for vectorized glyph data while"
-#~ " integrating cleanly with PyTorch "
-#~ "``Dataset`` instances."
-#~ msgstr ""
-#~ "これらの Transform はベクトル化されたグリフデータ向けの代表的な前処理を網羅しつつ、PyTorch "
-#~ "の ``Dataset`` とシームレスに統合できるように設計されています。"

@@ -70,11 +70,5 @@ msgstr ":py:obj:`repo <torchfont.datasets.repo>`\\"
 msgid "Dataset wrapper that materializes fonts from remote Git repositories."
 msgstr "リモート Git リポジトリからフォントを取得するデータセットラッパー。"
 
-#~ msgid "Build a dataset sourced from the Google Fonts index::"
-#~ msgstr "Google Fonts の索引を基にしたデータセットを構築::"
 
-#~ msgid "Dataset utilities for loading glyph samples from font files."
-#~ msgstr "フォントファイルからグリフサンプルを読み込むためのデータセットユーティリティ。"
 
-#~ msgid "Font folder dataset utilities for glyph loading and indexing."
-#~ msgstr "グリフの読み込みと索引付けを行うフォントフォルダ用データセットユーティリティ。"

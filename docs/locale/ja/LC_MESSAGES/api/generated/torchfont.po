@@ -114,31 +114,11 @@ msgstr ":py:obj:`transforms <torchfont.transforms>`\\"
 msgid "Transform primitives tailored to tensorized glyph sequences."
 msgstr "Tensor 化されたグリフ系列に合わせて設計された Transform プリミティブ。"
 
-#~ msgid "Overview:"
-#~ msgstr "概要："
 
-#~ msgid "Build a dataset sourced from Google Fonts::"
-#~ msgstr "Google Fonts 由来のデータセットを構築::"
 
-#~ msgid "Further Reading:"
-#~ msgstr "参考資料："
 
-#~ msgid "Tensor-based glyph rendering powered by ``fontTools`` pens."
-#~ msgstr "`fontTools` ペンを用いた Tensor ベースのグリフレンダリング。"
 
-#~ msgid "Transform primitives that handle batching and truncation."
-#~ msgstr "バッチ処理や系列トリミングを扱う Transform プリミティブ。"
 
-#~ msgid ""
-#~ "See ``README.md`` for installation guidance"
-#~ " and advanced usage patterns."
-#~ msgstr "インストール手順や高度な利用方法についてはプロジェクトの README を参照してください。"
 
-#~ msgid "Dataset utilities for loading glyph samples from font files."
-#~ msgstr "フォントファイルからグリフサンプルを読み込むためのデータセットユーティリティ。"
 
-#~ msgid "Input/output helpers for converting font outlines to tensor formats."
-#~ msgstr "フォントアウトラインを Tensor 形式へ変換する入出力ヘルパー。"
 
-#~ msgid ":py:obj:`torchfont <torchfont>`\\"
-#~ msgstr ":py:obj:`torchfont <torchfont>`\\"

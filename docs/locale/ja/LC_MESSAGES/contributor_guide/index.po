@@ -176,8 +176,4 @@ msgstr ""
 "不明点があれば GitHub Discussion か Issue "
 "で相談してください。ログやスクリーンショット、問題のあるフォントなどの情報が多いほど早くサポートできます。"
 
-#~ msgid "Contributing to TorchFont"
-#~ msgstr "TorchFont への貢献について"
 
-#~ msgid "Run the automated checks before opening a pull request:"
-#~ msgstr "Pull Request を開く前に以下の自動チェックを通してください。"

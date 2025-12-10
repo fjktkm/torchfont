@@ -10,10 +10,11 @@ Datasets
 TorchFont exposes three dataset wrappers under :mod:`torchfont.datasets`.
 
 ``FontFolder``
-   Scans a directory of ``.otf``/``.ttf`` files. Every available Unicode code
-   point and variation instance becomes an item. Use the ``codepoint_filter``
-   argument to limit the content and plug in a custom ``loader`` when you need
-   extra preprocessing.
+   Scans a directory of ``.otf``/``.ttf`` files. Font collections
+   (``.ttc``/``.otc``) are expanded automatically so every face is treated as
+   its own font. Every available Unicode code point and variation instance
+   becomes an item. Use the ``codepoint_filter`` argument to limit the content
+   and plug in a custom ``loader`` when you need extra preprocessing.
 
 ``GoogleFonts``
    Maintains a sparse checkout of the `google/fonts` repository. Pass ``patterns``

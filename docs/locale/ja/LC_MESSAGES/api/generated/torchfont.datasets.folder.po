@@ -66,39 +66,11 @@ msgstr ""
 msgid "Dataset that yields glyph samples from a directory of font files."
 msgstr "フォントファイルのディレクトリからグリフサンプルを生成するデータセット。"
 
-#~ msgid "Iterate glyph samples from a directory of fonts::"
-#~ msgstr "フォントを収めたディレクトリからグリフサンプルを順に取得::"
 
-#~ msgid "Guidance:"
-#~ msgstr "ガイダンス："
 
-#~ msgid "Font folder dataset utilities for glyph loading and indexing."
-#~ msgstr "グリフの読み込みと索引付けを行うフォントフォルダ用データセットユーティリティ。"
 
-#~ msgid "Functions"
-#~ msgstr "関数"
 
-#~ msgid ""
-#~ ":py:obj:`default_loader "
-#~ "<torchfont.datasets.folder.default_loader>`\\ \\(file\\, "
-#~ "instance\\_index\\, codepoint\\)"
-#~ msgstr ""
-#~ ":py:obj:`default_loader "
-#~ "<torchfont.datasets.folder.default_loader>`\\ \\(file\\, "
-#~ "instance\\_index\\, codepoint\\)"
 
-#~ msgid "Convert a glyph outline to tensor representations."
-#~ msgstr "グリフのアウトラインを Tensor 表現へ変換します。"
 
-#~ msgid ":py:obj:`load_font <torchfont.datasets.folder.load_font>`\\ \\(file\\)"
-#~ msgstr ":py:obj:`load_font <torchfont.datasets.folder.load_font>`\\ \\(file\\)"
 
-#~ msgid "Load a font file and cache the resulting ``TTFont`` instance."
-#~ msgstr "フォントファイルを読み込み、生成された ``TTFont`` インスタンスをキャッシュします。"
 
-#~ msgid ""
-#~ "Fonts are cached by absolute path "
-#~ "to minimize redundant disk access during"
-#~ " dataset iteration, so edits on disk"
-#~ " require an explicit cache clear."
-#~ msgstr "データセット反復時の余分なディスクアクセスを避けるため、フォントは絶対パス単位でキャッシュされます。ディスク上で内容を編集した場合は明示的にキャッシュをクリアしてください。"

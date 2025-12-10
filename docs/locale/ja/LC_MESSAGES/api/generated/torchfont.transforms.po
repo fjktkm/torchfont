@@ -63,13 +63,5 @@ msgid ""
 "training."
 msgstr "学習前の Tensor 化グリフを磨き上げるための、合成しやすい Transform 群。"
 
-#~ msgid "Compose a preprocessing pipeline for glyph tensors::"
-#~ msgstr "グリフ Tensor 向けの前処理 Transform パイプラインを構築::"
 
-#~ msgid "Overview:"
-#~ msgstr "概要："
 
-#~ msgid ""
-#~ "The exported classes cover sequencing, "
-#~ "truncation, and patch-based reshaping."
-#~ msgstr "再エクスポートされたクラスは、系列化やトリミング、パッチ単位での再構成までカバーする Transform 群。"

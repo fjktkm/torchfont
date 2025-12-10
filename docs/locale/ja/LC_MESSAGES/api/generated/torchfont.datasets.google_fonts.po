@@ -64,8 +64,4 @@ msgstr ""
 msgid "Dataset that materializes glyph samples from the Google Fonts project."
 msgstr "Google Fonts プロジェクトからグリフサンプルを取得するデータセット。"
 
-#~ msgid "Assemble a dataset backed by the live Google Fonts index::"
-#~ msgstr "最新の Google Fonts インデックスを利用してデータセットを構築::"
 
-#~ msgid "Resources:"
-#~ msgstr "リソース："
