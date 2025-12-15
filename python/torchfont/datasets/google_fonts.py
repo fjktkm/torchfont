@@ -29,8 +29,8 @@ class GoogleFonts(FontRepo):
     """Dataset that materializes glyph samples from the Google Fonts project.
 
     See Also:
-        torchfont.datasets.repo.FontRepo: Implements the sparse Git checkout
-        handling shared with this dataset.
+        torchfont.datasets.repo.FontRepo: Implements the Git synchronization
+        and indexing logic shared with this dataset.
 
     """
 
@@ -44,23 +44,23 @@ class GoogleFonts(FontRepo):
         transform: Callable[[object], object] | None = None,
         download: bool = False,
     ) -> None:
-        """Initialize a sparse clone of Google Fonts and index glyph samples.
+        """Initialize a shallow clone of Google Fonts and index glyph samples.
 
         Args:
-            root (Path | str): Local directory that stores the sparse checkout of
+            root (Path | str): Local directory that stores the shallow clone of
                 the Google Fonts repository.
             ref (str): Git reference (branch, tag, or commit) to fetch.
-            patterns (Sequence[str] | None): Optional sparse-checkout patterns
-                describing which files to materialize. Defaults to
-                ``DEFAULT_PATTERNS``. See the contributor guide at
+            patterns (Sequence[str] | None): Optional path patterns applied when
+                scanning the working tree for fonts. Defaults to ``DEFAULT_PATTERNS``.
+                See the contributor guide at
                 https://github.com/google/fonts/tree/main#readme for directory
                 conventions.
             codepoint_filter (Sequence[int] | None): Optional iterable of Unicode
                 code points to include when indexing glyph samples.
             transform (Callable[[object], object] | None): Optional callable
                 applied to each sample returned from the backend.
-            download (bool): Whether to perform the clone and sparse checkout
-                when the directory is missing or empty.
+            download (bool): Whether to perform the clone and checkout when the
+                directory is missing or empty.
 
         Examples:
             Reuse an existing checkout without hitting the network::

@@ -49,10 +49,10 @@ subset of Google Fonts into ``data/google/fonts`` with the provided dataset help
    dataset = GoogleFonts(
        root="data/google/fonts",
        ref="main",
-       download=True,  # performs a sparse checkout the first time
+       download=True,  # performs the initial shallow clone
    )
 
-The dataset keeps the sparse checkout up to date on subsequent runs. Point ``root`` to any writable cache directory.
+The dataset keeps the shallow clone up to date on subsequent runs. Point ``root`` to any writable cache directory.
 
 First Glyph Dataset
 -------------------
@@ -95,7 +95,7 @@ The :class:`torchfont.datasets.FontFolder` dataset turns a directory of ``.otf``
 Working with Google Fonts
 -------------------------
 
-The :class:`torchfont.datasets.GoogleFonts` dataset mirrors the official repository via sparse checkout. It exposes the same sample structure as :class:`FontFolder`, so you can reuse the same transforms and dataloaders:
+The :class:`torchfont.datasets.GoogleFonts` dataset mirrors the official repository via a shallow clone and applies glob patterns when indexing. It exposes the same sample structure as :class:`FontFolder`, so you can reuse the same transforms and dataloaders:
 
 .. code-block:: python
 

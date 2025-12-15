@@ -41,7 +41,7 @@ class FontFolder(Dataset[object]):
 
     See Also:
         torchfont.datasets.repo.FontRepo: Extends the same indexing machinery
-        with sparse Git checkout support.
+        with Git synchronization for remote repositories.
 
     """
 
@@ -50,6 +50,7 @@ class FontFolder(Dataset[object]):
         root: Path | str,
         *,
         codepoint_filter: Sequence[SupportsIndex] | None = None,
+        patterns: Sequence[str] | None = None,
         transform: Callable[[object], object] | None = None,
     ) -> None:
         """Initialize the dataset by scanning font files and indexing samples.
@@ -59,6 +60,8 @@ class FontFolder(Dataset[object]):
                 files are discovered recursively.
             codepoint_filter (Sequence[SupportsIndex] | None): Optional iterable
                 of Unicode code points used to restrict the dataset content.
+            patterns (Sequence[str] | None): Optional gitignore-style patterns
+                describing which font paths to include.
             transform (Callable[[object], object] | None): Optional
                 transformation applied to each loader output before the item is
                 returned.
@@ -74,13 +77,23 @@ class FontFolder(Dataset[object]):
         """
         self.root = Path(root)
         self.transform = transform
+        self.patterns = (
+            tuple(str(pattern) for pattern in patterns)
+            if patterns is not None
+            else None
+        )
         self.codepoint_filter = (
             [int(cp) for cp in codepoint_filter]
             if codepoint_filter is not None
             else None
         )
 
-        self._dataset = _torchfont.FontDataset(str(self.root), self.codepoint_filter)
+        backend_patterns = list(self.patterns) if self.patterns is not None else None
+        self._dataset = _torchfont.FontDataset(
+            str(self.root),
+            self.codepoint_filter,
+            backend_patterns,
+        )
         self.num_style_classes = int(self._dataset.style_class_count)
         self.num_content_classes = int(self._dataset.content_class_count)
 

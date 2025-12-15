@@ -28,7 +28,7 @@ Machine-readable guide for AI agents that need TorchFont’s most important refe
 
 ## Key modules and files
 
-- `python/torchfont/datasets/` – `FontFolder`, `GoogleFonts`, `FontRepo`, download helpers  
+- `python/torchfont/datasets/` – `FontFolder`, `GoogleFonts`, `FontRepo`, git sync helper  
   https://github.com/fjktkm/torchfont/tree/main/python/torchfont/datasets
 - `python/torchfont/transforms/` – sequence transforms such as `LimitSequenceLength`, `Patchify`  
   https://github.com/fjktkm/torchfont/tree/main/python/torchfont/transforms
@@ -40,9 +40,9 @@ Machine-readable guide for AI agents that need TorchFont’s most important refe
 
 ## Dataset & transform guidance
 
-- `getting_started/index.rst` documents `GoogleFonts` sparse checkout usage and the minimal `FontFolder` pipeline.
+- `getting_started/index.rst` documents `GoogleFonts` shallow-clone usage and the minimal `FontFolder` pipeline.
 - `user_guide/index.rst` describes how to compose transforms and gives caching cautions (datasets cache parsed fonts for the process lifetime).
-- For large repos, prefer `torchfont.datasets.FontRepo` with selective `patterns` to keep sparse checkouts lightweight.
+- For large repos, prefer `torchfont.datasets.FontRepo` with selective `patterns` to reduce how many fonts are indexed from the shallow clone.
 - Always pair datasets with a custom `collate_fn` that pads/clips sequences before batching (`See Getting Started > First Glyph Dataset`).
 
 ## Build, test, and docs workflow

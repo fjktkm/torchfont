@@ -5,6 +5,7 @@ class FontDataset:
         self,
         root: str,
         codepoint_filter: Sequence[int] | None = ...,
+        patterns: Sequence[str] | None = ...,
     ) -> None: ...
 
     sample_count: int

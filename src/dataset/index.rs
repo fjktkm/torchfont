@@ -1,5 +1,5 @@
 use super::entry::FontEntry;
-use crate::error::py_err;
+use crate::error::py_index_err;
 use pyo3::prelude::*;
 
 pub(super) struct DatasetIndex {
@@ -12,7 +12,7 @@ impl DatasetIndex {
     pub(super) fn content_index(&self, codepoint: u32) -> PyResult<usize> {
         self.content_classes
             .binary_search(&codepoint)
-            .map_err(|_| py_err(format!("codepoint U+{codepoint:04X} missing from index")))
+            .map_err(|_| py_index_err(format!("codepoint U+{codepoint:04X} missing from index")))
     }
 }
 

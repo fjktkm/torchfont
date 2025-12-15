@@ -8,6 +8,7 @@ name = "_torchfont"
 crate-type = ["cdylib"]
 
 [dependencies]
+ignore = "0.4.25"
 memmap2 = "0.9.9"
 shellexpand = "3.1.1"
 skrifa = "0.39.0"

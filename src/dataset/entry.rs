@@ -11,7 +11,10 @@ use skrifa::{
 };
 
 use super::io::map_font;
-use crate::{error::py_err, pen::SegmentPen};
+use crate::{
+    error::{py_err, py_index_err},
+    pen::SegmentPen,
+};
 
 pub(super) struct FontEntry {
     data: Arc<Mmap>,
@@ -143,7 +146,7 @@ impl FontEntry {
             .binary_search(&codepoint)
             .map(|idx| self.glyph_ids[idx])
             .map_err(|_| {
-                py_err(format!(
+                py_index_err(format!(
                     "codepoint U+{codepoint:04X} missing from '{}'",
                     self.path
                 ))
@@ -153,7 +156,7 @@ impl FontEntry {
     fn location_ref(&self, index: Option<usize>) -> PyResult<LocationRef<'_>> {
         if let Some(idx) = index {
             let location = self.locations.get(idx).ok_or_else(|| {
-                py_err(format!(
+                py_index_err(format!(
                     "instance index {idx} out of range for '{}'",
                     self.path
                 ))

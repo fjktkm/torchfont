@@ -6,7 +6,8 @@ Notes:
     learning pipelines declarative and reproducible.
 
 Features:
-    * Seamless Google Fonts integration through sparse Git checkouts.
+    * Seamless Google Fonts integration backed by shallow Git clones and
+      pattern-aware font discovery.
     * A Rust backend that renders glyph outlines directly into PyTorch-ready
       tensors.
     * Composable transform primitives for truncation, batching, and patch-based

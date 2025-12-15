@@ -17,14 +17,14 @@ TorchFont exposes three dataset wrappers under :mod:`torchfont.datasets`.
    and plug in a custom ``loader`` when you need extra preprocessing.
 
 ``GoogleFonts``
-   Maintains a sparse checkout of the `google/fonts` repository. Pass ``patterns``
-   to restrict which directories are materialized, and set ``download=True`` to
-   ensure the checkout exists. The dataset inherits the same indexing and label
+   Maintains a shallow clone of the `google/fonts` repository. Pass ``patterns``
+   to restrict which directories are indexed, and set ``download=True`` to
+   ensure the clone exists. The dataset inherits the same indexing and label
    structure as :class:`FontFolder`.
 
 ``FontRepo``
-   Generalizes the sparse checkout logic to arbitrary Git repositories. Provide
-   a ``url``, ``ref``, and optional ``patterns`` describing what to materialize.
+   Generalizes the Git synchronization logic to arbitrary repositories. Provide
+   a ``url``, ``ref``, and optional ``patterns`` describing which files to index.
 
 Example – `FontRepo`
 ~~~~~~~~~~~~~~~~~~~~

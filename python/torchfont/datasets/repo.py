@@ -1,8 +1,9 @@
 """Dataset wrapper that materializes fonts from remote Git repositories.
 
 Notes:
-    The host system must expose ``git`` on ``PATH`` and allow network access when
-    ``download`` is ``True``; otherwise sparse checkouts cannot be refreshed.
+    Synchronization relies on ``pygit2``/``libgit2`` bindings and does not
+    require the ``git`` CLI. Network access is still necessary when ``download``
+    is ``True`` to refresh the on-disk shallow clone.
 
 Examples:
     Synchronize a Git-based font corpus locally::
@@ -17,17 +18,21 @@ Examples:
 
 """
 
-import shutil
-import subprocess
 from collections.abc import Callable, Sequence
 from pathlib import Path
 from typing import SupportsIndex
+
+import pygit2
 
 from torchfont.datasets.folder import FontFolder
 
 
 class FontRepo(FontFolder):
-    """Font dataset that synchronizes glyphs from a sparse Git checkout.
+    """Font dataset that synchronizes glyphs from a shallow Git clone.
+
+    The clone fetches the requested reference at depth one, while
+    :paramref:`patterns` restricts which fonts are indexed from the working
+    tree.
 
     See Also:
         torchfont.datasets.folder.FontFolder: Provides the glyph indexing logic
@@ -52,9 +57,8 @@ class FontRepo(FontFolder):
             root (Path | str): Local directory that contains the Git working tree.
             url (str): Remote origin URL for the repository.
             ref (str): Git reference (branch, tag, or commit hash) to synchronize.
-            patterns (Sequence[str]): Sparse-checkout patterns describing which
-                files to materialize. Consult the git ``sparse-checkout`` docs
-                for syntax and troubleshooting tips.
+            patterns (Sequence[str]): Glob-style patterns applied when walking
+                the working tree to select which font files to index.
             codepoint_filter (Sequence[SupportsIndex] | None): Optional iterable
                 that limits Unicode code points when indexing glyphs.
             transform (Callable[[object], object] | None): Optional callable
@@ -63,8 +67,8 @@ class FontRepo(FontFolder):
                 contents when the working tree is empty or stale.
 
         Raises:
-            RuntimeError: If Git is unavailable or the existing repository does
-                not match the requested configuration.
+            ValueError: If the existing repository does not match the requested
+                configuration or syncing fails.
             FileNotFoundError: If the repository does not exist locally and
                 ``download`` is ``False``.
 
@@ -85,70 +89,27 @@ class FontRepo(FontFolder):
         self.root.mkdir(parents=True, exist_ok=True)
         self.url = url
         self.ref = ref
-        self.patterns = patterns
+        self.patterns = tuple(patterns)
 
-        git = shutil.which("git")
-        if not git:
-            msg = "git not found in PATH"
-            raise RuntimeError(msg)
+        git_dir = self.root / ".git"
+        created = not git_dir.exists()
 
-        def run(*args: str) -> None:
-            subprocess.run([git, *args], check=True, cwd=self.root)
-
-        def capture(*args: str) -> str:
-            return subprocess.run(
-                [git, *args],
-                check=True,
-                cwd=self.root,
-                capture_output=True,
-                text=True,
-            ).stdout.strip()
-
-        if not any(self.root.iterdir()):
-            if not download:
-                msg = (
-                    f"repository not found at '{self.root}'. "
-                    "use download=True to clone it"
-                )
-                raise FileNotFoundError(msg)
-            subprocess.run(
-                [
-                    git,
-                    "clone",
-                    "--filter=blob:none",
-                    "--no-checkout",
-                    self.url,
-                    str(self.root),
-                ],
-                check=True,
-            )
+        if created:
+            repo = pygit2.init_repository(str(self.root), origin_url=self.url)
         else:
-            repo_root = Path(capture("rev-parse", "--show-toplevel")).resolve()
-            if repo_root != self.root:
-                msg = (
-                    "git repository toplevel does not match: "
-                    f"expected '{self.root}', found '{repo_root}'"
-                )
-                raise RuntimeError(msg)
+            repo = pygit2.Repository(str(self.root))
 
-            origin_url = capture("remote", "get-url", "origin")
-            if origin_url != self.url:
-                msg = (
-                    "remote 'origin' URL does not match: "
-                    f"expected '{self.url}', found '{origin_url}'"
-                )
-                raise RuntimeError(msg)
+        if created or download:
+            repo.remotes["origin"].fetch([self.ref], depth=1)
+            fetch_head = repo.lookup_reference("FETCH_HEAD")
+            repo.checkout(fetch_head, strategy=pygit2.GIT_CHECKOUT_FORCE)  # type: ignore[attr-defined]
 
-        if download:
-            run("sparse-checkout", "init", "--no-cone")
-            run("sparse-checkout", "set", "--", *self.patterns)
-            run("fetch", "origin", self.ref, "--depth=1", "--filter=blob:none")
-            run("switch", "--detach", "FETCH_HEAD")
-
-        self.commit_hash = capture("rev-parse", "HEAD")
+        commit = repo.head.peel()
+        self.commit_hash = str(commit.id)
 
         super().__init__(
             root=self.root,
             codepoint_filter=codepoint_filter,
+            patterns=self.patterns,
             transform=transform,
         )
