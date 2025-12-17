@@ -22,9 +22,8 @@ from collections.abc import Callable, Sequence
 from pathlib import Path
 from typing import SupportsIndex
 
-import pygit2
-
 from torchfont.datasets.folder import FontFolder
+from torchfont.io.git import ensure_repo
 
 
 class FontRepo(FontFolder):
@@ -91,21 +90,12 @@ class FontRepo(FontFolder):
         self.ref = ref
         self.patterns = tuple(patterns)
 
-        git_dir = self.root / ".git"
-        created = not git_dir.exists()
-
-        if created:
-            repo = pygit2.init_repository(str(self.root), origin_url=self.url)
-        else:
-            repo = pygit2.Repository(str(self.root))
-
-        if created or download:
-            repo.remotes["origin"].fetch([self.ref], depth=1)
-            fetch_head = repo.lookup_reference("FETCH_HEAD")
-            repo.checkout(fetch_head, strategy=pygit2.GIT_CHECKOUT_FORCE)  # type: ignore[attr-defined]
-
-        commit = repo.head.peel()
-        self.commit_hash = str(commit.id)
+        self.commit_hash = ensure_repo(
+            root=self.root,
+            url=self.url,
+            ref=self.ref,
+            download=download,
+        )
 
         super().__init__(
             root=self.root,
