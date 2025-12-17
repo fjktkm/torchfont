@@ -11,8 +11,6 @@ Prerequisites
 
 * Python 3.10 or newer
 * PyTorch 2.3 or newer
-* Git when you plan to use :class:`torchfont.datasets.GoogleFonts` or
-  :class:`torchfont.datasets.FontRepo`
 
 Installation
 ------------
@@ -53,6 +51,15 @@ subset of Google Fonts into ``data/google/fonts`` with the provided dataset help
    )
 
 The dataset keeps the shallow clone up to date on subsequent runs. Point ``root`` to any writable cache directory.
+
+Progress Display
+~~~~~~~~~~~~~~~~
+
+When downloading or updating repositories, TorchFont displays progress information using the ``rich`` library. You can control this behavior using environment variables:
+
+* Set ``TERM=dumb`` to disable all progress bars and styling
+* Set ``TTY_INTERACTIVE=0`` to disable progress bar animations
+* In CI/CD environments, use ``TTY_COMPATIBLE=1`` and ``TTY_INTERACTIVE=0`` together
 
 First Glyph Dataset
 -------------------

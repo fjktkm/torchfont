@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TorchFont \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-08 13:29+0000\n"
+"POT-Creation-Date: 2025-12-17 06:55+0000\n"
 "PO-Revision-Date: 2025-11-08 05:55+0000\n"
 "Last-Translator: Codex AI <codex@example.com>\n"
 "Language: ja\n"
@@ -19,40 +19,42 @@ msgstr ""
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../source/api/generated/torchfont.datasets.repo.rst:2
-#: 89fb20c4a5774258a91fc88e579d2e30
+#: 31e32fdd1e3b4b4d8f7b93fef3b01853
 msgid "torchfont.datasets.repo"
 msgstr "torchfont.datasets.repo"
 
-#: 42ce5127a346404c9d52f7d2db0ad9f4 of torchfont.datasets.repo:1
+#: f990692793b242deb6dd5ddbb457d84f of torchfont.datasets.repo:1
 msgid "Dataset wrapper that materializes fonts from remote Git repositories."
 msgstr "リモート Git リポジトリからフォントを取得するデータセットラッパー。"
 
-#: 8fe88cb61ab646bd974c72ded8b13b94 of torchfont.datasets.repo:4
+#: af231ec058a34c5092726c09a4a3d64b of torchfont.datasets.repo:4
 msgid "Notes"
 msgstr "注記"
 
-#: 568bfd350bbf45fcbfcfd6c8638dce2f of torchfont.datasets.repo:5
+#: e4ef2bb526494797bc3a31a4d8640b66 of torchfont.datasets.repo:5
 msgid ""
-"The host system must expose ``git`` on ``PATH`` and allow network access "
-"when ``download`` is ``True``; otherwise sparse checkouts cannot be "
-"refreshed."
-msgstr "``download`` を ``True`` にする場合は、ホスト環境の ``PATH`` に ``git`` が存在し、ネットワークアクセスが許可されている必要があります。満たされないとスパースチェックアウトを更新できません。"
+"Synchronization relies on ``pygit2``/``libgit2`` bindings and does not "
+"require the ``git`` CLI. Network access is still necessary when "
+"``download`` is ``True`` to refresh the on-disk shallow clone."
+msgstr ""
+"同期には ``pygit2``/``libgit2`` バインディングを使用し、``git`` CLI は不要です。"
+"``download`` が ``True`` の場合、ディスク上のシャロークローンを更新するためにネットワークアクセスが必要です。"
 
-#: 96043eaef6dc49a28a86fa9c09fe11f4 of torchfont.datasets.repo:9
+#: fcd1f82e8c3f4c08a9858bf50a64a345 of torchfont.datasets.repo:10
 msgid "Examples"
 msgstr "使用例"
 
-#: 83b841b4f43241ab8b3958596a26d4e0 of torchfont.datasets.repo:10
+#: 7a94fd9348e54261bd6d5a2675020031 of torchfont.datasets.repo:11
 msgid "Synchronize a Git-based font corpus locally::"
 msgstr "Git ベースのフォントコーパスをローカルに同期::"
 
 #: ../../source/api/generated/torchfont.datasets.repo.rst:8
-#: 81aa337e48bf440dadc6da7db4e55f6b
+#: 4d7391adf4eb4354a8da5ee4c379743e
 msgid "Classes"
 msgstr "クラス"
 
 #: ../../source/api/generated/torchfont.datasets.repo.rst:11:<autosummary>:1
-#: c853103bb73c44f8aaae7defd4e24f8a
+#: b67d2d82e59b43ad8662b18c4543b031
 msgid ""
 ":py:obj:`FontRepo <torchfont.datasets.repo.FontRepo>`\\ \\(root\\, url\\,"
 " ref\\, \\*\\, patterns\\[\\, ...\\]\\)"
@@ -61,8 +63,7 @@ msgstr ""
 " ref\\, \\*\\, patterns\\[\\, ...\\]\\)"
 
 #: ../../source/api/generated/torchfont.datasets.repo.rst:11:<autosummary>:1
-#: 7a91564282464adf96e2665268c6d826
-msgid "Font dataset that synchronizes glyphs from a sparse Git checkout."
-msgstr "スパースな Git チェックアウトからグリフを同期するフォントデータセット。"
-
+#: ece3e06e0fbe40e5b15e76bf5b51fff3
+msgid "Font dataset that synchronizes glyphs from a shallow Git clone."
+msgstr "シャロー Git クローンからグリフを同期するフォントデータセット。"
 

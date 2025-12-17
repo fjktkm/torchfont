@@ -25,6 +25,8 @@ TorchFont exposes three dataset wrappers under :mod:`torchfont.datasets`.
 ``FontRepo``
    Generalizes the Git synchronization logic to arbitrary repositories. Provide
    a ``url``, ``ref``, and optional ``patterns`` describing which files to index.
+   Progress information is displayed during repository operations and can be
+   controlled via environment variables (see Getting Started guide).
 
 Example – `FontRepo`
 ~~~~~~~~~~~~~~~~~~~~

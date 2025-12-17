@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TorchFont \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-08 20:45+0000\n"
+"POT-Creation-Date: 2025-12-17 06:55+0000\n"
 "PO-Revision-Date: 2025-11-08 06:40+0000\n"
 "Last-Translator: Codex AI <codex@example.com>\n"
 "Language: ja\n"
@@ -51,46 +51,48 @@ msgid ""
 msgstr ""
 "``.otf`` や ``.ttf`` が入ったディレクトリを走査します。``.ttc`` や ``.otc`` "
 "といったフォントコレクションも自動で展開され、各フェイスは独立したフォントとして扱われます。利用可能な Unicode "
-"コードポイントとバリアントを 1 サンプルとして並べ、``codepoint_filter`` "
-"で対象文字を制限したり、追加の前処理が必要な場合は ``loader`` を差し替えられます。"
+"コードポイントとバリアントを 1 サンプルとして並べ、``codepoint_filter`` で対象文字を制限したり、追加の前処理が必要な場合は"
+" ``loader`` を差し替えられます。"
 
-#: ../../source/user_guide/index.rst:18 3399e740780c426ca3a679e1be2096f2
+#: ../../source/user_guide/index.rst:19 3399e740780c426ca3a679e1be2096f2
 msgid "``GoogleFonts``"
 msgstr "``GoogleFonts``"
 
-#: ../../source/user_guide/index.rst:19 0af01473c1204a50b36ced63a120f52f
+#: ../../source/user_guide/index.rst:20 0af01473c1204a50b36ced63a120f52f
 msgid ""
-"Maintains a sparse checkout of the `google/fonts` repository. Pass "
-"``patterns`` to restrict which directories are materialized, and set "
-"``download=True`` to ensure the checkout exists. The dataset inherits the"
-" same indexing and label structure as :class:`FontFolder`."
+"Maintains a shallow clone of the `google/fonts` repository. Pass "
+"``patterns`` to restrict which directories are indexed, and set "
+"``download=True`` to ensure the clone exists. The dataset inherits the "
+"same indexing and label structure as :class:`FontFolder`."
 msgstr ""
-"`google/fonts` リポジトリをスパースチェックアウトで維持します。 ``patterns`` で取り込むディレクトリを絞り、 "
+"`google/fonts` リポジトリをシャロークローンで維持します。``patterns`` で取り込むディレクトリを絞り、"
 "``download=True`` を指定すると初回にクローンが確実に作られます。インデックスとラベルの構造は "
 ":class:`FontFolder` と同じです。"
 
-#: ../../source/user_guide/index.rst:24 34dbff213c0a4ff3b1850a10c31b052f
+#: ../../source/user_guide/index.rst:25 34dbff213c0a4ff3b1850a10c31b052f
 msgid "``FontRepo``"
 msgstr "``FontRepo``"
 
-#: ../../source/user_guide/index.rst:25 69381c45263f40428430e538831f8504
+#: ../../source/user_guide/index.rst:26 aad6349e53ba47a2a684d428fcadcd91
 msgid ""
-"Generalizes the sparse checkout logic to arbitrary Git repositories. "
-"Provide a ``url``, ``ref``, and optional ``patterns`` describing what to "
-"materialize."
+"Generalizes the Git synchronization logic to arbitrary repositories. "
+"Provide a ``url``, ``ref``, and optional ``patterns`` describing which "
+"files to index. Progress information is displayed during repository "
+"operations and can be controlled via environment variables (see Getting "
+"Started guide)."
 msgstr ""
-"スパースチェックアウトの仕組みを任意の Git リポジトリに拡張したものです。``url`` と ``ref``、必要であれば展開したい "
-"``patterns`` を指定します。"
+"Git 同期の仕組みを任意のリポジトリに拡張したものです。``url`` と ``ref``、必要であれば展開したい "
+"``patterns`` を指定します。リポジトリ操作時には進捗情報が表示され、環境変数で制御できます（「はじめに」ガイドを参照）。"
 
-#: ../../source/user_guide/index.rst:29 8b032bd0c4514f4e989b474e922daa07
+#: ../../source/user_guide/index.rst:32 8b032bd0c4514f4e989b474e922daa07
 msgid "Example – `FontRepo`"
 msgstr "例 – `FontRepo`"
 
-#: ../../source/user_guide/index.rst:46 f00e112a39f947ce9cde3e2bf3d53016
+#: ../../source/user_guide/index.rst:49 f00e112a39f947ce9cde3e2bf3d53016
 msgid "Transforms"
 msgstr "Transform"
 
-#: ../../source/user_guide/index.rst:48 5c82dfff558c4fdab6c6ea65a85a629f
+#: ../../source/user_guide/index.rst:51 5c82dfff558c4fdab6c6ea65a85a629f
 msgid ""
 "Sequential transformations live under :mod:`torchfont.transforms`. "
 "Combine them with :class:`torchfont.transforms.Compose` to keep "
@@ -100,21 +102,21 @@ msgstr ""
 "にまとまっています。:class:`torchfont.transforms.Compose` "
 "と組み合わせることで宣言的にパイプラインを記述できます。"
 
-#: ../../source/user_guide/index.rst:66 d9fdf84f8b1848d6947286aeaa5e747d
+#: ../../source/user_guide/index.rst:69 d9fdf84f8b1848d6947286aeaa5e747d
 msgid "``LimitSequenceLength``"
 msgstr "``LimitSequenceLength``"
 
-#: ../../source/user_guide/index.rst:67 0c6efa7827d348f089573254d5a543ee
+#: ../../source/user_guide/index.rst:70 0c6efa7827d348f089573254d5a543ee
 msgid ""
 "Clips both the command-type tensor and the coordinate tensor to "
 "``max_len``."
 msgstr "ペンコマンド種別と座標の両方を ``max_len`` までクリップします。"
 
-#: ../../source/user_guide/index.rst:69 e0d2926157c947d1b82b19ccdb27647e
+#: ../../source/user_guide/index.rst:72 e0d2926157c947d1b82b19ccdb27647e
 msgid "``Patchify``"
 msgstr "``Patchify``"
 
-#: ../../source/user_guide/index.rst:70 9c68e338d45e482a835c66d74c470462
+#: ../../source/user_guide/index.rst:73 9c68e338d45e482a835c66d74c470462
 msgid ""
 "Zero-pads sequences to the next ``patch_size`` boundary, then reshapes "
 "them into contiguous patches—useful for transformer-style models."
@@ -122,11 +124,11 @@ msgstr ""
 "シーケンスを ``patch_size`` の倍数までゼロ埋めし、連続したパッチへ整形します。Transformer "
 "系モデルで扱いやすくなる定番の処理です。"
 
-#: ../../source/user_guide/index.rst:74 bc56e2d32bfa4e4c80c070d914de1a56
+#: ../../source/user_guide/index.rst:77 bc56e2d32bfa4e4c80c070d914de1a56
 msgid "Glyph Encoding"
 msgstr "グリフエンコード"
 
-#: ../../source/user_guide/index.rst:76 976491ba2dd642e5afd82691fd82729d
+#: ../../source/user_guide/index.rst:79 976491ba2dd642e5afd82691fd82729d
 msgid ""
 "TorchFont renders glyph outlines through the compiled "
 "``torchfont._torchfont`` extension. Dataset wrappers call into the same "
@@ -134,25 +136,24 @@ msgid ""
 "normalized and ready for PyTorch."
 msgstr ""
 "TorchFont はコンパイル済みの ``torchfont._torchfont`` "
-"拡張を介してグリフアウトラインをレンダリングします。各データセットラッパーも同じ Rust "
-"バックエンドを呼び出すため、返される ``(types, coords)`` テンソルは常に正規化済みで、そのまま PyTorch "
-"に食わせることができます。"
+"拡張を介してグリフアウトラインをレンダリングします。各データセットラッパーも同じ Rust バックエンドを呼び出すため、返される "
+"``(types, coords)`` テンソルは常に正規化済みで、そのまま PyTorch に食わせることができます。"
 
-#: ../../source/user_guide/index.rst:80 9361a21979a6444f88dae89cdffb0758
+#: ../../source/user_guide/index.rst:83 9361a21979a6444f88dae89cdffb0758
 msgid "Use the native module directly if you need lower-level access:"
 msgstr "より低レベルな制御が必要な場合はネイティブモジュールを直接呼び出せます。"
 
-#: ../../source/user_guide/index.rst:90 e95b5cee3a7648f2ab525e59d862e4d7
+#: ../../source/user_guide/index.rst:93 e95b5cee3a7648f2ab525e59d862e4d7
 msgid "Data Loading Tips"
 msgstr "データローディングのヒント"
 
-#: ../../source/user_guide/index.rst:92 64b1061a3c354e6983bb6a56838e137b
+#: ../../source/user_guide/index.rst:95 64b1061a3c354e6983bb6a56838e137b
 msgid ""
 "Glyph sequences vary in length. Always supply a ``collate_fn`` that pads "
 "or truncates samples before they are stacked into a batch."
 msgstr "グリフシーケンスは長さがまちまちです。バッチ化する前にパディングまたはトリミングする ``collate_fn`` を必ず用意しましょう。"
 
-#: ../../source/user_guide/index.rst:94 eea4ded964f14a73843e074f95495bf7
+#: ../../source/user_guide/index.rst:97 eea4ded964f14a73843e074f95495bf7
 msgid ""
 "When working with ``GoogleFonts`` consider splitting the dataset into "
 "several :class:`torch.utils.data.Subset` objects and feeding them to "
@@ -165,26 +166,26 @@ msgstr ""
 ":class:`lightning.pytorch.utilities.combined_loader.CombinedLoader`（``examples/dataloader.py``"
 " を参照）へ渡すことで IO を並列化できます。"
 
-#: ../../source/user_guide/index.rst:98 dc0ce2b3c96c4dd0980508b15d56267a
+#: ../../source/user_guide/index.rst:101 dc0ce2b3c96c4dd0980508b15d56267a
 msgid ""
 "Cache-heavy datasets benefit from setting ``num_workers`` to at least the"
 " number of CPU cores available during preprocessing and inferencing."
 msgstr "キャッシュを多用するデータセットでは、前処理や推論時の CPU コア数に合わせて ``num_workers`` を十分に確保すると効果的です。"
 
-#: ../../source/user_guide/index.rst:102 df1a023cfaf54a19b5949a16248402af
+#: ../../source/user_guide/index.rst:105 df1a023cfaf54a19b5949a16248402af
 msgid "Best Practices"
 msgstr "ベストプラクティス"
 
-#: ../../source/user_guide/index.rst:104 7765b74822644ddf95219334f420571a
+#: ../../source/user_guide/index.rst:107 7765b74822644ddf95219334f420571a
 msgid ""
 "**Keep raw fonts immutable.** The native dataset caches parsed fonts for "
 "the lifetime of the process. Rebuild the dataset if you edit files on "
 "disk."
 msgstr ""
-"**生のフォントを変更しない。** ネイティブデータセットはプロセスの寿命中、解析済みフォントをキャッシュします。ディスク上の"
-" ファイルを編集した場合はデータセットを作り直してください。"
+"**生のフォントを変更しない。** ネイティブデータセットはプロセスの寿命中、解析済みフォントをキャッシュします。ディスク上の "
+"ファイルを編集した場合はデータセットを作り直してください。"
 
-#: ../../source/user_guide/index.rst:106 4e9408a35fe24485a9b870934389e9eb
+#: ../../source/user_guide/index.rst:109 4e9408a35fe24485a9b870934389e9eb
 msgid ""
 "**Separate style and content labels.** Every dataset returns both. Treat "
 "style (font instance) as one task and content (code point) as another so "
@@ -193,15 +194,11 @@ msgstr ""
 "**スタイルとコンテンツのラベルを分けて扱う。** "
 "どのデータセットも両方を返すので、スタイル（フォントインスタンス）とコンテンツ（コードポイント）を別タスクとして扱うと損失の解釈が容易になります。"
 
-#: ../../source/user_guide/index.rst:109 ccafd5b2641442c8a692cd9a0c592069
+#: ../../source/user_guide/index.rst:112 ccafd5b2641442c8a692cd9a0c592069
 msgid ""
 "**Document your Transform pipeline.** Store the pipeline configuration "
 "next to model checkpoints to keep glyph preprocessing reproducible."
 msgstr ""
 "**Transform パイプラインを記録する。** "
 "グリフ前処理を再現できるよう、モデルのチェックポイントと一緒にパイプライン設定を保存しておきましょう。"
-
-
-
-
 

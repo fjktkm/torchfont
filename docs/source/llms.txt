@@ -28,13 +28,15 @@ Machine-readable guide for AI agents that need TorchFont’s most important refe
 
 ## Key modules and files
 
-- `python/torchfont/datasets/` – `FontFolder`, `GoogleFonts`, `FontRepo`, git sync helper  
+- `python/torchfont/datasets/` – `FontFolder`, `GoogleFonts`, `FontRepo`
   https://github.com/fjktkm/torchfont/tree/main/python/torchfont/datasets
-- `python/torchfont/transforms/` – sequence transforms such as `LimitSequenceLength`, `Patchify`  
+- `python/torchfont/io/` – Internal Git repository synchronization helpers with progress display
+  https://github.com/fjktkm/torchfont/tree/main/python/torchfont/io
+- `python/torchfont/transforms/` – sequence transforms such as `LimitSequenceLength`, `Patchify`
   https://github.com/fjktkm/torchfont/tree/main/python/torchfont/transforms
-- `src/pen.rs` – Rust pen that records glyph outlines into normalized tensors  
+- `src/pen.rs` – Rust pen that records glyph outlines into normalized tensors
   https://github.com/fjktkm/torchfont/blob/main/src/pen.rs
-- `examples/` – runnable notebooks/scripts (e.g., combined dataloaders)  
+- `examples/` – runnable notebooks/scripts (e.g., combined dataloaders)
   https://github.com/fjktkm/torchfont/tree/main/examples
 - `data/` – user-provided font caches (empty placeholder in repo; the code expects writable paths)
 

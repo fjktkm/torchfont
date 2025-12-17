@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TorchFont \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-10 20:39+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2025-12-17 06:55+0000\n"
+"PO-Revision-Date: 2025-12-17 06:55+0000\n"
+"Last-Translator: Codex AI <codex@example.com>\n"
 "Language: ja\n"
 "Language-Team: ja <LL@li.org>\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -19,25 +19,38 @@ msgstr ""
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../source/api/generated/torchfont.io.rst:2
-#: 4b754dfa4900475bb3c2190326eb7566
+#: 02eaa92573f5418d9f673648dd2f7f8b
 msgid "torchfont.io"
 msgstr "torchfont.io"
 
-#: 52bcff263e514ac680dfcf64703f55dd of torchfont.io:1
+#: 93c3464d864845929473d54699c2eb0e of torchfont.io:1
 msgid "IO utilities and glyph outline helpers."
 msgstr "I/O ユーティリティとグリフアウトライン用のヘルパー。"
 
 #: ../../source/api/generated/torchfont.io.rst:8
-#: 20650c43a6274cab8a1af4d7ed9b4768
+#: 0b34a4f5713d40249841d88ba17d30a0
 msgid "Modules"
 msgstr "モジュール"
 
-#: ../../source/api/generated/torchfont.io.rst:13:<autosummary>:1
-#: 3d4ed730dd9646ef93cd12a69f61c09a
+#: ../../source/api/generated/torchfont.io.rst:14:<autosummary>:1
+#: a6a726d678c648aabf2b3cc5343613b1
+msgid ":py:obj:`git <torchfont.io.git>`\\"
+msgstr ":py:obj:`git <torchfont.io.git>`\\"
+
+#: ../../source/api/generated/torchfont.io.rst:14:<autosummary>:1
+#: f513f4e7348d4199a5a8366030df94b3
+msgid ""
+"Internal helpers for synchronizing Git repositories with progress "
+"reporting."
+msgstr "進捗表示付きでGitリポジトリを同期するための内部ヘルパー。"
+
+#: ../../source/api/generated/torchfont.io.rst:14:<autosummary>:1
+#: 3de67dda0dad41a5aaa1d4499ca59611
 msgid ":py:obj:`outline <torchfont.io.outline>`\\"
 msgstr ":py:obj:`outline <torchfont.io.outline>`\\"
 
-#: ../../source/api/generated/torchfont.io.rst:13:<autosummary>:1
-#: d15e427f39204f7ba136a9dbbf8f4291
+#: ../../source/api/generated/torchfont.io.rst:14:<autosummary>:1
+#: 578c347d1d4c43dfaf10fe6cadfbcc20
 msgid "Shared constants for glyph outline command encoding."
 msgstr "グリフアウトラインのコマンドエンコーディングで共有される定数。"
+

@@ -1,0 +1,50 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Takumu Fujioka
+# This file is distributed under the same license as the TorchFont package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: TorchFont \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-17 06:55+0000\n"
+"PO-Revision-Date: 2025-12-17 06:55+0000\n"
+"Last-Translator: Codex AI <codex@example.com>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../source/api/generated/torchfont.io.git.rst:2
+#: 8344bd246b1640039f6787e0f88b1fdf
+msgid "torchfont.io.git"
+msgstr "torchfont.io.git"
+
+#: 3a4524d50f6e423e937422eea4970496 of torchfont.io.git:1
+msgid ""
+"Internal helpers for synchronizing Git repositories with progress "
+"reporting."
+msgstr "進捗表示付きでGitリポジトリを同期するための内部ヘルパー。"
+
+#: ../../source/api/generated/torchfont.io.git.rst:8
+#: ee1f094488674bed9b08d45dff60c634
+msgid "Functions"
+msgstr "関数"
+
+#: ../../source/api/generated/torchfont.io.git.rst:11:<autosummary>:1
+#: c7bbcb7c2d484fdb9974ec56aa35f85f
+msgid ""
+":py:obj:`ensure_repo <torchfont.io.git.ensure_repo>`\\ \\(root\\, url\\, "
+"ref\\, \\*\\, download\\)"
+msgstr ""
+":py:obj:`ensure_repo <torchfont.io.git.ensure_repo>`\\ \\(root\\, url\\, "
+"ref\\, \\*\\, download\\)"
+
+#: ../../source/api/generated/torchfont.io.git.rst:11:<autosummary>:1
+#: abd767e8805e469f958515d224976535
+msgid "Ensure ``root`` hosts ``ref`` and return the synced commit hash."
+msgstr "``root`` に ``ref`` が存在することを確認し、同期したコミットハッシュを返す。"
+
