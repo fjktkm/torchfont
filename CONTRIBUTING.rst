@@ -37,6 +37,7 @@ that appear. To reproduce issues locally, run:
 
 .. code-block:: bash
 
+   uv run ruff format --diff .
    uv run ruff check .
    uv run mypy python/torchfont
    uv run pytest
