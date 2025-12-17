@@ -89,12 +89,10 @@ def ensure_repo(
 
     if git_dir.exists():
         repo = pygit2.Repository(str(path))
-        created = False
     else:
         repo = pygit2.init_repository(str(path), origin_url=url)
-        created = True
 
-    if created or download:
+    if download:
         with Progress() as progress:
             callbacks = _RemoteCallbacks(progress)
             repo.remotes["origin"].fetch([ref], depth=1, callbacks=callbacks)
