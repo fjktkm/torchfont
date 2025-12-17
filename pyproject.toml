@@ -65,7 +65,7 @@ ignore = ["EXE002"]
 "examples/**/*.py" = ["D", "T201"]
 "python/torchfont/datasets/repo.py" = ["S603"]
 "python/torchfont/datasets/*.py" = ["PLR0913"]
-"tests/**/*.py" = ["D", "S101"]
+"tests/**/*.py" = ["D", "PLR2004", "S101"]
 
 [tool.maturin]
 python-source = "python"

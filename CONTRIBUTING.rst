@@ -28,19 +28,39 @@ Coding Standards
 * Public APIs live under ``torchfont.datasets`` and ``torchfont.transforms``.
   When adding modules, update ``docs/source/api`` so that Sphinx picks them up.
 
-Testing & Linting
------------------
+Linting & Type Checking
+-----------------------
 
-GitHub Actions runs linting, type-checking, and tests automatically after you
-open a pull request. Keep an eye on the workflow status and address any failures
-that appear. To reproduce issues locally, run:
+GitHub Actions runs linting and type-checking automatically after you open a
+pull request. Keep an eye on the workflow status and address any failures that
+appear. To reproduce issues locally, run:
 
 .. code-block:: bash
 
    uv run ruff format --diff .
    uv run ruff check .
    uv run mypy python/torchfont
+
+Testing
+-------
+
+By default, ``pytest`` skips slow and network-dependent tests to speed up local
+development. Tests are organized by module in the ``tests/`` directory and use
+pytest markers to categorize requirements:
+
+.. code-block:: bash
+
+   # Run only fast, offline tests (default)
    uv run pytest
+
+   # Run all tests including slow/network tests
+   uv run pytest --runslow --runnetwork
+
+   # Run only network tests
+   uv run pytest --runnetwork
+
+   # Run only slow tests
+   uv run pytest --runslow
 
 The repository contains small integration samples inside ``examples/``. Please
 exercise or extend them if your change alters their behavior.
