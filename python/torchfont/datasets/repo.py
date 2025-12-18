@@ -66,8 +66,6 @@ class FontRepo(FontFolder):
                 contents when the working tree is empty or stale.
 
         Raises:
-            ValueError: If the existing repository does not match the requested
-                configuration or syncing fails.
             FileNotFoundError: If the repository does not exist locally and
                 ``download`` is ``False``.
 
