@@ -92,8 +92,8 @@ def ensure_repo(
     else:
         repo = pygit2.init_repository(str(path), origin_url=url)
 
-    if download:
-        with Progress() as progress:
+    with Progress() as progress:
+        if download:
             callbacks = _RemoteCallbacks(progress)
             repo.remotes["origin"].fetch([ref], depth=1, callbacks=callbacks)
             fetch_head = repo.lookup_reference("FETCH_HEAD")
@@ -102,6 +102,14 @@ def ensure_repo(
                 strategy=pygit2.GIT_CHECKOUT_FORCE,
                 callbacks=_CheckoutCallbacks(progress),
             )
+        else:
+            target = repo.revparse_single(ref)
+            repo.checkout_tree(  # type: ignore[attr-defined]
+                target,
+                strategy=pygit2.GIT_CHECKOUT_FORCE,
+                callbacks=_CheckoutCallbacks(progress),
+            )
+            repo.set_head(target.id)
 
     commit = repo.head.peel()
     return str(commit.id)
