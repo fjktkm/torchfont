@@ -119,9 +119,6 @@ class FontFolder(Dataset[object]):
             ``(style_idx, content_idx)``, describing the variation instance and
             Unicode code point class.
 
-        Raises:
-            IndexError: If ``idx`` falls outside the range ``[0, len(self))``.
-
         Examples:
             Retrieve the first glyph sample and its target pair::
 
