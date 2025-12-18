@@ -14,8 +14,8 @@ pub struct SegmentPen {
     commands: Vec<i32>,
     coords: Vec<f32>,
     scale: f32,
-    current: Option<(f32, f32)>,
-    start: Option<(f32, f32)>,
+    current: (f32, f32),
+    start: (f32, f32),
 }
 
 impl SegmentPen {
@@ -26,8 +26,8 @@ impl SegmentPen {
             commands: Vec::new(),
             coords: Vec::new(),
             scale,
-            current: None,
-            start: None,
+            current: (0.0, 0.0),
+            start: (0.0, 0.0),
         }
     }
 
@@ -46,34 +46,32 @@ impl SegmentPen {
 impl OutlinePen for SegmentPen {
     fn move_to(&mut self, x: f32, y: f32) {
         self.push(Command::MoveTo, [0.0, 0.0, 0.0, 0.0, x, y]);
-        self.current = Some((x, y));
-        self.start = Some((x, y));
+        self.current = (x, y);
+        self.start = (x, y);
     }
 
     fn line_to(&mut self, x: f32, y: f32) {
         self.push(Command::LineTo, [0.0, 0.0, 0.0, 0.0, x, y]);
-        self.current = Some((x, y));
+        self.current = (x, y);
     }
 
     fn quad_to(&mut self, cx0: f32, cy0: f32, x: f32, y: f32) {
-        let (px, py) = self.current.expect("quad_to requires an active point");
+        let (px, py) = self.current;
         let cp1x = px + (2.0 / 3.0) * (cx0 - px);
         let cp1y = py + (2.0 / 3.0) * (cy0 - py);
         let cp2x = x + (2.0 / 3.0) * (cx0 - x);
         let cp2y = y + (2.0 / 3.0) * (cy0 - y);
         self.push(Command::CurveTo, [cp1x, cp1y, cp2x, cp2y, x, y]);
-        self.current = Some((x, y));
+        self.current = (x, y);
     }
 
     fn curve_to(&mut self, cx0: f32, cy0: f32, cx1: f32, cy1: f32, x: f32, y: f32) {
-        let _ = self.current.expect("curve_to requires an active point");
         self.push(Command::CurveTo, [cx0, cy0, cx1, cy1, x, y]);
-        self.current = Some((x, y));
+        self.current = (x, y);
     }
 
     fn close(&mut self) {
-        let start = self.start.expect("close requires an active contour");
         self.push(Command::ClosePath, [0.0; 6]);
-        self.current = Some(start);
+        self.current = self.start;
     }
 }
