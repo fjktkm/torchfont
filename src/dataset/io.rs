@@ -24,6 +24,7 @@ pub(super) fn discover_font_files(
     patterns: Option<&[String]>,
 ) -> PyResult<Vec<String>> {
     let mut builder = WalkBuilder::new(root);
+    builder.min_depth(Some(1));
 
     if let Some(patterns) = patterns
         && !patterns.is_empty()
@@ -37,10 +38,6 @@ pub(super) fn discover_font_files(
     for result in builder.build() {
         let entry =
             result.map_err(|err| py_err(format!("failed to walk '{}': {err}", root.display())))?;
-
-        if entry.depth() == 0 {
-            continue;
-        }
 
         let path = entry.path();
 
