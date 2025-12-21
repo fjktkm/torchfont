@@ -138,6 +138,5 @@ def test_font_folder_empty_result() -> None:
         codepoint_filter=range(0x80),
     )
     assert len(dataset) == 0
-    assert dataset.sample_count == 0
-    assert dataset.style_class_count == 0
-    assert dataset.content_class_count == 0
+    assert dataset.num_style_classes == 0
+    assert dataset.num_content_classes == 0
