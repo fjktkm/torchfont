@@ -50,14 +50,6 @@ pub(super) fn discover_font_files(
     }
 
     files.sort_unstable();
-
-    if files.is_empty() {
-        return Err(py_err(format!(
-            "no font files found under '{}'",
-            root.display()
-        )));
-    }
-
     Ok(files)
 }
 

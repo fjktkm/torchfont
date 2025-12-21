@@ -1,6 +1,5 @@
 from typing import cast
 
-import pytest
 import torch
 from torchfont.datasets import FontFolder
 
@@ -133,9 +132,12 @@ def test_font_folder_pattern_filter() -> None:
 
 
 def test_font_folder_empty_result() -> None:
-    with pytest.raises(ValueError, match="no font files found"):
-        FontFolder(
-            root="tests/fonts",
-            patterns=("nonexistent*.ttf",),
-            codepoint_filter=range(0x80),
-        )
+    dataset = FontFolder(
+        root="tests/fonts",
+        patterns=("nonexistent*.ttf",),
+        codepoint_filter=range(0x80),
+    )
+    assert len(dataset) == 0
+    assert dataset.sample_count == 0
+    assert dataset.style_class_count == 0
+    assert dataset.content_class_count == 0
