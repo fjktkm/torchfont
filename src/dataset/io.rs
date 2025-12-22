@@ -24,13 +24,8 @@ pub(super) fn discover_font_files(
     patterns: Option<&[String]>,
 ) -> PyResult<Vec<String>> {
     let mut builder = WalkBuilder::new(root);
-    builder.min_depth(Some(1));
-
-    if let Some(patterns) = patterns
-        && !patterns.is_empty()
-    {
-        let overrides = build_overrides(root, patterns)?;
-        builder.overrides(overrides);
+    if let Some(patterns) = patterns.filter(|p| !p.is_empty()) {
+        builder.overrides(build_overrides(root, patterns)?);
     }
 
     let mut files = Vec::new();
