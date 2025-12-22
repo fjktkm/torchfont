@@ -5,7 +5,6 @@ use pyo3::prelude::*;
 use skrifa::raw::{FileRef, TableProvider};
 use skrifa::{
     GlyphId, MetadataProvider,
-    charmap::Charmap,
     instance::{Location, LocationRef, Size},
     outline::DrawSettings,
 };
@@ -110,7 +109,8 @@ impl FontEntry {
             .map_err(|_| py_err(format!("font '{base_path}' is missing a head table")))?
             .units_per_em();
 
-        let mut mappings: Vec<_> = Charmap::new(&font)
+        let mut mappings: Vec<_> = font
+            .charmap()
             .mappings()
             .filter(|(codepoint, _)| {
                 filter.is_none_or(|values| values.binary_search(codepoint).is_ok())
