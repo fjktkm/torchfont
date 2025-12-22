@@ -1,6 +1,6 @@
 use crate::error::py_err;
 use ignore::{WalkBuilder, overrides::OverrideBuilder};
-use memmap2::{Mmap, MmapOptions};
+use memmap2::Mmap;
 use pyo3::prelude::*;
 use std::{
     fs,
@@ -56,7 +56,7 @@ fn has_font_extension(path: &Path) -> bool {
 pub(super) fn map_font(path: &str) -> PyResult<Arc<Mmap>> {
     let file =
         fs::File::open(path).map_err(|err| py_err(format!("failed to open '{path}': {err}")))?;
-    let mmap = unsafe { MmapOptions::new().map(&file) }
+    let mmap = unsafe { Mmap::map(&file) }
         .map_err(|err| py_err(format!("failed to map '{path}': {err}")))?;
     Ok(Arc::new(mmap))
 }
