@@ -86,7 +86,6 @@ class FontRepo(FontFolder):
         self.root.mkdir(parents=True, exist_ok=True)
         self.url = url
         self.ref = ref
-        self.patterns = tuple(patterns)
 
         self.commit_hash = ensure_repo(
             root=self.root,
@@ -98,6 +97,6 @@ class FontRepo(FontFolder):
         super().__init__(
             root=self.root,
             codepoint_filter=codepoint_filter,
-            patterns=self.patterns,
+            patterns=patterns,
             transform=transform,
         )
