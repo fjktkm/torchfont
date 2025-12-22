@@ -82,20 +82,18 @@ class FontRepo(FontFolder):
                 )
 
         """
-        self.root = Path(root).expanduser().resolve()
-        self.root.mkdir(parents=True, exist_ok=True)
         self.url = url
         self.ref = ref
 
         self.commit_hash = ensure_repo(
-            root=self.root,
+            root=root,
             url=self.url,
             ref=self.ref,
             download=download,
         )
 
         super().__init__(
-            root=self.root,
+            root=root,
             codepoint_filter=codepoint_filter,
             patterns=patterns,
             transform=transform,

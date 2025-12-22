@@ -83,7 +83,7 @@ def ensure_repo(
     download: bool,
 ) -> str:
     """Ensure ``root`` hosts ``ref`` and return the synced commit hash."""
-    path = Path(root)
+    path = Path(root).expanduser().resolve()
     path.mkdir(parents=True, exist_ok=True)
     git_dir = path / ".git"
 

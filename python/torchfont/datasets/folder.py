@@ -75,7 +75,7 @@ class FontFolder(Dataset[object]):
                 )
 
         """
-        self.root = Path(root)
+        self.root = Path(root).expanduser().resolve()
         self.transform = transform
         self.patterns = (
             tuple(str(pattern) for pattern in patterns)
