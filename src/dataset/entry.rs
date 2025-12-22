@@ -119,15 +119,10 @@ impl FontEntry {
         mappings.sort_unstable_by_key(|entry| entry.0);
         let (codepoints, glyph_ids): (Vec<_>, Vec<_>) = mappings.into_iter().unzip();
 
-        let axes_count = font.axes().len();
         let locations = font
             .named_instances()
             .iter()
-            .map(|instance| {
-                let mut location = Location::new(axes_count);
-                instance.location_to_slice(location.coords_mut());
-                location
-            })
+            .map(|inst| inst.location())
             .collect();
 
         Ok(Self {
