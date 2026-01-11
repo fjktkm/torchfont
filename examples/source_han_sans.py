@@ -4,6 +4,7 @@ import torch
 from torch import Tensor
 from torch.nn.utils.rnn import pad_sequence
 from torch.utils.data import DataLoader
+
 from torchfont.datasets import FontRepo
 
 dataset = FontRepo(

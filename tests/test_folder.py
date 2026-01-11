@@ -1,4 +1,5 @@
 import torch
+
 from torchfont.datasets import FontFolder
 
 

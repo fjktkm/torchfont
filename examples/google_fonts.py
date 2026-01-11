@@ -4,13 +4,14 @@ import torch
 from torch import Tensor
 from torch.nn.utils.rnn import pad_sequence
 from torch.utils.data import DataLoader
+from tqdm import tqdm
+
 from torchfont.datasets import GoogleFonts
 from torchfont.transforms import (
     Compose,
     LimitSequenceLength,
     Patchify,
 )
-from tqdm import tqdm
 
 transform = Compose(
     (

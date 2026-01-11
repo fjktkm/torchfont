@@ -4,6 +4,7 @@ from pathlib import Path
 
 import pytest
 import torch
+
 from torchfont.datasets import FontRepo
 
 
