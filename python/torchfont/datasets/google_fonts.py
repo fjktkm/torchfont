@@ -14,6 +14,8 @@ Examples:
 from collections.abc import Callable, Sequence
 from pathlib import Path
 
+from torch import Tensor
+
 from torchfont.datasets.repo import FontRepo
 
 REPO_URL = "https://github.com/google/fonts"
@@ -41,7 +43,9 @@ class GoogleFonts(FontRepo):
         *,
         patterns: Sequence[str] | None = None,
         codepoint_filter: Sequence[int] | None = None,
-        transform: Callable[[object], object] | None = None,
+        transform: (
+            Callable[[Tensor, Tensor], tuple[Tensor, Tensor]] | None
+        ) = None,
         download: bool = False,
     ) -> None:
         """Initialize a shallow clone of Google Fonts and index glyph samples.
@@ -57,8 +61,9 @@ class GoogleFonts(FontRepo):
                 conventions.
             codepoint_filter (Sequence[int] | None): Optional iterable of Unicode
                 code points to include when indexing glyph samples.
-            transform (Callable[[object], object] | None): Optional callable
-                applied to each sample returned from the backend.
+            transform (Callable[[Tensor, Tensor], tuple[Tensor, Tensor]] | None):
+                Optional transformation applied to each sample returned from the
+                backend.
             download (bool): Whether to perform the clone and checkout when the
                 directory is missing or empty.
 

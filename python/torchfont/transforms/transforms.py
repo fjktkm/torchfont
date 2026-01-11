@@ -27,12 +27,16 @@ class Compose:
 
     """
 
-    def __init__(self, transforms: Sequence[Callable[..., object]]) -> None:
+    def __init__(
+        self,
+        transforms: Sequence[Callable[[Tensor, Tensor], tuple[Tensor, Tensor]]],
+    ) -> None:
         """Store the ordered transform pipeline.
 
         Args:
-            transforms (Sequence[Callable[..., object]]): Operations that accept
-                and return compatible sample types. Ordering matters, so place
+            transforms (Sequence[Callable]): Operations that accept and return
+                compatible sample types.
+                Ordering matters, so place
                 stateful or lossy transforms later in the list.
 
         Examples:
@@ -43,24 +47,26 @@ class Compose:
         """
         self.transforms = transforms
 
-    def __call__(self, sample: object) -> object:
+    def __call__(self, types: Tensor, coords: Tensor) -> tuple[Tensor, Tensor]:
         """Apply every transform in order to the provided sample.
 
         Args:
-            sample (object): Input passed to the first transform in the sequence.
+            types (Tensor): Input command sequence.
+            coords (Tensor): Input coordinate sequence.
 
         Returns:
-            object: Resulting sample after all transformations are applied.
+            tuple[Tensor, Tensor]: Resulting sample after all transformations
+            are applied.
 
         Examples:
             Run the composed pipeline on a glyph sample::
 
-                sample = pipeline(sample)
+                types, coords = pipeline(types, coords)
 
         """
         for t in self.transforms:
-            sample = t(sample)
-        return sample
+            types, coords = t(types, coords)
+        return types, coords
 
 
 class LimitSequenceLength:
@@ -87,12 +93,12 @@ class LimitSequenceLength:
         """
         self.max_len = max_len
 
-    def __call__(self, sample: tuple[Tensor, Tensor]) -> tuple[Tensor, Tensor]:
+    def __call__(self, types: Tensor, coords: Tensor) -> tuple[Tensor, Tensor]:
         """Clip the sequence and coordinate tensors to the specified length.
 
         Args:
-            sample (tuple[Tensor, Tensor]): Tuple of ``(types, coords)`` tensors
-                representing pen commands and control points.
+            types (Tensor): Tensor of pen command types.
+            coords (Tensor): Tensor of pen command coordinates.
 
         Returns:
             tuple[Tensor, Tensor]: Tensors truncated to ``max_len`` elements.
@@ -104,11 +110,9 @@ class LimitSequenceLength:
         Examples:
             Clamp a sample to 128 steps::
 
-                types, coords = LimitSequenceLength(128)((types, coords))
+                types, coords = LimitSequenceLength(128)(types, coords)
 
         """
-        types, coords = sample
-
         types = types[: self.max_len]
         coords = coords[: self.max_len]
 
@@ -140,12 +144,12 @@ class Patchify:
         """
         self.patch_size = patch_size
 
-    def __call__(self, sample: tuple[Tensor, Tensor]) -> tuple[Tensor, Tensor]:
+    def __call__(self, types: Tensor, coords: Tensor) -> tuple[Tensor, Tensor]:
         """Pad and reshape sequences into contiguous patches.
 
         Args:
-            sample (tuple[Tensor, Tensor]): Tuple of ``(types, coords)``
-                tensors representing pen commands and control points.
+            types (Tensor): Tensor of pen command types.
+            coords (Tensor): Tensor of pen command coordinates.
 
         Returns:
             tuple[Tensor, Tensor]: Tensors grouped into patches of
@@ -159,11 +163,9 @@ class Patchify:
         Examples:
             Reshape a glyph sequence into patches of 64 steps::
 
-                patch_types, patch_coords = Patchify(64)((types, coords))
+                patch_types, patch_coords = Patchify(64)(types, coords)
 
         """
-        types, coords = sample
-
         seq_len = types.size(0)
         pad = (-seq_len) % self.patch_size
         num_patches = (seq_len + pad) // self.patch_size

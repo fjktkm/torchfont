@@ -22,6 +22,8 @@ from collections.abc import Callable, Sequence
 from pathlib import Path
 from typing import SupportsIndex
 
+from torch import Tensor
+
 from torchfont.datasets.folder import FontFolder
 from torchfont.io.git import ensure_repo
 
@@ -47,7 +49,9 @@ class FontRepo(FontFolder):
         *,
         patterns: Sequence[str],
         codepoint_filter: Sequence[SupportsIndex] | None = None,
-        transform: Callable[[object], object] | None = None,
+        transform: (
+            Callable[[Tensor, Tensor], tuple[Tensor, Tensor]] | None
+        ) = None,
         download: bool = False,
     ) -> None:
         """Clone and index a Git repository of fonts.
@@ -60,8 +64,8 @@ class FontRepo(FontFolder):
                 the working tree to select which font files to index.
             codepoint_filter (Sequence[SupportsIndex] | None): Optional iterable
                 that limits Unicode code points when indexing glyphs.
-            transform (Callable[[object], object] | None): Optional callable
-                applied to each sample from the backend.
+            transform (Callable[[Tensor, Tensor], tuple[Tensor, Tensor]] | None):
+                Optional transformation applied to each sample from the backend.
             download (bool): Whether to clone and check out the repository
                 contents when the working tree is empty or stale.
 

@@ -20,6 +20,7 @@ from pathlib import Path
 from typing import SupportsIndex
 
 import torch
+from torch import Tensor
 from torch.utils.data import Dataset
 
 from torchfont import _torchfont
@@ -57,7 +58,9 @@ class FontFolder(Dataset[object]):
         *,
         codepoint_filter: Sequence[SupportsIndex] | None = None,
         patterns: Sequence[str] | None = None,
-        transform: Callable[[object], object] | None = None,
+        transform: (
+            Callable[[Tensor, Tensor], tuple[Tensor, Tensor]] | None
+        ) = None,
     ) -> None:
         """Initialize the dataset by scanning font files and indexing samples.
 
@@ -68,9 +71,9 @@ class FontFolder(Dataset[object]):
                 of Unicode code points used to restrict the dataset content.
             patterns (Sequence[str] | None): Optional gitignore-style patterns
                 describing which font paths to include.
-            transform (Callable[[object], object] | None): Optional
-                transformation applied to each loader output before the item is
-                returned.
+            transform (Callable[[Tensor, Tensor], tuple[Tensor, Tensor]] | None):
+                Optional transformation applied to each loader output before the
+                item is returned.
 
         Examples:
             Restrict the dataset to uppercase ASCII glyphs::
@@ -110,7 +113,7 @@ class FontFolder(Dataset[object]):
         """
         return int(self._dataset.sample_count)
 
-    def __getitem__(self, idx: int) -> tuple[object, tuple[int, int]]:
+    def __getitem__(self, idx: int) -> tuple[Tensor, Tensor, int, int]:
         """Load a glyph sample and its associated targets.
 
         Args:
@@ -118,28 +121,24 @@ class FontFolder(Dataset[object]):
                 points, and instances.
 
         Returns:
-            tuple[object, tuple[int, int]]: ``(sample, target)`` pair where
-            ``sample`` is produced by the compiled backend and ``target`` is
-            ``(style_idx, content_idx)``, describing the variation instance and
-            Unicode code point class.
+            tuple[Tensor, Tensor, int, int]: ``(types, coords,
+            style_idx, content_idx)`` where ``types`` and ``coords`` are
+            produced by the compiled backend and the labels describe the
+            variation instance and Unicode code point class.
 
         Examples:
-            Retrieve the first glyph sample and its target pair::
+            Retrieve the first glyph sample and its target labels::
 
-                sample, target = dataset[0]
+                types, coords, style_idx, content_idx = dataset[0]
 
         """
         raw_types, raw_coords, style_idx, content_idx = self._dataset.item(int(idx))
         types = torch.as_tensor(raw_types, dtype=torch.long)
         coords = torch.as_tensor(raw_coords, dtype=torch.float32).view(-1, COORD_DIM)
-        sample: object = (types, coords)
-
         if self.transform is not None:
-            sample = self.transform(sample)
+            types, coords = self.transform(types, coords)
 
-        target = (style_idx, content_idx)
-
-        return sample, target
+        return types, coords, style_idx, content_idx
 
     @property
     def content_classes(self) -> list[str]:
