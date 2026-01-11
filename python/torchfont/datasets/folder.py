@@ -34,10 +34,16 @@ class FontFolder(Dataset[object]):
     style and content targets.
 
     Attributes:
-        num_content_classes (int): Total number of unique Unicode code points
-            discoverable across the indexed fonts.
-        num_style_classes (int): Total number of variation instances across the
-            indexed fonts.
+        content_classes (list[str]): List of Unicode character strings, one per
+            content class, sorted by index. Use len(content_classes) to get
+            the total number of content classes.
+        content_class_to_idx (dict[str, int]): Mapping from characters to content
+            class indices.
+        style_classes (list[str]): List of style instance names, one per style
+            class, sorted by index. Use len(style_classes) to get the total
+            number of style classes.
+        style_class_to_idx (dict[str, int]): Mapping from style names to style
+            class indices.
 
     See Also:
         torchfont.datasets.repo.FontRepo: Extends the same indexing machinery
@@ -94,8 +100,6 @@ class FontFolder(Dataset[object]):
             self.codepoint_filter,
             backend_patterns,
         )
-        self.num_style_classes = int(self._dataset.style_class_count)
-        self.num_content_classes = int(self._dataset.content_class_count)
 
     def __len__(self) -> int:
         """Return the total number of glyph samples discoverable in the dataset.
@@ -136,3 +140,68 @@ class FontFolder(Dataset[object]):
         target = (style_idx, content_idx)
 
         return sample, target
+
+    @property
+    def content_classes(self) -> list[str]:
+        """List of unique characters (Unicode strings) in the dataset.
+
+        Returns class names sorted by their index. Each name is a single
+        Unicode character corresponding to a codepoint in the dataset.
+
+        Returns:
+            list[str]: Character strings for each content class.
+
+        Examples:
+            >>> dataset = FontFolder(root="fonts", codepoint_filter=range(0x41, 0x44))
+            >>> dataset.content_classes
+            ['A', 'B', 'C']
+
+        """
+        codepoints = self._dataset.content_classes
+        return [chr(cp) for cp in codepoints]
+
+    @property
+    def content_class_to_idx(self) -> dict[str, int]:
+        """Mapping from character strings to content class indices.
+
+        Returns:
+            dict[str, int]: Dictionary mapping character to index.
+
+        Examples:
+            >>> dataset.content_class_to_idx['A']
+            0
+
+        """
+        return {char: idx for idx, char in enumerate(self.content_classes)}
+
+    @property
+    def style_classes(self) -> list[str]:
+        """List of style variation instance names in the dataset.
+
+        Returns class names sorted by their index. For variable fonts, names
+        come from the font's named instances. For static fonts, names are
+        derived from the font's family and subfamily names.
+
+        Returns:
+            list[str]: Descriptive names for each style class.
+
+        Examples:
+            >>> dataset.style_classes[:3]
+            ['Roboto Regular', 'Roboto Bold', 'Lato Regular']
+
+        """
+        return list(self._dataset.style_classes)
+
+    @property
+    def style_class_to_idx(self) -> dict[str, int]:
+        """Mapping from style instance names to style class indices.
+
+        Returns:
+            dict[str, int]: Dictionary mapping style name to index.
+
+        Examples:
+            >>> dataset.style_class_to_idx['Roboto Regular']
+            0
+
+        """
+        return {name: idx for idx, name in enumerate(self.style_classes)}

@@ -34,8 +34,8 @@ def test_font_repo_init(clean_repo_dir: Path) -> None:
     assert dataset.ref == "main"
     assert dataset.commit_hash is not None
     assert dataset.patterns == ("ufl/*/*.ttf",)
-    assert dataset.num_style_classes > 0
-    assert dataset.num_content_classes > 0
+    assert len(dataset.style_classes) > 0
+    assert len(dataset.content_classes) > 0
     assert len(dataset) > 0
 
 

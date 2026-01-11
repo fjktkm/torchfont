@@ -27,8 +27,8 @@ def test_google_fonts_fresh_clone(clean_clone_dir: Path) -> None:
     )
 
     assert (clean_clone_dir / ".git").exists()
-    assert dataset.num_style_classes > 0
-    assert dataset.num_content_classes > 0
+    assert len(dataset.style_classes) > 0
+    assert len(dataset.content_classes) > 0
     assert dataset.url == "https://github.com/google/fonts"
     assert dataset.ref == "main"
     assert dataset.commit_hash is not None
@@ -66,7 +66,7 @@ def test_google_fonts_existing_clone() -> None:
     commit_hash_2 = dataset2.commit_hash
 
     assert commit_hash_1 == commit_hash_2
-    assert dataset1.num_style_classes == dataset2.num_style_classes
+    assert len(dataset1.style_classes) == len(dataset2.style_classes)
     assert len(dataset1) == len(dataset2)
 
 
@@ -137,5 +137,5 @@ def test_google_fonts_custom_codepoint_filter() -> None:
         download=True,
     )
 
-    assert dataset.num_content_classes <= 10
+    assert len(dataset.content_classes) <= 10
     assert len(dataset) > 0
