@@ -21,7 +21,7 @@ jobs:
       - uses: astral-sh/setup-uv@v6
       - run: uv run ruff format --diff .
       - run: uv run ruff check .
-      - run: uv run mypy python tests examples
+      - run: uv run mypy torchfont tests examples
 
   rust-static-check:
     name: Rust static check

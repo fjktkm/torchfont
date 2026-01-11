@@ -6,7 +6,7 @@ on:
       - "main"
     paths:
       - "docs/source/**/*.rst"
-      - "python/**"
+      - "torchfont/**"
       - "CONTRIBUTING.rst"
   workflow_dispatch:
 
