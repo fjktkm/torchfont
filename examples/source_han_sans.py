@@ -16,12 +16,12 @@ dataset = FontRepo(
 
 
 def collate_fn(
-    batch: Sequence[tuple[tuple[Tensor, Tensor], tuple[int, int]]],
+    batch: Sequence[tuple[Tensor, Tensor, int, int]],
 ) -> tuple[Tensor, Tensor, Tensor, Tensor]:
-    types_list = [types for (types, _), _ in batch]
-    coords_list = [coords for (_, coords), _ in batch]
-    style_label_list = [style for _, (style, _) in batch]
-    content_label_list = [content for _, (_, content) in batch]
+    types_list = [types for types, _, _, _ in batch]
+    coords_list = [coords for _, coords, _, _ in batch]
+    style_label_list = [style for _, _, style, _ in batch]
+    content_label_list = [content for _, _, _, content in batch]
 
     types_tensor = pad_sequence(types_list, batch_first=True, padding_value=0)
     coords_tensor = pad_sequence(coords_list, batch_first=True, padding_value=0.0)

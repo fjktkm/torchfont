@@ -1,7 +1,6 @@
 import shutil
 from collections.abc import Generator
 from pathlib import Path
-from typing import cast
 
 import pytest
 import torch
@@ -108,18 +107,15 @@ def test_font_repo_getitem(clean_repo_dir: Path) -> None:
 
     assert len(dataset) > 0
 
-    sample, target = dataset[0]
-    assert isinstance(sample, tuple)
-    types, coords = cast("tuple[torch.Tensor, torch.Tensor]", sample)
+    types, coords, style_idx, content_idx = dataset[0]
 
     assert types.dtype == torch.long
     assert types.ndim == 1
     assert coords.dtype == torch.float32
     assert coords.ndim == 2
     assert coords.shape[1] == 6
-
-    assert isinstance(target, tuple)
-    assert len(target) == 2
+    assert isinstance(style_idx, int)
+    assert isinstance(content_idx, int)
 
 
 @pytest.mark.network
