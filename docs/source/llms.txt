@@ -28,12 +28,12 @@ Machine-readable guide for AI agents that need TorchFont’s most important refe
 
 ## Key modules and files
 
-- `python/torchfont/datasets/` – `FontFolder`, `GoogleFonts`, `FontRepo`
-  https://github.com/fjktkm/torchfont/tree/main/python/torchfont/datasets
-- `python/torchfont/io/` – Internal Git repository synchronization helpers with progress display
-  https://github.com/fjktkm/torchfont/tree/main/python/torchfont/io
-- `python/torchfont/transforms/` – sequence transforms such as `LimitSequenceLength`, `Patchify`
-  https://github.com/fjktkm/torchfont/tree/main/python/torchfont/transforms
+- `torchfont/datasets/` – `FontFolder`, `GoogleFonts`, `FontRepo`
+  https://github.com/fjktkm/torchfont/tree/main/torchfont/datasets
+- `torchfont/io/` – Internal Git repository synchronization helpers with progress display
+  https://github.com/fjktkm/torchfont/tree/main/torchfont/io
+- `torchfont/transforms/` – sequence transforms such as `LimitSequenceLength`, `Patchify`
+  https://github.com/fjktkm/torchfont/tree/main/torchfont/transforms
 - `src/pen.rs` – Rust pen that records glyph outlines into normalized tensors
   https://github.com/fjktkm/torchfont/blob/main/src/pen.rs
 - `examples/` – runnable notebooks/scripts (e.g., combined dataloaders)
@@ -56,7 +56,7 @@ Machine-readable guide for AI agents that need TorchFont’s most important refe
 
 ## Release & metadata
 
-- Latest release tag: see `pyproject.toml` + `python/torchfont/__init__.py` for authoritative version constants.
+- Latest release tag: see `pyproject.toml` + `torchfont/__init__.py` for authoritative version constants.
 - Citation BibTeX is embedded in both `README.md` and `docs/source/index.rst`.
 - Package published on PyPI as `torchfont`; verify badges/versions via `uv pip show torchfont`.
 
