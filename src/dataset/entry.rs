@@ -92,6 +92,39 @@ impl FontEntry {
         !self.locations.is_empty()
     }
 
+    pub(super) fn named_instance_names(&self) -> Vec<Option<String>> {
+        if !self.is_variable() {
+            return vec![];
+        }
+
+        let font = match skrifa::FontRef::from_index(&self.data[..], self.face_index) {
+            Ok(f) => f,
+            Err(_) => return vec![],
+        };
+
+        font.named_instances()
+            .iter()
+            .map(|inst| {
+                let name_id = inst.subfamily_name_id();
+                font.localized_strings(name_id)
+                    .english_or_first()
+                    .map(|s| s.to_string())
+            })
+            .collect()
+    }
+
+    pub(super) fn full_name(&self) -> String {
+        let font = match skrifa::FontRef::from_index(&self.data[..], self.face_index) {
+            Ok(f) => f,
+            Err(_) => return String::new(),
+        };
+
+        font.localized_strings(skrifa::raw::types::NameId::FULL_NAME)
+            .english_or_first()
+            .map(|s| s.to_string())
+            .unwrap_or_default()
+    }
+
     fn from_face(
         base_path: &str,
         data: Arc<Mmap>,

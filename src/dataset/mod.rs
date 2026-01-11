@@ -41,13 +41,30 @@ impl FontDataset {
     }
 
     #[getter]
-    pub fn style_class_count(&self) -> usize {
-        self.index.inst_offsets.last().copied().unwrap_or(0)
+    pub fn content_classes(&self) -> Vec<u32> {
+        self.index.content_classes.clone()
     }
 
     #[getter]
-    pub fn content_class_count(&self) -> usize {
-        self.index.content_classes.len()
+    pub fn style_classes(&self) -> Vec<String> {
+        let mut names = Vec::new();
+        for entry in self.entries.iter() {
+            if entry.is_variable() {
+                let full_name = entry.full_name();
+                let instance_names = entry.named_instance_names();
+                if instance_names.is_empty() {
+                    names.push(full_name);
+                } else {
+                    for name_opt in instance_names.iter() {
+                        let instance_name = name_opt.as_deref().unwrap_or("");
+                        names.push(format!("{full_name} {instance_name}"));
+                    }
+                }
+            } else {
+                names.push(entry.full_name());
+            }
+        }
+        names
     }
 
     pub fn locate(&self, idx: usize) -> PyResult<(usize, Option<usize>, u32, usize, usize)> {
