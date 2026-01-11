@@ -4,25 +4,13 @@ import torch
 from torch import Tensor
 from torch.nn.utils.rnn import pad_sequence
 from torch.utils.data import DataLoader
-from torchfont.datasets import GoogleFonts
-from torchfont.transforms import (
-    Compose,
-    LimitSequenceLength,
-    Patchify,
-)
-from tqdm import tqdm
+from torchfont.datasets import FontRepo
 
-transform = Compose(
-    (
-        LimitSequenceLength(max_len=512),
-        Patchify(patch_size=32),
-    ),
-)
-
-dataset = GoogleFonts(
-    root="data/google/fonts",
-    ref="main",
-    transform=transform,
+dataset = FontRepo(
+    root="data/fortawesome/font-awesome",
+    url="https://github.com/FortAwesome/Font-Awesome",
+    ref="7.x",
+    patterns=("otfs/*.otf",),
     download=True,
 )
 
@@ -57,5 +45,6 @@ print(f"{len(dataset)=}")
 print(f"{len(dataset.content_classes)=}")
 print(f"{len(dataset.style_classes)=}")
 
-for batch in tqdm(dataloader, desc="Iterating over datasets"):
-    sample = batch
+for batch in dataloader:
+    print(batch)
+    break

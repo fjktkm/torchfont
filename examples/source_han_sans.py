@@ -42,10 +42,9 @@ dataloader = DataLoader(
 )
 
 print(f"{len(dataset)=}")
-print(f"{dataset.num_content_classes=}")
-print(f"{dataset.num_style_classes=}")
+print(f"{len(dataset.content_classes)=}")
+print(f"{len(dataset.style_classes)=}")
 
 for batch in dataloader:
-    sample = batch
-    print(sample)
+    print(batch)
     break
