@@ -49,9 +49,7 @@ class FontRepo(FontFolder):
         *,
         patterns: Sequence[str],
         codepoint_filter: Sequence[SupportsIndex] | None = None,
-        transform: (
-            Callable[[Tensor, Tensor], tuple[Tensor, Tensor]] | None
-        ) = None,
+        transform: (Callable[[Tensor, Tensor], tuple[Tensor, Tensor]] | None) = None,
         download: bool = False,
     ) -> None:
         """Clone and index a Git repository of fonts.

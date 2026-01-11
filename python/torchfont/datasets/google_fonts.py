@@ -43,9 +43,7 @@ class GoogleFonts(FontRepo):
         *,
         patterns: Sequence[str] | None = None,
         codepoint_filter: Sequence[int] | None = None,
-        transform: (
-            Callable[[Tensor, Tensor], tuple[Tensor, Tensor]] | None
-        ) = None,
+        transform: (Callable[[Tensor, Tensor], tuple[Tensor, Tensor]] | None) = None,
         download: bool = False,
     ) -> None:
         """Initialize a shallow clone of Google Fonts and index glyph samples.

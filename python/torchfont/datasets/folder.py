@@ -58,9 +58,7 @@ class FontFolder(Dataset[object]):
         *,
         codepoint_filter: Sequence[SupportsIndex] | None = None,
         patterns: Sequence[str] | None = None,
-        transform: (
-            Callable[[Tensor, Tensor], tuple[Tensor, Tensor]] | None
-        ) = None,
+        transform: (Callable[[Tensor, Tensor], tuple[Tensor, Tensor]] | None) = None,
     ) -> None:
         """Initialize the dataset by scanning font files and indexing samples.
 
