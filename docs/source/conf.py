@@ -11,7 +11,7 @@ import os
 project = "TorchFont"
 copyright = "2025, Takumu Fujioka"
 author = "Takumu Fujioka"
-release = "0.6.3"
+release = "0.7.0"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
