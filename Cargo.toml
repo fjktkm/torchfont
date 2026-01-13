@@ -11,7 +11,7 @@ crate-type = ["cdylib"]
 ignore = "0.4.25"
 memmap2 = "0.9.9"
 shellexpand = "3.1.1"
-skrifa = "0.39.0"
+skrifa = "0.40.0"
 walkdir = "2.5.0"
 
 [dependencies.pyo3]
