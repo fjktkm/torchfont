@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - uses: astral-sh/setup-uv@v6
 
@@ -34,7 +34,7 @@ jobs:
       - name: Build documentation
         run: uv run --no-sync sphinx-build -b html docs/source docs/build
 
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v4
         with:
           path: docs/build
 
