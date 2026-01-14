@@ -125,6 +125,25 @@ impl FontEntry {
             .unwrap_or_default()
     }
 
+    pub(super) fn family_name(&self) -> String {
+        let font = match skrifa::FontRef::from_index(&self.data[..], self.face_index) {
+            Ok(f) => f,
+            Err(_) => return String::new(),
+        };
+
+        [
+            skrifa::raw::types::NameId::TYPOGRAPHIC_FAMILY_NAME,
+            skrifa::raw::types::NameId::FAMILY_NAME,
+        ]
+        .into_iter()
+        .find_map(|id| {
+            font.localized_strings(id)
+                .english_or_first()
+                .map(|s| s.to_string())
+        })
+        .unwrap_or_default()
+    }
+
     fn from_face(
         base_path: &str,
         data: Arc<Mmap>,

@@ -50,14 +50,18 @@ impl FontDataset {
         let mut names = Vec::new();
         for entry in self.entries.iter() {
             if entry.is_variable() {
-                let full_name = entry.full_name();
+                let family_name = entry.family_name();
                 let instance_names = entry.named_instance_names();
                 if instance_names.is_empty() {
-                    names.push(full_name);
+                    names.push(entry.full_name());
                 } else {
                     for name_opt in instance_names.iter() {
                         let instance_name = name_opt.as_deref().unwrap_or("");
-                        names.push(format!("{full_name} {instance_name}"));
+                        if instance_name.is_empty() {
+                            names.push(family_name.clone());
+                        } else {
+                            names.push(format!("{family_name} {instance_name}"));
+                        }
                     }
                 }
             } else {
