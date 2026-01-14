@@ -68,12 +68,10 @@ impl FontDataset {
                         }
                     }
                 }
+            } else if let Some(subfamily) = entry.subfamily_name() {
+                names.push(format!("{family_name} {subfamily}"));
             } else {
-                if let Some(subfamily) = entry.subfamily_name() {
-                    names.push(format!("{family_name} {subfamily}"));
-                } else {
-                    names.push(family_name);
-                }
+                names.push(family_name);
             }
         }
         names
