@@ -1,5 +1,13 @@
 # TorchFont
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![PyPI version](https://img.shields.io/pypi/v/torchfont)](https://pypi.org/project/torchfont/)
+[![Python Version](https://img.shields.io/pypi/pyversions/torchfont)](https://pypi.org/project/torchfont/)
+[![PyTorch](https://img.shields.io/badge/PyTorch-2.3+-ee4c2c?logo=pytorch&logoColor=white)](https://pytorch.org/)
+[![Rust](https://img.shields.io/badge/Rust-2024-orange?logo=rust)](https://www.rust-lang.org/)
+[![CI](https://github.com/fjktkm/torchfont/actions/workflows/ci.yml/badge.svg)](https://github.com/fjktkm/torchfont/actions)
+[![Documentation](https://readthedocs.org/projects/torchfont/badge/?version=latest)](https://torchfont.readthedocs.io/)
+
 TorchFont is an **unofficial** library based on PyTorch for deep learning with vector fonts.
 It is not affiliated with or endorsed by the PyTorch project.
 
