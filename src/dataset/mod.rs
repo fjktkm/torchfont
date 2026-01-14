@@ -49,11 +49,15 @@ impl FontDataset {
     pub fn style_classes(&self) -> Vec<String> {
         let mut names = Vec::new();
         for entry in self.entries.iter() {
+            let family_name = entry.family_name();
             if entry.is_variable() {
-                let family_name = entry.family_name();
                 let instance_names = entry.named_instance_names();
                 if instance_names.is_empty() {
-                    names.push(entry.full_name());
+                    if let Some(subfamily) = entry.subfamily_name() {
+                        names.push(format!("{family_name} {subfamily}"));
+                    } else {
+                        names.push(family_name);
+                    }
                 } else {
                     for name_opt in instance_names.iter() {
                         let instance_name = name_opt.as_deref().unwrap_or("");
@@ -65,7 +69,11 @@ impl FontDataset {
                     }
                 }
             } else {
-                names.push(entry.full_name());
+                if let Some(subfamily) = entry.subfamily_name() {
+                    names.push(format!("{family_name} {subfamily}"));
+                } else {
+                    names.push(family_name);
+                }
             }
         }
         names

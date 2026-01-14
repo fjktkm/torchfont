@@ -113,18 +113,6 @@ impl FontEntry {
             .collect()
     }
 
-    pub(super) fn full_name(&self) -> String {
-        let font = match skrifa::FontRef::from_index(&self.data[..], self.face_index) {
-            Ok(f) => f,
-            Err(_) => return String::new(),
-        };
-
-        font.localized_strings(skrifa::raw::types::NameId::FULL_NAME)
-            .english_or_first()
-            .map(|s| s.to_string())
-            .unwrap_or_default()
-    }
-
     pub(super) fn family_name(&self) -> String {
         let font = match skrifa::FontRef::from_index(&self.data[..], self.face_index) {
             Ok(f) => f,
@@ -142,6 +130,21 @@ impl FontEntry {
                 .map(|s| s.to_string())
         })
         .unwrap_or_default()
+    }
+
+    pub(super) fn subfamily_name(&self) -> Option<String> {
+        let font = skrifa::FontRef::from_index(&self.data[..], self.face_index).ok()?;
+
+        [
+            skrifa::raw::types::NameId::TYPOGRAPHIC_SUBFAMILY_NAME,
+            skrifa::raw::types::NameId::SUBFAMILY_NAME,
+        ]
+        .into_iter()
+        .find_map(|id| {
+            font.localized_strings(id)
+                .english_or_first()
+                .map(|s| s.to_string())
+        })
     }
 
     fn from_face(
