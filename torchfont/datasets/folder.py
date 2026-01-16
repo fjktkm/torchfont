@@ -27,7 +27,7 @@ from torchfont import _torchfont
 from torchfont.io.outline import COORD_DIM
 
 
-class FontFolder(Dataset[object]):
+class FontFolder(Dataset[tuple[Tensor, Tensor, int, int]]):
     """Dataset that yields glyph samples from a directory of font files.
 
     The dataset flattens every available code point and variation instance into
