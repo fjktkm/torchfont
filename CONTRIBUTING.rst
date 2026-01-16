@@ -23,7 +23,7 @@ Coding Standards
 
 * The minimum supported Python version is 3.10. Avoid syntax that would break on
   that interpreter.
-* Keep modules typed. ``pyproject.toml`` ships ``py.typed`` metadata, so mypy
+* Keep modules typed. ``pyproject.toml`` ships ``py.typed`` metadata, so ty
   warnings matter.
 * Public APIs live under ``torchfont.datasets`` and ``torchfont.transforms``.
   When adding modules, update ``docs/source/api`` so that Sphinx picks them up.
@@ -37,9 +37,9 @@ appear. To reproduce issues locally, run:
 
 .. code-block:: bash
 
-   uv run ruff format --diff .
-   uv run ruff check .
-   uv run mypy torchfont
+   uv run ruff format --diff
+   uv run ruff check
+   uv run ty check
 
 Testing
 -------

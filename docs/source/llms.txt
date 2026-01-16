@@ -13,17 +13,17 @@ Machine-readable guide for AI agents that need TorchFont’s most important refe
 
 ## Priority documents (read in order)
 
-1. **Project README** – goals, installation basics, citation  
+1. **Project README** – goals, installation basics, citation
    https://github.com/fjktkm/torchfont/blob/main/README.md
-2. **Getting Started** – environment requirements, dataset bootstrap, first dataloader example  
+2. **Getting Started** – environment requirements, dataset bootstrap, first dataloader example
    https://github.com/fjktkm/torchfont/blob/main/docs/source/getting_started/index.rst
-3. **User Guide** – dataset wrappers, transform recipes, IO utilities, best practices  
+3. **User Guide** – dataset wrappers, transform recipes, IO utilities, best practices
    https://github.com/fjktkm/torchfont/blob/main/docs/source/user_guide/index.rst
-4. **API Reference index** – Sphinx autosummary root for all public modules (`torchfont.*`)  
+4. **API Reference index** – Sphinx autosummary root for all public modules (`torchfont.*`)
    https://github.com/fjktkm/torchfont/blob/main/docs/source/api/index.rst
-5. **Contributor Guide / CONTRIBUTING** – development setup, workflow, lint/test requirements  
+5. **Contributor Guide / CONTRIBUTING** – development setup, workflow, lint/test requirements
    https://github.com/fjktkm/torchfont/blob/main/CONTRIBUTING.rst
-6. **Tests** – canonical behavioral examples for datasets/transforms  
+6. **Tests** – canonical behavioral examples for datasets/transforms
    https://github.com/fjktkm/torchfont/tree/main/tests
 
 ## Key modules and files
@@ -51,7 +51,7 @@ Machine-readable guide for AI agents that need TorchFont’s most important refe
 
 - Dependency manager: [`uv`](https://docs.astral.sh/uv/) (`uv add torchfont`), alternatively `pip install torchfont`.
 - Python version: >=3.10; PyTorch >=2.3 (`pyproject.toml`).
-- Run lint/tests via `uv run ruff check`, `uv run mypy`, `uv run pytest` (see `CONTRIBUTING.rst` for exact commands).
+- Run lint/tests via `uv run ruff check`, `uv run ty check`, `uv run pytest` (see `CONTRIBUTING.rst` for exact commands).
 - Docs built with Sphinx + Furo; entry point `docs/source/index.rst`. To build locally: `uv run sphinx-build -b html docs/source docs/build/html`.
 
 ## Release & metadata

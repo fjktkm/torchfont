@@ -19,9 +19,9 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: astral-sh/setup-uv@v7
-      - run: uv run ruff format --diff .
-      - run: uv run ruff check .
-      - run: uv run mypy torchfont tests examples
+      - run: uv run ruff format --diff
+      - run: uv run ruff check
+      - run: uv run ty check
 
   rust-static-check:
     name: Rust static check
