@@ -1,5 +1,4 @@
 {
     "ruff.nativeServer": "on",
-    "ruff.configuration": "./pyproject.toml",
-    "python.analysis.typeCheckingMode": "strict",
+    "ruff.configuration": "./pyproject.toml"
 }
