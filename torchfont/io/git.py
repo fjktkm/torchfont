@@ -97,14 +97,14 @@ def ensure_repo(
             callbacks = _RemoteCallbacks(progress)
             repo.remotes["origin"].fetch([ref], depth=1, callbacks=callbacks)
             fetch_head = repo.lookup_reference("FETCH_HEAD")
-            repo.checkout(  # type: ignore[attr-defined]
+            repo.checkout(
                 fetch_head,
                 strategy=pygit2.GIT_CHECKOUT_FORCE,
                 callbacks=_CheckoutCallbacks(progress),
             )
         else:
             target = repo.revparse_single(ref)
-            repo.checkout_tree(  # type: ignore[attr-defined]
+            repo.checkout_tree(
                 target,
                 strategy=pygit2.GIT_CHECKOUT_FORCE,
                 callbacks=_CheckoutCallbacks(progress),
