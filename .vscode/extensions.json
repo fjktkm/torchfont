@@ -6,6 +6,6 @@
         "tamasfe.even-better-toml"
     ],
     "unwantedRecommendations": [
-        "ms-python.python"
+        "ms-python.vscode-pylance"
     ]
 }
