@@ -40,6 +40,7 @@ dataloader = DataLoader(
     num_workers=8,
     prefetch_factor=2,
     collate_fn=collate_fn,
+    multiprocessing_context="fork",
 )
 
 print(f"{len(dataset)=}")
