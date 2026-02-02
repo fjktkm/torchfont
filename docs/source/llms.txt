@@ -5,39 +5,39 @@ Machine-readable guide for AI agents that need TorchFont’s most important refe
 ## Overview
 
 - Project: TorchFont (`vector-font datasets, transforms, IO built on PyTorch`)
-- Repository: https://github.com/fjktkm/torchfont
-- Documentation source: https://github.com/fjktkm/torchfont/tree/main/docs/source
+- Repository: https://github.com/torchfont/torchfont
+- Documentation source: https://github.com/torchfont/torchfont/tree/main/docs/source
 - Current version: `0.5.2` (see `pyproject.toml`)
-- License: MIT (https://github.com/fjktkm/torchfont/blob/main/LICENSE)
+- License: MIT (https://github.com/torchfont/torchfont/blob/main/LICENSE)
 - Audience: ML researchers building models over glyph sequences, font engineers, contributors
 
 ## Priority documents (read in order)
 
 1. **Project README** – goals, installation basics, citation
-   https://github.com/fjktkm/torchfont/blob/main/README.md
+   https://github.com/torchfont/torchfont/blob/main/README.md
 2. **Getting Started** – environment requirements, dataset bootstrap, first dataloader example
-   https://github.com/fjktkm/torchfont/blob/main/docs/source/getting_started/index.rst
+   https://github.com/torchfont/torchfont/blob/main/docs/source/getting_started/index.rst
 3. **User Guide** – dataset wrappers, transform recipes, IO utilities, best practices
-   https://github.com/fjktkm/torchfont/blob/main/docs/source/user_guide/index.rst
+   https://github.com/torchfont/torchfont/blob/main/docs/source/user_guide/index.rst
 4. **API Reference index** – Sphinx autosummary root for all public modules (`torchfont.*`)
-   https://github.com/fjktkm/torchfont/blob/main/docs/source/api/index.rst
+   https://github.com/torchfont/torchfont/blob/main/docs/source/api/index.rst
 5. **Contributor Guide / CONTRIBUTING** – development setup, workflow, lint/test requirements
-   https://github.com/fjktkm/torchfont/blob/main/CONTRIBUTING.rst
+   https://github.com/torchfont/torchfont/blob/main/CONTRIBUTING.rst
 6. **Tests** – canonical behavioral examples for datasets/transforms
-   https://github.com/fjktkm/torchfont/tree/main/tests
+   https://github.com/torchfont/torchfont/tree/main/tests
 
 ## Key modules and files
 
 - `torchfont/datasets/` – `FontFolder`, `GoogleFonts`, `FontRepo`
-  https://github.com/fjktkm/torchfont/tree/main/torchfont/datasets
+  https://github.com/torchfont/torchfont/tree/main/torchfont/datasets
 - `torchfont/io/` – Internal Git repository synchronization helpers with progress display
-  https://github.com/fjktkm/torchfont/tree/main/torchfont/io
+  https://github.com/torchfont/torchfont/tree/main/torchfont/io
 - `torchfont/transforms/` – sequence transforms such as `LimitSequenceLength`, `Patchify`
-  https://github.com/fjktkm/torchfont/tree/main/torchfont/transforms
+  https://github.com/torchfont/torchfont/tree/main/torchfont/transforms
 - `src/pen.rs` – Rust pen that records glyph outlines into normalized tensors
-  https://github.com/fjktkm/torchfont/blob/main/src/pen.rs
+  https://github.com/torchfont/torchfont/blob/main/src/pen.rs
 - `examples/` – runnable notebooks/scripts (e.g., combined dataloaders)
-  https://github.com/fjktkm/torchfont/tree/main/examples
+  https://github.com/torchfont/torchfont/tree/main/examples
 - `data/` – user-provided font caches (empty placeholder in repo; the code expects writable paths)
 
 ## Dataset & transform guidance
@@ -63,6 +63,6 @@ Machine-readable guide for AI agents that need TorchFont’s most important refe
 ## Contact & policies
 
 - Maintainer: Takumu Fujioka (`fjktkm@gmail.com`)
-- Issues & feature requests: https://github.com/fjktkm/torchfont/issues
+- Issues & feature requests: https://github.com/torchfont/torchfont/issues
 - License: MIT; contributions are accepted under the same license.
 - When mirroring or summarizing documentation, retain the project name and cite the GitHub repo per the provided BibTeX entry.

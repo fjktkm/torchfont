@@ -48,7 +48,7 @@ If you find TorchFont useful in your work, please consider citing the following 
       year         = 2025,
       journal      = {GitHub repository},
       publisher    = {GitHub},
-      howpublished = {\url{https://github.com/fjktkm/torchfont}}
+      howpublished = {\url{https://github.com/torchfont/torchfont}}
    }
 
 .. toctree::
