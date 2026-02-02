@@ -1,9 +1,8 @@
 {
-	"name": "maturin",
-	"image": "ghcr.io/astral-sh/uv:python3.13-trixie",
+	"name": "mise",
+	"image": "jdxcode/mise:latest",
 	"features": {
-		"ghcr.io/devcontainers/features/common-utils:2": {},
-		"ghcr.io/devcontainers/features/rust:1": {}
+		"ghcr.io/devcontainers/features/common-utils:2": {}
 	},
 	"mounts": [
 		{
@@ -26,9 +25,10 @@
 		}
 	],
 	"containerEnv": {
+		"MISE_TRUSTED_CONFIG_PATHS": "/workspaces/torchfont",
 		"UV_LINK_MODE": "copy"
 	},
-	"postCreateCommand": "uv sync --all-groups",
+	"postCreateCommand": "mise run setup",
 	"customizations": {
 		"vscode": {
 			"extensions": [

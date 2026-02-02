@@ -1,0 +1,22 @@
+[tools]
+uv = "latest"
+rust = { version = "stable", profile = "default" }
+
+[tasks.setup]
+run = ["mise install", "mise exec -- uv sync --all-groups"]
+
+[tasks.format]
+run = ["mise exec -- uv run ruff format", "mise exec -- cargo fmt --all"]
+
+[tasks.check]
+run = [
+  "mise exec -- uv run ruff format --diff",
+  "mise exec -- uv run ruff check",
+  "mise exec -- uv run ty check",
+  "mise exec -- cargo fmt --all -- --check",
+  "mise exec -- cargo clippy --all-targets --all-features -- -D warnings",
+  "mise exec -- cargo check --all-targets --all-features",
+]
+
+[tasks.test]
+run = ["mise exec -- uv run pytest tests"]
