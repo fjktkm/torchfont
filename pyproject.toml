@@ -4,6 +4,15 @@ description = "Datasets, Transforms and Models specific to Vector Fonts"
 readme = "README.md"
 authors = [{ name = "Takumu Fujioka", email = "fjktkm@gmail.com" }]
 requires-python = ">=3.10"
+keywords = [
+    "pytorch",
+    "vector-fonts",
+    "fonts",
+    "glyphs",
+    "google-fonts",
+    "ttf",
+    "otf",
+]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
@@ -25,6 +34,11 @@ classifiers = [
 ]
 dynamic = ["version"]
 dependencies = ["pygit2>=1.18.2", "rich>=14.2.0", "torch>=2.3.0"]
+
+[project.urls]
+Repository = "https://github.com/torchfont/torchfont"
+Documentation = "https://torchfont.readthedocs.io/"
+Releases = "https://github.com/torchfont/torchfont/releases"
 
 [build-system]
 requires = ["maturin>=1.10,<2.0"]
