@@ -1,4 +1,5 @@
 import torch
+from torch.utils.data import DataLoader
 
 from torchfont.datasets import FontFolder
 
@@ -191,3 +192,23 @@ def test_style_class_to_idx() -> None:
     # Round-trip test
     for idx, name in enumerate(dataset.style_classes):
         assert dataset.style_class_to_idx[name] == idx
+
+
+def test_font_folder_dataloader_multiworker_default_start_method() -> None:
+    dataset = FontFolder(
+        root="tests/fonts",
+        patterns=("lato/Lato-Regular.ttf",),
+        codepoint_filter=range(0x41, 0x5B),
+    )
+
+    assert len(dataset) > 0
+
+    loader = DataLoader(
+        dataset,
+        batch_size=1,
+        num_workers=2,
+        shuffle=False,
+    )
+
+    batch = next(iter(loader))
+    assert batch is not None

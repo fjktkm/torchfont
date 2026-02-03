@@ -85,9 +85,7 @@ class FontFolder(Dataset[tuple[Tensor, Tensor, int, int]]):
         self.root = Path(root).expanduser().resolve()
         self.transform = transform
         self.patterns = (
-            tuple(str(pattern) for pattern in patterns)
-            if patterns is not None
-            else None
+            [str(pattern) for pattern in patterns] if patterns is not None else None
         )
         self.codepoint_filter = (
             [int(cp) for cp in codepoint_filter]
@@ -95,11 +93,25 @@ class FontFolder(Dataset[tuple[Tensor, Tensor, int, int]]):
             else None
         )
 
-        backend_patterns = list(self.patterns) if self.patterns is not None else None
         self._dataset = _torchfont.FontDataset(
             str(self.root),
             self.codepoint_filter,
-            backend_patterns,
+            self.patterns,
+        )
+
+    def __getstate__(self) -> dict[str, object]:
+        """Return state without the native backend for worker reconstruction."""
+        state = self.__dict__.copy()
+        state.pop("_dataset", None)
+        return state
+
+    def __setstate__(self, state: dict[str, object]) -> None:
+        """Restore state and recreate the native backend after unpickling."""
+        self.__dict__.update(state)
+        self._dataset = _torchfont.FontDataset(
+            str(self.root),
+            self.codepoint_filter,
+            self.patterns,
         )
 
     def __len__(self) -> int:
