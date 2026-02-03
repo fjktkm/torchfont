@@ -85,7 +85,9 @@ class FontFolder(Dataset[tuple[Tensor, Tensor, int, int]]):
         self.root = Path(root).expanduser().resolve()
         self.transform = transform
         self.patterns = (
-            [str(pattern) for pattern in patterns] if patterns is not None else None
+            tuple(str(pattern) for pattern in patterns)
+            if patterns is not None
+            else None
         )
         self.codepoint_filter = (
             [int(cp) for cp in codepoint_filter]
