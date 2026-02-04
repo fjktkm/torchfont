@@ -132,7 +132,8 @@ class FontFolder(Dataset[tuple[Tensor, Tensor, int, int]]):
 
         Args:
             idx (int): Zero-based index locating a sample across all fonts, code
-                points, and instances.
+                points, and instances. Negative indices are supported and count
+                from the end of the dataset.
 
         Returns:
             tuple[Tensor, Tensor, int, int]: ``(types, coords,
@@ -145,8 +146,23 @@ class FontFolder(Dataset[tuple[Tensor, Tensor, int, int]]):
 
                 types, coords, style_idx, content_idx = dataset[0]
 
+            Retrieve the last glyph sample::
+
+                types, coords, style_idx, content_idx = dataset[-1]
+
         """
-        raw_types, raw_coords, style_idx, content_idx = self._dataset.item(int(idx))
+        idx = int(idx)
+        original_idx = idx
+        dataset_len = len(self)
+        if idx < 0:
+            idx += dataset_len
+        if idx < 0 or idx >= dataset_len:
+            msg = (
+                f"index {original_idx} is out of range for dataset of length "
+                f"{dataset_len}"
+            )
+            raise IndexError(msg)
+        raw_types, raw_coords, style_idx, content_idx = self._dataset.item(idx)
         types = torch.as_tensor(raw_types, dtype=torch.long)
         coords = torch.as_tensor(raw_coords, dtype=torch.float32).view(-1, COORD_DIM)
         if self.transform is not None:
