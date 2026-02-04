@@ -1,4 +1,8 @@
+import multiprocessing as mp
+
+import pytest
 import torch
+from torch.utils.data import DataLoader
 
 from torchfont.datasets import FontFolder
 
@@ -191,3 +195,51 @@ def test_style_class_to_idx() -> None:
     # Round-trip test
     for idx, name in enumerate(dataset.style_classes):
         assert dataset.style_class_to_idx[name] == idx
+
+
+@pytest.mark.parametrize("start_method", [None, *mp.get_all_start_methods()])
+def test_font_folder_dataloader_multiworker(
+    start_method: str | None,
+) -> None:
+    dataset = FontFolder(
+        root="tests/fonts",
+        patterns=("lato/Lato-Regular.ttf",),
+        codepoint_filter=range(0x41, 0x5B),
+    )
+
+    assert len(dataset) > 0
+
+    loader = DataLoader(
+        dataset,
+        batch_size=1,
+        num_workers=2,
+        shuffle=False,
+        multiprocessing_context=start_method,
+    )
+
+    batch = next(iter(loader))
+    assert batch is not None
+
+    # Unpack batch and validate structure similar to test_font_folder_getitem
+    types_batch, coords_batch, style_idx_batch, content_idx_batch = batch
+
+    # Validate types tensor (batch dimension added)
+    assert types_batch.dtype == torch.long
+    assert types_batch.ndim == 2  # batch_size x sequence_length
+
+    # Validate coords tensor (batch dimension added)
+    assert coords_batch.dtype == torch.float32
+    assert coords_batch.ndim == 3  # batch_size x sequence_length x 6
+    assert coords_batch.shape[2] == 6
+
+    # Validate indices tensors
+    assert style_idx_batch.dtype == torch.long
+    assert content_idx_batch.dtype == torch.long
+    assert style_idx_batch.ndim == 1  # batch_size
+    assert content_idx_batch.ndim == 1  # batch_size
+
+    # Validate index values are in valid range
+    assert torch.all(style_idx_batch >= 0)
+    assert torch.all(style_idx_batch < len(dataset.style_classes))
+    assert torch.all(content_idx_batch >= 0)
+    assert torch.all(content_idx_batch < len(dataset.content_classes))
