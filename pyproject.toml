@@ -81,7 +81,7 @@ unsafe-fixes = true
 
 [tool.ruff.lint]
 select = ["ALL"]
-ignore = ["EXE002"]
+ignore = ["COM812", "D203", "D213", "EXE002"]
 
 [tool.ruff.lint.per-file-ignores]
 "docs/**/*.py" = ["A001", "D", "INP001"]
