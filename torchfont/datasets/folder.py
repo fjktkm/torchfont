@@ -15,6 +15,8 @@ Examples:
 
 """
 
+import warnings
+from collections import Counter
 from collections.abc import Callable, Sequence
 from pathlib import Path
 from typing import SupportsIndex
@@ -210,9 +212,26 @@ class FontFolder(Dataset[tuple[Tensor, Tensor, int, int]]):
         Returns:
             dict[str, int]: Dictionary mapping style name to index.
 
+        Warns:
+            UserWarning: If duplicate style names exist, earlier entries are
+                overwritten and the mapping will have fewer keys than
+                :attr:`style_classes` has elements.
+
         Examples:
             >>> dataset.style_class_to_idx['Roboto Regular']
             0
 
         """
-        return {name: idx for idx, name in enumerate(self.style_classes)}
+        names = self.style_classes
+        mapping = {name: idx for idx, name in enumerate(names)}
+        if len(mapping) != len(names):
+            duplicates = {n for n, c in Counter(names).items() if c > 1}
+            warnings.warn(
+                "Duplicate style class names found: "
+                + ", ".join(sorted(duplicates))
+                + ". style_class_to_idx will map each name to the last "
+                "occurrence only.",
+                UserWarning,
+                stacklevel=2,
+            )
+        return mapping
