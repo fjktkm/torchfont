@@ -198,7 +198,7 @@ def test_style_class_to_idx() -> None:
 
 
 @pytest.mark.parametrize("start_method", [None, *mp.get_all_start_methods()])
-def test_font_folder_dataloader_multiworker_default_start_method(
+def test_font_folder_dataloader_multiworker(
     start_method: str | None,
 ) -> None:
     dataset = FontFolder(
