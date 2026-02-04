@@ -132,7 +132,8 @@ class FontFolder(Dataset[tuple[Tensor, Tensor, int, int]]):
 
         Args:
             idx (int): Zero-based index locating a sample across all fonts, code
-                points, and instances.
+                points, and instances. Negative indices are supported and count
+                from the end of the dataset.
 
         Returns:
             tuple[Tensor, Tensor, int, int]: ``(types, coords,
@@ -144,6 +145,10 @@ class FontFolder(Dataset[tuple[Tensor, Tensor, int, int]]):
             Retrieve the first glyph sample and its target labels::
 
                 types, coords, style_idx, content_idx = dataset[0]
+
+            Retrieve the last glyph sample::
+
+                types, coords, style_idx, content_idx = dataset[-1]
 
         """
         idx = int(idx)
