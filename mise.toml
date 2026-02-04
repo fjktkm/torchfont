@@ -1,6 +1,6 @@
 [tools]
 uv = "latest"
-rust = { version = "stable", profile = "default" }
+rust = { version = "stable", profile = "default", components = "rust-src" }
 
 [tasks.setup]
 run = ["mise install", "mise exec -- uv sync --all-groups"]
