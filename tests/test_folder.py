@@ -1,9 +1,12 @@
 import multiprocessing as mp
+import warnings
+from unittest.mock import PropertyMock, patch
 
 import pytest
 import torch
 from torch.utils.data import DataLoader
 
+from torchfont import _torchfont
 from torchfont.datasets import FontFolder
 
 
@@ -195,6 +198,45 @@ def test_style_class_to_idx() -> None:
     # Round-trip test
     for idx, name in enumerate(dataset.style_classes):
         assert dataset.style_class_to_idx[name] == idx
+
+
+def test_style_class_to_idx_warns_on_duplicates() -> None:
+    """Test that style_class_to_idx emits a UserWarning on duplicate names."""
+    dataset = FontFolder(
+        root="tests/fonts",
+        patterns=("lato/Lato-Regular.ttf",),
+        codepoint_filter=range(0x41, 0x44),
+    )
+
+    raw_names = ["Roboto Regular", "Roboto Bold", "Roboto Regular"]
+    with patch.object(
+        _torchfont.FontDataset,
+        "style_classes",
+        new_callable=PropertyMock,
+        return_value=raw_names,
+    ):
+        with warnings.catch_warnings(record=True) as w:
+            warnings.simplefilter("always")
+            mapping = dataset.style_class_to_idx
+            assert len(w) == 1
+            assert issubclass(w[0].category, UserWarning)
+            assert "Roboto Regular" in str(w[0].message)
+
+        assert len(mapping) == 2  # duplicates collapsed
+
+
+def test_style_class_to_idx_no_warning_without_duplicates() -> None:
+    """Test that no warning is emitted when style names are unique."""
+    dataset = FontFolder(
+        root="tests/fonts",
+        patterns=("lato/Lato-Regular.ttf",),
+        codepoint_filter=range(0x41, 0x44),
+    )
+
+    with warnings.catch_warnings(record=True) as w:
+        warnings.simplefilter("always")
+        _ = dataset.style_class_to_idx
+        assert len(w) == 0
 
 
 @pytest.mark.parametrize("start_method", [None, *mp.get_all_start_methods()])
