@@ -223,6 +223,8 @@ def test_style_class_to_idx_warns_on_duplicates() -> None:
             assert "Roboto Regular" in str(w[0].message)
 
         assert len(mapping) == 2  # duplicates collapsed
+        assert mapping["Roboto Regular"] == 2  # keeps last occurrence
+        assert mapping["Roboto Bold"] == 1
 
 
 def test_style_class_to_idx_no_warning_without_duplicates() -> None:
