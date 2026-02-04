@@ -107,6 +107,31 @@ def test_font_folder_negative_indexing() -> None:
         assert content_sl == content_exp2
 
 
+def test_font_folder_index_out_of_bounds() -> None:
+    """Test that out of bounds indices raise IndexError."""
+    dataset = FontFolder(
+        root="tests/fonts",
+        patterns=("lato/Lato-Regular.ttf",),
+        codepoint_filter=range(0x41, 0x5B),
+    )
+
+    assert len(dataset) > 0
+
+    # Test positive out of bounds
+    with pytest.raises(IndexError):
+        dataset[len(dataset)]
+
+    with pytest.raises(IndexError):
+        dataset[len(dataset) + 100]
+
+    # Test negative out of bounds
+    with pytest.raises(IndexError):
+        dataset[-len(dataset) - 1]
+
+    with pytest.raises(IndexError):
+        dataset[-len(dataset) - 100]
+
+
 def test_font_folder_cjk_support() -> None:
     dataset = FontFolder(
         root="tests/fonts",

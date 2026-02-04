@@ -149,6 +149,8 @@ class FontFolder(Dataset[tuple[Tensor, Tensor, int, int]]):
         idx = int(idx)
         if idx < 0:
             idx += len(self)
+        if idx < 0 or idx >= len(self):
+            raise IndexError(f"index {idx - len(self) if idx < 0 else idx} is out of range for dataset of length {len(self)}")
         raw_types, raw_coords, style_idx, content_idx = self._dataset.item(idx)
         types = torch.as_tensor(raw_types, dtype=torch.long)
         coords = torch.as_tensor(raw_coords, dtype=torch.float32).view(-1, COORD_DIM)
