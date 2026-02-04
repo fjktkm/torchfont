@@ -6,7 +6,6 @@ import pytest
 import torch
 from torch.utils.data import DataLoader
 
-from torchfont import _torchfont
 from torchfont.datasets import FontFolder
 
 
@@ -210,7 +209,7 @@ def test_style_class_to_idx_warns_on_duplicates() -> None:
 
     raw_names = ["Roboto Regular", "Roboto Bold", "Roboto Regular"]
     with patch.object(
-        _torchfont.FontDataset,
+        FontFolder,
         "style_classes",
         new_callable=PropertyMock,
         return_value=raw_names,
