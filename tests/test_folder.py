@@ -72,6 +72,41 @@ def test_font_folder_getitem() -> None:
     assert 0 <= content_idx < len(dataset.content_classes)
 
 
+def test_font_folder_negative_indexing() -> None:
+    """Test that negative indexing works correctly."""
+    dataset = FontFolder(
+        root="tests/fonts",
+        patterns=("lato/Lato-Regular.ttf",),
+        codepoint_filter=range(0x41, 0x5B),
+    )
+
+    assert len(dataset) > 0
+
+    # Test that dataset[-1] returns the last element
+    types_last, coords_last, style_last, content_last = dataset[-1]
+    types_explicit, coords_explicit, style_explicit, content_explicit = dataset[
+        len(dataset) - 1
+    ]
+
+    # Verify that negative indexing returns the same result as positive indexing
+    assert torch.equal(types_last, types_explicit)
+    assert torch.equal(coords_last, coords_explicit)
+    assert style_last == style_explicit
+    assert content_last == content_explicit
+
+    # Test dataset[-2] if dataset has at least 2 elements
+    if len(dataset) >= 2:
+        types_second_last, coords_second_last, style_sl, content_sl = dataset[-2]
+        types_explicit2, coords_explicit2, style_exp2, content_exp2 = dataset[
+            len(dataset) - 2
+        ]
+
+        assert torch.equal(types_second_last, types_explicit2)
+        assert torch.equal(coords_second_last, coords_explicit2)
+        assert style_sl == style_exp2
+        assert content_sl == content_exp2
+
+
 def test_font_folder_cjk_support() -> None:
     dataset = FontFolder(
         root="tests/fonts",

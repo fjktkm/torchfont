@@ -146,7 +146,10 @@ class FontFolder(Dataset[tuple[Tensor, Tensor, int, int]]):
                 types, coords, style_idx, content_idx = dataset[0]
 
         """
-        raw_types, raw_coords, style_idx, content_idx = self._dataset.item(int(idx))
+        idx = int(idx)
+        if idx < 0:
+            idx += len(self)
+        raw_types, raw_coords, style_idx, content_idx = self._dataset.item(idx)
         types = torch.as_tensor(raw_types, dtype=torch.long)
         coords = torch.as_tensor(raw_coords, dtype=torch.float32).view(-1, COORD_DIM)
         if self.transform is not None:
