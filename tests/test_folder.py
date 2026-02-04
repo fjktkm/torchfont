@@ -1,3 +1,6 @@
+import multiprocessing as mp
+
+import pytest
 import torch
 from torch.utils.data import DataLoader
 
@@ -194,7 +197,10 @@ def test_style_class_to_idx() -> None:
         assert dataset.style_class_to_idx[name] == idx
 
 
-def test_font_folder_dataloader_multiworker_default_start_method() -> None:
+@pytest.mark.parametrize("start_method", [None, *mp.get_all_start_methods()])
+def test_font_folder_dataloader_multiworker_default_start_method(
+    start_method: str | None,
+) -> None:
     dataset = FontFolder(
         root="tests/fonts",
         patterns=("lato/Lato-Regular.ttf",),
@@ -208,6 +214,7 @@ def test_font_folder_dataloader_multiworker_default_start_method() -> None:
         batch_size=1,
         num_workers=2,
         shuffle=False,
+        multiprocessing_context=start_method,
     )
 
     batch = next(iter(loader))
