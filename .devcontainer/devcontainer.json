@@ -6,7 +6,7 @@
 	},
 	"mounts": [
 		{
-			"source": "uv-cache",
+			"source": "uv",
 			"target": "/root/.cache/uv",
 			"type": "volume"
 		},
@@ -25,7 +25,7 @@
 		}
 	],
 	"containerEnv": {
-		"MISE_TRUSTED_CONFIG_PATHS": "/workspaces/torchfont",
+		"MISE_TRUSTED_CONFIG_PATHS": "/workspaces",
 		"UV_LINK_MODE": "copy"
 	},
 	"postCreateCommand": "mise run setup",
