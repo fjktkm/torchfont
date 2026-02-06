@@ -1,6 +1,8 @@
 [tools]
 uv = "latest"
 rust = { version = "stable", profile = "default", components = "rust-src" }
+node = "lts"
+pnpm = "latest"
 
 [tasks.setup]
 run = ["mise install", "mise exec -- uv sync"]
