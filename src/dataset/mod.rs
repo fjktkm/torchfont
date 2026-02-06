@@ -141,10 +141,7 @@ impl FontDataset {
                 }
             }
         }
-        let bytes: Vec<u8> = flat
-            .iter()
-            .flat_map(|&v| v.to_ne_bytes())
-            .collect();
+        let bytes: Vec<u8> = flat.iter().flat_map(|&v| v.to_ne_bytes()).collect();
         Ok(PyBytes::new(py, &bytes))
     }
 }

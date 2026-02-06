@@ -187,6 +187,7 @@ class FontFolder(Dataset[tuple[Tensor, Tensor, int, int]]):
             torch.Size([N, 2])
             >>> dataset.targets[0]
             tensor([style_idx, content_idx])
+
         """
         raw = self._dataset.targets()
         if not raw:
