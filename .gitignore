@@ -1,7 +1,5 @@
 # Custom ignore rules
 data/
-docs/source/api/generated/
-gettext/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
