@@ -181,6 +181,12 @@ class FontFolder(Dataset[tuple[Tensor, Tensor, int, int]]):
             torch.LongTensor: Tensor of shape ``(N, 2)`` where column 0 holds
             the style class index and column 1 holds the content class index.
 
+        Examples:
+            >>> dataset = FontFolder(root="fonts", codepoint_filter=range(0x41, 0x44))
+            >>> dataset.targets.shape
+            torch.Size([N, 2])
+            >>> dataset.targets[0]
+            tensor([style_idx, content_idx])
         """
         raw = self._dataset.targets()
         if not raw:
