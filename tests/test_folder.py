@@ -1,4 +1,5 @@
 import multiprocessing as mp
+import pickle
 import warnings
 from unittest.mock import PropertyMock, patch
 
@@ -346,3 +347,73 @@ def test_font_folder_dataloader_multiworker(
     assert torch.all(style_idx_batch < len(dataset.style_classes))
     assert torch.all(content_idx_batch >= 0)
     assert torch.all(content_idx_batch < len(dataset.content_classes))
+
+
+def test_targets_shape_and_dtype() -> None:
+    """Test that targets has shape (N, 2) and dtype long."""
+    dataset = FontFolder(
+        root="tests/fonts",
+        patterns=("lato/Lato-Regular.ttf",),
+        codepoint_filter=range(0x41, 0x5B),
+    )
+
+    assert dataset.targets.shape == (len(dataset), 2)
+    assert dataset.targets.dtype == torch.long
+
+
+def test_targets_matches_getitem() -> None:
+    """Test that targets[i] matches the labels from __getitem__."""
+    dataset = FontFolder(
+        root="tests/fonts",
+        patterns=("lato/Lato-Regular.ttf",),
+        codepoint_filter=range(0x41, 0x44),  # A, B, C — small set
+    )
+
+    for i in range(len(dataset)):
+        _, _, style_idx, content_idx = dataset[i]
+        assert dataset.targets[i, 0].item() == style_idx
+        assert dataset.targets[i, 1].item() == content_idx
+
+
+def test_targets_empty_dataset() -> None:
+    """Test that targets has shape (0, 2) for an empty dataset."""
+    dataset = FontFolder(
+        root="tests/fonts",
+        patterns=("nonexistent*.ttf",),
+        codepoint_filter=range(0x80),
+    )
+
+    assert dataset.targets.shape == (0, 2)
+    assert dataset.targets.dtype == torch.long
+
+
+def test_targets_variable_fonts() -> None:
+    """Test that targets is correct for variable fonts with multiple instances."""
+    dataset = FontFolder(
+        root="tests/fonts",
+        patterns=("roboto/Roboto*.ttf",),
+        codepoint_filter=range(0x41, 0x44),
+    )
+
+    assert len(dataset.style_classes) > 1
+    assert dataset.targets.shape == (len(dataset), 2)
+    assert dataset.targets.dtype == torch.long
+
+    for i in range(len(dataset)):
+        _, _, style_idx, content_idx = dataset[i]
+        assert dataset.targets[i, 0].item() == style_idx
+        assert dataset.targets[i, 1].item() == content_idx
+
+
+def test_targets_survives_pickle() -> None:
+    """Test that targets is correctly restored after pickle round-trip."""
+    dataset = FontFolder(
+        root="tests/fonts",
+        patterns=("lato/Lato-Regular.ttf",),
+        codepoint_filter=range(0x41, 0x44),
+    )
+
+    original_targets = dataset.targets.clone()
+    restored = pickle.loads(pickle.dumps(dataset))  # noqa: S301
+
+    assert torch.equal(restored.targets, original_targets)
