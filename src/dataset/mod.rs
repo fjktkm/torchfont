@@ -7,6 +7,7 @@ use entry::FontEntry;
 use index::{DatasetIndex, load_entries_and_index};
 use io::{canonicalize_root, discover_font_files};
 use pyo3::prelude::*;
+use pyo3::types::PyBytes;
 
 #[pyclass]
 pub struct FontDataset {
@@ -124,5 +125,23 @@ impl FontDataset {
         self.entries[font_idx]
             .glyph(codepoint, inst_idx)
             .map(|(types, coords)| (types, coords, style_idx, content_idx))
+    }
+
+    pub fn targets<'py>(&self, py: Python<'py>) -> PyResult<Bound<'py, PyBytes>> {
+        let total = self.sample_count();
+        let mut flat: Vec<i64> = Vec::with_capacity(total * 2);
+        for (font_idx, entry) in self.entries.iter().enumerate() {
+            let inst_offset = self.index.inst_offsets[font_idx];
+            for inst_idx in 0..entry.instance_count() {
+                let style_idx = inst_offset + inst_idx;
+                for &cp in &entry.codepoints {
+                    let content_idx = self.index.content_index(cp)?;
+                    flat.push(style_idx as i64);
+                    flat.push(content_idx as i64);
+                }
+            }
+        }
+        let bytes: Vec<u8> = flat.iter().flat_map(|&v| v.to_ne_bytes()).collect();
+        Ok(PyBytes::new(py, &bytes))
     }
 }

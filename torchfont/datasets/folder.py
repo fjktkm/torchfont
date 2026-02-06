@@ -37,6 +37,9 @@ class FontFolder(Dataset[tuple[Tensor, Tensor, int, int]]):
     style and content targets.
 
     Attributes:
+        targets (torch.LongTensor): Label matrix of shape ``(N, 2)`` where
+            column 0 holds the style class index and column 1 holds the
+            content class index for every sample.
         content_classes (list[str]): List of Unicode character strings, one per
             content class, sorted by index. Use len(content_classes) to get
             the total number of content classes.
@@ -169,6 +172,27 @@ class FontFolder(Dataset[tuple[Tensor, Tensor, int, int]]):
             types, coords = self.transform(types, coords)
 
         return types, coords, style_idx, content_idx
+
+    @property
+    def targets(self) -> Tensor:
+        """Label matrix pairing every sample with its style and content class.
+
+        Returns:
+            torch.LongTensor: Tensor of shape ``(N, 2)`` where column 0 holds
+            the style class index and column 1 holds the content class index.
+
+        Examples:
+            >>> dataset = FontFolder(root="fonts", codepoint_filter=range(0x41, 0x44))
+            >>> dataset.targets.shape
+            torch.Size([N, 2])
+            >>> dataset.targets[0]
+            tensor([style_idx, content_idx])
+
+        """
+        raw = self._dataset.targets()
+        if not raw:
+            return torch.empty(0, 2, dtype=torch.long)
+        return torch.frombuffer(bytearray(raw), dtype=torch.long).view(-1, 2)
 
     @property
     def content_classes(self) -> list[str]:
