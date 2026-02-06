@@ -141,9 +141,10 @@ impl FontDataset {
                 }
             }
         }
-        let byte_len = flat.len() * std::mem::size_of::<i64>();
-        // SAFETY: i64 has no padding and any bit pattern is valid for u8.
-        let bytes = unsafe { std::slice::from_raw_parts(flat.as_ptr() as *const u8, byte_len) };
-        Ok(PyBytes::new(py, bytes))
+        let bytes: Vec<u8> = flat
+            .iter()
+            .flat_map(|&v| v.to_ne_bytes())
+            .collect();
+        Ok(PyBytes::new(py, &bytes))
     }
 }
