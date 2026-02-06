@@ -7,7 +7,7 @@ Machine-readable guide for AI agents that need TorchFont’s most important refe
 - Project: TorchFont (`vector-font datasets, transforms, IO built on PyTorch`)
 - Repository: https://github.com/torchfont/torchfont
 - Documentation source: https://github.com/torchfont/torchfont/tree/main/docs/source
-- Current version: `0.7.2` (see `pyproject.toml`)
+- Current version: `0.8.0` (see `pyproject.toml`)
 - License: MIT (https://github.com/torchfont/torchfont/blob/main/LICENSE)
 - Audience: ML researchers building models over glyph sequences, font engineers, contributors
 
