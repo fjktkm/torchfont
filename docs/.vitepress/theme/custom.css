@@ -1,0 +1,8 @@
+:root {
+  --vp-font-family-base: sans-serif;
+  --vp-font-family-mono: monospace;
+
+  --vp-c-brand-1: hsl(220 90% 66%);
+  --vp-c-brand-2: hsl(220 90% 60%);
+  --vp-c-brand-3: hsl(220 90% 54%);
+}
