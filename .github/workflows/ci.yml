@@ -6,7 +6,25 @@ on:
       - main
     tags:
       - '*'
+    paths:
+      - 'src/**'
+      - 'torchfont/**'
+      - 'tests/**'
+      - 'Cargo.toml'
+      - 'Cargo.lock'
+      - 'pyproject.toml'
+      - 'uv.lock'
+      - '.github/workflows/**'
   pull_request:
+    paths:
+      - 'src/**'
+      - 'torchfont/**'
+      - 'tests/**'
+      - 'Cargo.toml'
+      - 'Cargo.lock'
+      - 'pyproject.toml'
+      - 'uv.lock'
+      - '.github/workflows/**'
   workflow_dispatch:
 
 permissions:
