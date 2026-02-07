@@ -1,0 +1,14 @@
+{
+  "name": "torchfont",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "docs:dev": "vitepress dev docs --host",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
+  },
+  "devDependencies": {
+    "@types/node": "^25.2.1",
+    "vitepress": "^1.6.3"
+  }
+}

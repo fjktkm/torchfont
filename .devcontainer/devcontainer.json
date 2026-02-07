@@ -19,6 +19,15 @@
 			"type": "volume"
 		},
 		{
+			"source": "pnpm",
+			"target": "${containerWorkspaceFolder}/.pnpm-store",
+			"type": "volume"
+		},
+		{
+			"target": "${containerWorkspaceFolder}/node_modules",
+			"type": "volume"
+		},
+		{
 			"source": "torchfont",
 			"target": "${containerWorkspaceFolder}/data",
 			"type": "volume"

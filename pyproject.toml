@@ -37,7 +37,6 @@ dependencies = ["pygit2>=1.18.2", "rich>=14.2.0", "torch>=2.3.0"]
 
 [project.urls]
 Repository = "https://github.com/torchfont/torchfont"
-Documentation = "https://torchfont.readthedocs.io/"
 Releases = "https://github.com/torchfont/torchfont/releases"
 
 [build-system]
@@ -54,14 +53,6 @@ dev = [
     "tqdm>=4.67.1",
     "ty>=0.0.12",
     "types-tqdm>=4.67.0.20250809",
-]
-docs = [
-    "furo>=2025.9.25",
-    "sphinx>=8.1.3",
-    "sphinx-autobuild>=2024.10.3",
-    "sphinx-autodoc-typehints>=3.0.1",
-    "sphinx-design>=0.6.1",
-    "sphinx-intl>=2.3.2",
 ]
 
 [tool.uv.sources]
@@ -84,7 +75,6 @@ select = ["ALL"]
 ignore = ["COM812", "D203", "D213", "EXE002"]
 
 [tool.ruff.lint.per-file-ignores]
-"docs/**/*.py" = ["A001", "D", "INP001"]
 "examples/**/*.py" = ["D", "T201"]
 "torchfont/datasets/*.py" = ["PLR0913"]
 "tests/**/*.py" = ["D", "PLR2004", "S101"]
