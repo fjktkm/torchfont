@@ -1,17 +1,14 @@
-# NOTE: Read the Docs deployment is still required.
-# This file is kept on purpose so we don't forget to reconfigure it for VitePress.
-# TODO: Replace the placeholder build step below with the real VitePress build
-#       (likely Node.js install + `vitepress build` output path).
-#       Once VitePress is wired up, remove these comments.
-
 version: 2
 
 build:
-  os: ubuntu-24.04
+  os: ubuntu-lts-latest
   tools:
-    python: "3.12"
-  commands:
-    - echo "TODO: configure Read the Docs build for VitePress"
-
-# No Sphinx config here by design.
-# The VitePress setup will define how and where the static site is built.
+    nodejs: "22"
+  jobs:
+    install:
+      - npm install
+    build:
+      html:
+        - npx vitepress build docs
+        - mkdir -p $READTHEDOCS_OUTPUT/
+        - mv docs/.vitepress/dist $READTHEDOCS_OUTPUT/html
