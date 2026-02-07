@@ -6,8 +6,8 @@ layout: page
 
 <script setup>
 if (typeof window !== 'undefined') {
-  window.location.replace('/ja/')
+  window.location.replace('./ja/')
 }
 </script>
 
-<meta http-equiv="refresh" content="0;url=/ja/">
+<meta http-equiv="refresh" content="0;url=./ja/">
